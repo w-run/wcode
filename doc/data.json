@@ -28,7 +28,7 @@
   ],
 
   "components": [
-    { "id": "design", "name": "设计系统", "prefix": "design", "progress": 80, "check": true, "note": "令牌/基础组件/布局/状态组件就绪，等待页面集成" },
+    { "id": "design", "name": "设计系统", "prefix": "design", "progress": 100, "check": true, "note": "S1 完成：令牌/基础组件/布局/状态组件全部就绪" },
     { "id": "api", "name": "API 层", "prefix": "api", "progress": 90, "check": true, "note": "client/repos/issues 就绪，剩余按需补充" },
     { "id": "dashboard", "name": "仪表盘", "prefix": "dashboard", "progress": 0, "check": false, "note": "S3 待启动" },
     { "id": "repo", "name": "仓库", "prefix": "repo", "progress": 0, "check": false, "note": "S3 待启动" },
