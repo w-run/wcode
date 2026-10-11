@@ -65,7 +65,7 @@ const tabItems: TabItem[] = [
   padding-left: env(safe-area-inset-left);
   padding-right: env(safe-area-inset-right);
 
-  @include media-down(calc($bp-desktop - 1px)) {
+  @include media-down($bp-desktop) {
     display: flex;
     align-items: stretch;
   }

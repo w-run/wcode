@@ -3,7 +3,7 @@
 // 基于 _tokens.scss 的 $bp-* 变量
 // ============================================================
 
-@use '@/assets/styles/tokens' as *;
+@use 'tokens' as *;
 
 /// >= 断点宽度（不含）
 @mixin media-up($bp) {

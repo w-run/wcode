@@ -121,7 +121,7 @@ const navItems: NavItem[] = [
   flex-shrink: 0;
 
   // 移动端隐藏
-  @include media-down(calc($bp-desktop - 1px)) {
+  @include media-down($bp-desktop) {
     display: none;
   }
 }
