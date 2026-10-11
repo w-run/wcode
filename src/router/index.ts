@@ -67,6 +67,11 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/settings',
+      name: 'settings',
+      component: () => import('@/views/settings/SettingsPage.vue'),
+    },
+    {
       path: '/repos/:owner/:name/settings/mirrors',
       name: 'repo-mirrors',
       component: () => import('@/views/settings/MirrorPage.vue'),

@@ -3,6 +3,34 @@ import { ApiError } from './errors'
 /** Gitea 同域代理前缀（Vite proxy 转发到 Gitea :3000） */
 export const API_BASE_URL = '/api/v1'
 
+const TOKEN_KEY = 'wcode-token'
+
+/** 读取本地保存的 API Token（用于跨域 / 免 Cookie 场景的鉴权） */
+export function getToken(): string {
+  try {
+    return localStorage.getItem(TOKEN_KEY) ?? ''
+  } catch {
+    return ''
+  }
+}
+
+/** 保存 / 清除 API Token */
+export function setToken(token: string): void {
+  try {
+    if (token) localStorage.setItem(TOKEN_KEY, token)
+    else localStorage.removeItem(TOKEN_KEY)
+  } catch {
+    // localStorage 不可用时忽略
+  }
+}
+
+/** 构造鉴权头：优先 Token，其次同域 Cookie */
+function withAuth(headers: Headers): Headers {
+  const token = getToken()
+  if (token) headers.set('Authorization', `token ${token}`)
+  return headers
+}
+
 /** 可序列化为 query string 的值 */
 export type QueryValue = string | number | boolean | null | undefined
 
@@ -36,7 +64,7 @@ async function extractErrorMessage(response: Response): Promise<string> {
 }
 
 async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const headers = new Headers(init.headers)
+  const headers = withAuth(new Headers(init.headers))
   headers.set('Accept', 'application/json')
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
@@ -70,7 +98,7 @@ async function requestText(
   path: string,
   init: RequestInit = {},
 ): Promise<string> {
-  const headers = new Headers(init.headers)
+  const headers = withAuth(new Headers(init.headers))
   headers.set('Accept', 'text/plain, */*')
 
   const response = await fetch(`${API_BASE_URL}${path}`, {
