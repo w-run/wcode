@@ -53,4 +53,7 @@
   --bp-tablet: #{$bp-tablet};
   --bp-desktop: #{$bp-desktop};
   --bp-wide: #{$bp-wide};
+
+  // 过渡
+  --transition-fast: #{$transition-fast};
 }
