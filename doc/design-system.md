@@ -11,14 +11,17 @@
 | `--color-bg` | `#FAFAF8` | 页面背景（米白） |
 | `--color-surface` | `#FFFFFF` | 卡片/组件背景 |
 | `--color-surface-2` | `#F5F5F0` | 次级表面（hover/selected） |
-| `--color-border` | `#E8E8E3` | 边框 |
 | `--color-text` | `#1A1A1A` | 主文本 |
 | `--color-text-muted` | `#6B7280` | 次级文本 |
-| `--color-accent` | `#3B82F6` | 强调色（蓝，用于交互） |
-| `--color-accent-hover` | `#2563EB` | 强调色 hover |
-| `--color-danger` | `#EF4444` | 危险/错误 |
-| `--color-success` | `#22C55E` | 成功 |
-| `--color-warning` | `#F59E0B` | 警告 |
+| `--color-accent` | `#D62839` | 强调色（主题色：深红，用于交互/按钮/链接） |
+| `--color-accent-hover` | `#B81F2E` | 强调色 hover |
+| `--color-accent-light` | `#FBE8EA` | 强调色浅底（标签/徽章背景） |
+| `--color-danger` | `#DC2626` | 危险/错误 |
+| `--color-danger-light` | `#FEE2E2` | 危险浅底 |
+| `--color-success` | `#16A34A` | 成功 |
+| `--color-success-light` | `#DCFCE7` | 成功浅底 |
+| `--color-warning` | `#CA8A04` | 警告 |
+| `--color-warning-light` | `#FEF9C3` | 警告浅底 |
 
 ### 1.2 语义色
 
@@ -46,34 +49,53 @@
 | `--space-12` | `48px` | 页面区块间距 |
 | `--space-16` | `64px` | 页面大区块间距 |
 
-## 3. 圆角系统
+## 3. 圆角系统（圆润风格）
+
+**核心原则：多用胶囊/大圆角/圆形，避免硬边框；用色块和阴影区分区域而非边框线。**
 
 | Token | 值 | 用途 |
 |-------|----|------|
-| `--radius-sm` | `4px` | 小元素（badge/tag） |
-| `--radius-md` | `8px` | 按钮/输入框 |
-| `--radius-lg` | `12px` | 卡片 |
-| `--radius-xl` | `16px` | 大卡片/模态框 |
+| `--radius-full` | `9999px` | **胶囊按钮**（主按钮）、标签、徽章、圆形头像 |
+| `--radius-xl` | `24px` | 大卡片、模态框 |
+| `--radius-lg` | `16px` | 中等卡片、面板 |
+| `--radius-md` | `12px` | 小卡片、输入框、工具栏 |
+| `--radius-sm` | `8px` | 小元素（badge/tag） |
 
 ## 4. 阴影系统
 
+> 避免硬边框装饰。区域区分优先用**色块**（不同 surface 色），阴影只用于浮层/卡片层次，不用于描边。
+
 | Token | 值 | 用途 |
 |-------|----|------|
-| `--shadow-sm` | `0 1px 2px rgba(0,0,0,0.05)` | 轻微阴影 |
-| `--shadow-md` | `0 4px 6px rgba(0,0,0,0.07)` | 卡片默认阴影 |
-| `--shadow-lg` | `0 10px 15px rgba(0,0,0,0.1)` | 浮层/弹窗 |
-| `--shadow-bento` | `0 0 0 1px var(--color-border), 0 4px 12px rgba(0,0,0,0.05)` | Bento 卡片 |
+| `--shadow-sm` | `0 2px 6px rgba(0,0,0,0.04)` | 轻微层次（次级卡片） |
+| `--shadow-md` | `0 4px 12px rgba(0,0,0,0.06)` | 卡片默认阴影 |
+| `--shadow-lg` | `0 12px 24px rgba(0,0,0,0.10)` | 浮层/弹窗 |
+| `--shadow-accent` | `0 4px 12px rgba(214,40,57,0.20)` | 强调色阴影（主按钮 hover） |
+
+> 注意：不使用 `0 0 0 1px` 描边阴影替代边框。区域边界优先用背景色差（`--color-surface` vs `--color-surface-2`）表达。
 
 ## 5. Bento 栅格
 
 ### 5.1 布局原则
 
 - **留白**：大区块间至少 32px，留出呼吸空间
-- **卡片**：使用 `--shadow-bento`，圆角 `--radius-lg`
+- **圆润卡片**：使用 `--shadow-md`，圆角 `--radius-lg` / `--radius-xl`
 - **网格**：响应式，CSS Grid，支持 1-4 列
-- **扁平**：避免渐变背景，用纯色 + 阴影区分层次
+- **区域区分**：用色块（背景色差）区分区域，避免硬边框；卡片之间靠留白和阴影分隔
 
-### 5.2 网格断点
+### 5.2 组件圆润风格约定
+
+| 组件 | 圆角风格 |
+|------|----------|
+| 主按钮（Primary Button） | `border-radius: var(--radius-full)`（胶囊形） |
+| 次按钮 / Icon Button | `border-radius: var(--radius-full)`（圆形或胶囊） |
+| 输入框 | `border-radius: var(--radius-md)` |
+| 卡片 | `border-radius: var(--radius-lg)` |
+| 大面板/模态框 | `border-radius: var(--radius-xl)` |
+| 标签/徽章 | `border-radius: var(--radius-full)` |
+| Avatar | `border-radius: var(--radius-full)`（圆形） |
+
+### 5.3 网格断点
 
 | 断点 | 最小宽度 | 列数 | 卡片最大宽度 |
 |------|----------|------|--------------|
@@ -98,8 +120,8 @@
 
 ### 6.3 错误态
 
-- 红色边框/背景提示
-- 友好文案 + 重试按钮
+- 错误提示用**色块**（`--color-danger-light` 浅红底 + `--color-danger` 文字），不用红色硬边框
+- 友好文案 + 重试按钮（胶囊形）
 - 避免技术术语暴露给用户
 
 ## 7. 实现方式
@@ -112,10 +134,11 @@
 ```scss
 // _tokens.scss
 $color-bg: #FAFAF8;
-$color-accent: #3B82F6;
+$color-accent: #D62839;
 $space-4: 16px;
-$radius-lg: 12px;
-$shadow-bento: 0 0 0 1px #E8E8E3, 0 4px 12px rgba(0, 0, 0, 0.05);
+$radius-lg: 16px;
+$radius-full: 9999px;
+$shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
 
 // _root.scss
 :root {
@@ -123,7 +146,8 @@ $shadow-bento: 0 0 0 1px #E8E8E3, 0 4px 12px rgba(0, 0, 0, 0.05);
   --color-accent: #{$color-accent};
   --space-4: #{$space-4};
   --radius-lg: #{$radius-lg};
-  --shadow-bento: #{$shadow-bento};
+  --radius-full: #{$radius-full};
+  --shadow-md: #{$shadow-md};
 }
 ```
 
