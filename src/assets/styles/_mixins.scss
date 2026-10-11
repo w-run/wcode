@@ -1,0 +1,20 @@
+// ============================================================
+// 响应式断点 mixin
+// 基于 _tokens.scss 的 $bp-* 变量
+// ============================================================
+
+@use '@/assets/styles/tokens' as *;
+
+/// >= 断点宽度（不含）
+@mixin media-up($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+/// < 断点宽度（含）
+@mixin media-down($bp) {
+  @media (max-width: calc($bp - 1px)) {
+    @content;
+  }
+}
