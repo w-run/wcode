@@ -238,27 +238,7 @@ export interface Comment {
   updated_at?: string
 }
 
-/** 新建 / 更新评论的请求体 */
+/** 新建评论的请求体 */
 export interface CreateCommentOptions {
   body: string
-}
-
-/** PR 列表的可选参数 */
-export interface PullListOptions {
-  page?: number
-  limit?: number
-  state?: 'open' | 'closed' | 'all'
-  sort?: 'oldest' | 'recentupdate' | 'leastupdate' | 'mostcomment' | 'leastcomment' | 'priority'
-  type?: 'all' | 'pulls'
-  labels?: string
-}
-
-/** 新建 PR 的请求体 */
-export interface CreatePullOptions {
-  title: string
-  body?: string
-  head: string
-  base: string
-  labels?: number[]
-  milestone?: number
 }

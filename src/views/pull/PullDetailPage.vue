@@ -48,9 +48,7 @@ const statusVariant = computed<'success' | 'accent' | 'danger'>(() => {
 /** 是否可合并：打开且未合并 */
 const canMerge = computed(
   () =>
-    !!pull.value &&
-    status.value === 'open' &&
-    pull.value.mergeable !== false,
+    !!pull.value && status.value === 'open' && pull.value.mergeable !== false,
 )
 
 const bodyHtml = computed(() =>
@@ -95,7 +93,9 @@ onMounted(async () => {
     <template v-else-if="store.detailState === 'error'">
       <ErrorState
         :message="store.detailError ?? '无法加载 PR 详情'"
-        @retry="store.fetchPullDetail(props.owner, props.name, Number(props.number))"
+        @retry="
+          store.fetchPullDetail(props.owner, props.name, Number(props.number))
+        "
       />
     </template>
 
@@ -120,11 +120,7 @@ onMounted(async () => {
           >
             合并
           </Button>
-          <span
-            v-if="store.mergeDone"
-            class="pd__merge-done"
-            role="status"
-          >
+          <span v-if="store.mergeDone" class="pd__merge-done" role="status">
             已合并
           </span>
           <span v-if="store.mergeError" class="pd__merge-error" role="alert">
@@ -142,7 +138,9 @@ onMounted(async () => {
           fill="currentColor"
           aria-hidden="true"
         >
-          <path d="M8.75 1.75v11.19l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V1.75a.75.75 0 0 1 1.5 0Z" />
+          <path
+            d="M8.75 1.75v11.19l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V1.75a.75.75 0 0 1 1.5 0Z"
+          />
         </svg>
         <span class="branch-chip branch-chip--base">{{
           pull.base?.ref ?? '—'
@@ -158,11 +156,7 @@ onMounted(async () => {
       </div>
 
       <!-- 正文（Markdown） -->
-      <article
-        v-if="bodyHtml"
-        class="pd__card pd__body"
-        v-html="bodyHtml"
-      />
+      <article v-if="bodyHtml" class="pd__card pd__body" v-html="bodyHtml" />
 
       <!-- 评论列表 -->
       <section class="pd__comments">
@@ -172,14 +166,8 @@ onMounted(async () => {
           <Skeleton height="64px" border-radius="12px" />
         </div>
 
-        <div
-          v-else-if="store.comments.length === 0"
-          class="pd__comments-empty"
-        >
-          <EmptyState
-            title="还没有评论"
-            description="留下第一条评论吧"
-          />
+        <div v-else-if="store.comments.length === 0" class="pd__comments-empty">
+          <EmptyState title="还没有评论" description="留下第一条评论吧" />
         </div>
 
         <ul v-else class="pd__comment-list">
@@ -187,7 +175,9 @@ onMounted(async () => {
             <Avatar :src="c.user?.avatar_url" :name="c.user?.login" size="sm" />
             <div class="comment__main">
               <div class="comment__head">
-                <span class="comment__author">{{ c.user?.login ?? 'unknown' }}</span>
+                <span class="comment__author">{{
+                  c.user?.login ?? 'unknown'
+                }}</span>
                 <time class="comment__time">{{
                   formatRelativeTime(c.created_at)
                 }}</time>

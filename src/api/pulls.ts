@@ -42,10 +42,7 @@ export async function createPull(
   repo: string,
   data: CreatePullOptions,
 ): Promise<PullRequest> {
-  return client.post<PullRequest>(
-    `/repos/${owner}/${repo}/pulls`,
-    data,
-  )
+  return client.post<PullRequest>(`/repos/${owner}/${repo}/pulls`, data)
 }
 
 /**
@@ -57,10 +54,7 @@ export async function mergePull(
   repo: string,
   index: number,
 ): Promise<void> {
-  return client.post<void>(
-    `/repos/${owner}/${repo}/pulls/${index}/merge`,
-    {},
-  )
+  return client.post<void>(`/repos/${owner}/${repo}/pulls/${index}/merge`, {})
 }
 
 /**

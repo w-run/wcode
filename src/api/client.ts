@@ -65,6 +65,31 @@ async function request<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
 }
 
+/** 请求纯文本响应（`/raw/{filepath}` 等直接返回文件内容的接口） */
+async function requestText(
+  path: string,
+  init: RequestInit = {},
+): Promise<string> {
+  const headers = new Headers(init.headers)
+  headers.set('Accept', 'text/plain, */*')
+
+  const response = await fetch(`${API_BASE_URL}${path}`, {
+    ...init,
+    credentials: 'include',
+    headers,
+  })
+
+  if (!response.ok) {
+    throw new ApiError(
+      response.status,
+      await extractErrorMessage(response),
+      response.url,
+    )
+  }
+
+  return response.text()
+}
+
 /** fetch 封装：统一 baseURL / Cookie 凭证 / JSON 解析 / 错误处理 */
 export const client = {
   get<T>(path: string): Promise<T> {
@@ -86,5 +111,9 @@ export const client = {
   },
   del<T>(path: string): Promise<T> {
     return request<T>(path, { method: 'DELETE' })
+  },
+  /** 纯文本响应（raw 文件内容等） */
+  getText(path: string): Promise<string> {
+    return requestText(path, { method: 'GET' })
   },
 }

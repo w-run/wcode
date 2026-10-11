@@ -1,5 +1,11 @@
 import { client, buildQuery } from './client'
-import type { Issue, IssueListOptions, CreateIssueOptions } from './types'
+import type {
+  Issue,
+  IssueListOptions,
+  CreateIssueOptions,
+  Comment,
+  CreateCommentOptions,
+} from './types'
 
 /**
  * 列出仓库的 Issue
@@ -37,4 +43,34 @@ export async function createIssue(
   data: CreateIssueOptions,
 ): Promise<Issue> {
   return client.post<Issue>(`/repos/${owner}/${repo}/issues`, data)
+}
+
+/**
+ * 列出 Issue 的评论
+ * GET /repos/{owner}/{repo}/issues/{index}/comments
+ */
+export async function listIssueComments(
+  owner: string,
+  repo: string,
+  number: number,
+): Promise<Comment[]> {
+  return client.get<Comment[]>(
+    `/repos/${owner}/${repo}/issues/${number}/comments`,
+  )
+}
+
+/**
+ * 新增 Issue 评论
+ * POST /repos/{owner}/{repo}/issues/{index}/comments
+ */
+export async function createIssueComment(
+  owner: string,
+  repo: string,
+  number: number,
+  data: CreateCommentOptions,
+): Promise<Comment> {
+  return client.post<Comment>(
+    `/repos/${owner}/${repo}/issues/${number}/comments`,
+    data,
+  )
 }

@@ -10,8 +10,15 @@ import Button from '@/components/ui/Button.vue'
 
 const route = useRoute()
 const store = usePullsStore()
-const { filteredPulls, listState, filter, openCount, closedCount, mergedCount, usingMock } =
-  storeToRefs(store)
+const {
+  filteredPulls,
+  listState,
+  filter,
+  openCount,
+  closedCount,
+  mergedCount,
+  usingMock,
+} = storeToRefs(store)
 
 const owner = computed(() => route.params.owner as string)
 const name = computed(() => route.params.name as string)
@@ -64,10 +71,7 @@ onMounted(() => {
     </nav>
 
     <!-- 加载态 -->
-    <div
-      v-if="listState === 'loading'"
-      class="repo-pulls-page__grid"
-    >
+    <div v-if="listState === 'loading'" class="repo-pulls-page__grid">
       <div v-for="i in 3" :key="i" class="repo-pulls-page__skeleton" />
     </div>
 

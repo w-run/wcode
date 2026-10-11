@@ -187,7 +187,9 @@ export const usePullsStore = defineStore('pulls', () => {
     sendingComment.value = true
     commentError.value = null
     try {
-      const created = await createComment(owner, name, number, { body: content })
+      const created = await createComment(owner, name, number, {
+        body: content,
+      })
       comments.value = [...comments.value, { ...created, body: content }]
       return true
     } catch (err) {

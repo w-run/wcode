@@ -15,14 +15,10 @@ export { client, API_BASE_URL, buildQuery } from './client'
 export { searchRepos, listRepos, getRepo, getReadme } from './repos'
 
 // Issue
-export { listIssues, getIssue, createIssue } from './issues'
-
-// Pull Request
 export {
-  listPulls,
-  getPull,
-  createPull,
-  mergePull,
-  listComments,
-  createComment,
-} from './pulls'
+  listIssues,
+  getIssue,
+  createIssue,
+  listIssueComments,
+  createIssueComment,
+} from './issues'

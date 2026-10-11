@@ -4,6 +4,8 @@ import type {
   RepositorySearchResults,
   ReadmeContent,
   RepoSearchOptions,
+  ContentsResponse,
+  Branch,
 } from './types'
 
 /**
@@ -55,4 +57,48 @@ export async function getReadme(
   repo: string,
 ): Promise<ReadmeContent> {
   return client.get<ReadmeContent>(`/repos/${owner}/${repo}/contents/README.md`)
+}
+
+/**
+ * 获取目录 / 文件内容（Gitea contents 接口）
+ * GET /repos/{owner}/{repo}/contents/{path}?ref={ref}
+ */
+export async function getContents(
+  owner: string,
+  repo: string,
+  path = '',
+  ref?: string,
+): Promise<ContentsResponse[]> {
+  const query = buildQuery({ ref })
+  const url = path
+    ? `/repos/${owner}/${repo}/contents/${path}${query}`
+    : `/repos/${owner}/${repo}/contents${query}`
+  const data = await client.get<ContentsResponse | ContentsResponse[]>(url)
+  return Array.isArray(data) ? data : [data]
+}
+
+/**
+ * 获取文件原始内容（纯文本）
+ * GET /repos/{owner}/{repo}/raw/{ref}/{path}
+ */
+export async function getFileRaw(
+  owner: string,
+  repo: string,
+  ref: string,
+  path: string,
+): Promise<string> {
+  return client.getText(
+    `/repos/${owner}/${repo}/raw/${encodeURIComponent(ref)}/${path}`,
+  )
+}
+
+/**
+ * 获取仓库分支列表
+ * GET /repos/{owner}/{repo}/branches
+ */
+export async function listBranches(
+  owner: string,
+  repo: string,
+): Promise<Branch[]> {
+  return client.get<Branch[]>(`/repos/${owner}/${repo}/branches`)
 }

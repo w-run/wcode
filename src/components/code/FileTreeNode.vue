@@ -1,15 +1,6 @@
 <script setup lang="ts">
 import { getContents } from '@/api/repos'
-
-/** 文件树节点（children 为 null 表示目录尚未懒加载） */
-export interface TreeNode {
-  name: string
-  path: string
-  type: string
-  children: TreeNode[] | null
-  expanded: boolean
-  loading: boolean
-}
+import type { TreeNode } from './types'
 
 const props = defineProps<{
   node: TreeNode
@@ -17,7 +8,6 @@ const props = defineProps<{
   repo: string
   refName?: string
   depth: number
-  /** 当前激活路径（文件高亮） */
   activePath?: string
 }>()
 

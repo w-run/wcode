@@ -64,7 +64,9 @@ const detailTo = computed(() => ({
           fill="currentColor"
           aria-hidden="true"
         >
-          <path d="M8.75 1.75v11.19l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V1.75a.75.75 0 0 1 1.5 0Z" />
+          <path
+            d="M8.75 1.75v11.19l3.72-3.72a.75.75 0 1 1 1.06 1.06l-5 5a.75.75 0 0 1-1.06 0l-5-5a.75.75 0 1 1 1.06-1.06l3.72 3.72V1.75a.75.75 0 0 1 1.5 0Z"
+          />
         </svg>
         <span class="branch-chip branch-chip--base">{{
           pr.base?.ref ?? '—'
