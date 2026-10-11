@@ -122,6 +122,36 @@ const TOOLS = [
       required: ['owner', 'repo', 'path'],
     },
   },
+  {
+    name: 'issue_close',
+    description: '关闭一个 Issue（需写权限 Token）',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        owner: { type: 'string' },
+        repo: { type: 'string' },
+        index: { type: 'number', description: 'Issue 编号' },
+      },
+      required: ['owner', 'repo', 'index'],
+    },
+  },
+  {
+    name: 'repo_create',
+    description: '为当前用户创建仓库（需写权限 Token）',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        name: { type: 'string' },
+        description: { type: 'string' },
+        private: { type: 'boolean', description: '是否私有，默认 false' },
+        auto_init: {
+          type: 'boolean',
+          description: '是否初始化 README，默认 true',
+        },
+      },
+      required: ['name'],
+    },
+  },
 ]
 
 async function callTool(name, args) {
@@ -195,6 +225,23 @@ async function callTool(name, args) {
         return Buffer.from(item.content, 'base64').toString('utf8')
       }
       return String(item.content ?? '')
+    }
+    case 'issue_close': {
+      const { owner, repo, index } = args
+      await gitea(`/repos/${owner}/${repo}/issues/${index}`, 'PATCH', {
+        state: 'closed',
+      })
+      return `已关闭 Issue #${index}`
+    }
+    case 'repo_create': {
+      const { name, description = '' } = args
+      const r = await gitea('/user/repos', 'POST', {
+        name,
+        description,
+        private: Boolean(args.private),
+        auto_init: args.auto_init ?? true,
+      })
+      return `已创建仓库 ${r.full_name}`
     }
     default:
       throw new Error(`未知工具: ${name}`)

@@ -34,9 +34,11 @@ Claude Desktop / Cursor 等 MCP 客户端：
 | `repo_list` | 列出当前用户所有仓库 |
 | `repo_search` | 搜索仓库 |
 | `repo_get` | 获取仓库元数据（描述/语言/star/默认分支） |
+| `repo_create` | 创建仓库（需写权限 Token） |
 | `file_read` | 读取仓库文件内容（文本） |
 | `issue_list` | 列出仓库 Issue |
 | `issue_create` | 创建 Issue |
+| `issue_close` | 关闭 Issue（需写权限 Token） |
 | `pr_list` | 列出仓库 Pull Request |
 
 ## 协议
