@@ -246,6 +246,14 @@
       "progress": 80,
       "check": false,
       "note": "S6 完成：Nginx+一键脚本+性能优化"
+    },
+    {
+      "id": "runner",
+      "name": "本地 Runner",
+      "prefix": "runner",
+      "progress": 100,
+      "check": true,
+      "note": "对标 GitHub Actions 的工作流执行器"
     }
   ]
 }
