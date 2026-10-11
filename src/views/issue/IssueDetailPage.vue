@@ -76,12 +76,12 @@ async function submit() {
         </span>
       </div>
 
-      <div class="issue__body">{{ store.currentIssue.body || '（无正文）' }}</div>
+      <div class="issue__body">
+        {{ store.currentIssue.body || '（无正文）' }}
+      </div>
 
       <div class="issue__comments">
-        <h2 class="issue__sub">
-          评论 {{ store.comments.length }}
-        </h2>
+        <h2 class="issue__sub">评论 {{ store.comments.length }}</h2>
 
         <div v-if="store.commentsState === 'loading'" class="issue__skeleton">
           <span v-for="i in 3" :key="i" class="issue__comment-skel" />
@@ -139,8 +139,12 @@ async function submit() {
   background: $color-surface-2;
   animation: issue-shimmer 1.5s ease-in-out infinite;
 
-  &:nth-child(odd) { width: 70%; }
-  &:nth-child(even) { width: 45%; }
+  &:nth-child(odd) {
+    width: 70%;
+  }
+  &:nth-child(even) {
+    width: 45%;
+  }
 }
 
 .issue__error {
@@ -308,7 +312,12 @@ async function submit() {
 }
 
 @keyframes issue-shimmer {
-  0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
 }
 </style>

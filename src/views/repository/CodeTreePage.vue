@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { computed, onMounted, ref, watch } from 'vue'
-import { useRoute, useRouter } from 'vue-router'
+import { useRouter } from 'vue-router'
 import { getContents, listBranches } from '@/api/repos'
 import type { ContentsResponse } from '@/api/types'
 import FileTree from '@/components/code/FileTree.vue'
@@ -12,7 +12,6 @@ const props = defineProps<{
   path?: string | string[]
 }>()
 
-const route = useRoute()
 const router = useRouter()
 
 const currentPath = computed(() =>
