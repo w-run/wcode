@@ -106,7 +106,7 @@
         "双向同步 + 冲突检测",
         "远端平台（GitHub/Gitee/GitLab/通用 Git）"
       ],
-      "done": 3,
+      "done": 4,
       "total": 4
     },
     {
@@ -227,9 +227,9 @@
       "id": "mirror",
       "name": "镜像同步",
       "prefix": "mirror",
-      "progress": 75,
+      "progress": 100,
       "check": false,
-      "note": "S5.6：镜像管理页 + 平台引导完成"
+      "note": "S5.6 完成：拉取/推送分组 + 双向标识 + 平台引导"
     },
     {
       "id": "settings",

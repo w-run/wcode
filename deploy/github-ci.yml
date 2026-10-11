@@ -1,0 +1,40 @@
+# ============================================================
+# GitHub Actions CI 模板
+# 用法：复制到 .github/workflows/ci.yml 即启用
+# （当前仓库 token 无 workflow scope，故以模板形式存放，
+#  具备权限后放置到 .github/workflows/ 目录即可生效）
+# ============================================================
+name: CI
+
+on:
+  push:
+    branches: [develop, main]
+  pull_request:
+    branches: [develop]
+
+jobs:
+  check:
+    name: 门禁（type-check + lint + test + build）
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 安装 pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11
+
+      - name: 安装 Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: 安装依赖
+        run: pnpm install --frozen-lockfile
+
+      - name: 运行门禁
+        run: pnpm check
+
+      - name: MCP 语法校验
+        run: node --check server/mcp/index.mjs

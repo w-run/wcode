@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import {
   listMirrors,
   syncMirror,
@@ -15,9 +15,24 @@ const props = defineProps<{
 }>()
 
 const mirrors = ref<Mirror[]>([])
+const pushMirrors = ref<Mirror[]>([])
 const loading = ref(true)
 const usingMock = ref(false)
 const syncing = ref<number | null>(null)
+
+const groups = computed(() => [
+  { key: 'pull', label: '拉取镜像', items: mirrors.value },
+  { key: 'push', label: '推送镜像', items: pushMirrors.value },
+])
+
+const pushAddresses = computed(
+  () => new Set(pushMirrors.value.map((m) => m.remote_address)),
+)
+
+/** 该远端是否同时配置了推送镜像（双向同步） */
+function isDual(addr: string) {
+  return pushAddresses.value.has(addr)
+}
 
 const form = ref({
   type: 'pull' as MirrorType,
@@ -40,14 +55,25 @@ const MOCK: Mirror[] = [
 async function load() {
   loading.value = true
   try {
-    mirrors.value = await listMirrors(props.owner, props.name)
+    const [pull, push] = await Promise.all([
+      listMirrors(props.owner, props.name, 'pull'),
+      listMirrors(props.owner, props.name, 'push'),
+    ])
+    mirrors.value = pull
+    pushMirrors.value = push
     usingMock.value = false
   } catch {
     mirrors.value = MOCK
+    pushMirrors.value = []
     usingMock.value = true
   } finally {
     loading.value = false
   }
+}
+
+function addMirror(m: Mirror, type: MirrorType) {
+  if (type === 'push') pushMirrors.value.push(m)
+  else mirrors.value.push(m)
 }
 
 async function doSync(id: number) {
@@ -69,12 +95,12 @@ async function submit() {
       remote_username: form.value.username || undefined,
       remote_password: form.value.password || undefined,
     })
-    mirrors.value.push(m)
+    addMirror(m, form.value.type)
   } catch {
-    mirrors.value.push({
-      id: Date.now(),
-      remote_address: form.value.url.trim(),
-    })
+    addMirror(
+      { id: Date.now(), remote_address: form.value.url.trim() },
+      form.value.type,
+    )
     usingMock.value = true
   } finally {
     form.value = { type: 'pull', url: '', username: '', password: '' }
@@ -98,23 +124,32 @@ onMounted(load)
       离线预览：后端不可达，展示示例数据
     </p>
 
-    <section class="mirror__list">
+    <section v-for="g in groups" :key="g.key" class="mirror__list">
+      <h2 class="mirror__group-title">{{ g.label }}</h2>
+
       <div v-if="loading" class="mirror__skeleton">
         <span v-for="i in 3" :key="i" class="mirror__skel" />
       </div>
 
-      <p v-else-if="!mirrors.length" class="mirror__empty">还没有配置镜像</p>
+      <p v-else-if="!g.items.length" class="mirror__empty">
+        暂无 {{ g.label }}
+      </p>
 
-      <article v-for="m in mirrors" v-else :key="m.id" class="mirror-card">
+      <article v-for="m in g.items" v-else :key="m.id" class="mirror-card">
         <div class="mirror-card__main">
-          <span class="mirror-card__badge">拉取</span>
+          <span class="mirror-card__badge">
+            {{ g.key === 'pull' ? '拉取' : '推送' }}
+          </span>
+          <span v-if="isDual(m.remote_address)" class="mirror-card__dual">
+            双向
+          </span>
           <span class="mirror-card__url">{{ m.remote_address }}</span>
         </div>
         <div class="mirror-card__meta">
           <span v-if="m.interval">间隔 {{ m.interval }}</span>
-          <span v-if="m.updated_at"
-            >上次 {{ formatRelativeTime(m.updated_at) }}</span
-          >
+          <span v-if="m.updated_at">
+            上次 {{ formatRelativeTime(m.updated_at) }}
+          </span>
         </div>
         <button
           type="button"
@@ -231,6 +266,13 @@ onMounted(load)
   font-size: 13px;
 }
 
+.mirror__group-title {
+  margin: 0 0 $space-2 $space-2;
+  font-size: 13px;
+  font-weight: 600;
+  color: $color-text;
+}
+
 .mirror__list {
   display: flex;
   flex-direction: column;
@@ -282,6 +324,15 @@ onMounted(load)
   border-radius: $radius-full;
   background: $color-accent-light;
   color: $color-accent;
+  font-size: 12px;
+}
+
+.mirror-card__dual {
+  flex-shrink: 0;
+  padding: 2px 10px;
+  border-radius: $radius-full;
+  background: $color-warning-light;
+  color: $color-warning;
   font-size: 12px;
 }
 
