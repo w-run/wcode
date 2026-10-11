@@ -10,6 +10,7 @@
 | [feedback_pnpm_allow_builds.md](feedback_pnpm_allow_builds.md) | 纪律 | pnpm 11 供应链策略拦截 esbuild/@parcel-watcher 构建脚本；须在 pnpm-workspace.yaml 设 allowBuilds 批准 |
 | [feedback_concurrent_branch.md](feedback_concurrent_branch.md) | 纪律 | 多 worker 必须用独立 worktree 隔离；共享工作区并发导致分支指针互相覆盖、提交错位 |
 | [feedback_scss_build_gate.md](feedback_scss_build_gate.md) | 纪律 | 门禁须含 vite build；type-check/lint 不编译 SCSS，$transition-fast 缺失与 mixin 未注入被漏检 |
+| [feedback_worktree_pnpm.md](feedback_worktree_pnpm.md) | 纪律 | worktree 无 node_modules，pnpm 依赖校验因无 TTY 失败（ERR_PNPM_ABORTED_REMOVE_MODULES_DIR_NO_TTY）；改用 node_modules/.bin 直调 |
 
 <!-- 新增条目时按下表格式登记：
 
