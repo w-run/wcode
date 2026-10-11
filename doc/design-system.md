@@ -104,6 +104,46 @@
 | desktop | `1024px+` | 3 | 33% |
 | wide | `1280px+` | 4 | 25% |
 
+### 5.4 移动端适配策略
+
+**视口配置（必须）：**
+
+```html
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+```
+
+**响应式实现约定：**
+
+| 场景 | 策略 |
+|------|------|
+| 栅格列数 | CSS Grid `grid-template-columns` 按断点响应式切换（§5.3） |
+| 隐藏/显示 | 移动端优先：`display: none` 在 mobile 断点隐藏次要信息；大屏反之 |
+| 侧边栏 | 移动端收起为 Drawer（从左侧滑入），大屏固定展示 |
+| 导航 | 移动端底部 Tab Bar（5 个以内主入口）；大屏顶部横向导航 |
+| 图片 | `loading="lazy"` + `srcset` 多档适配，禁止固定 `width`/`height` 撑开布局 |
+| 代码高亮 | 横向滚动（`overflow-x: auto`），不换行，保持可读性 |
+
+**移动端交互规范：**
+
+| 规范 | 要求 |
+|------|------|
+| 触摸目标最小尺寸 | `44px × 44px`（Apple HIG / WCAG 2.5.8），胶囊按钮高度不低于此 |
+| 点击热区 | 可点击区域不足时用 `::before`/`::after` 伪元素扩展 |
+| 手势支持 | 仓库文件列表/代码浏览支持**双指缩放**（`touch-action: manipulation`） |
+| 长按 | 仓库卡片/文件长按弹出上下文菜单（类似 GitHub Mobile） |
+| 下拉刷新 | 列表页支持下拉刷新（指针事件 `@starting-style` + pull-to-refresh） |
+| 避免 hover 陷阱 | 桌面端 hover 效果在移动端必须可触达（用 `:focus-visible` 替代或补充） |
+
+**移动端性能规范：**
+
+| 规范 | 要求 |
+|------|------|
+| 首屏渲染 | 关键 CSS 内联（`<style>`），首屏内容 3G 慢网 ≤ 3s |
+| 图片 | WebP 优先，备选 JPEG/PNG；大图 `loading="lazy"` |
+| 代码高亮 | 首屏代码块不超过 50 行；超长文件懒加载分片渲染 |
+| 路由懒加载 | Vue `defineAsyncComponent` / `() => import()` 按路由懒加载 |
+| 预加载 | 首页资源 `<link rel="prefetch">`，次屏内容空闲时加载 |
+
 ## 6. 状态设计
 
 ### 6.1 空态
@@ -123,6 +163,12 @@
 - 错误提示用**色块**（`--color-danger-light` 浅红底 + `--color-danger` 文字），不用红色硬边框
 - 友好文案 + 重试按钮（胶囊形）
 - 避免技术术语暴露给用户
+
+### 6.4 移动端状态栏适配
+
+- 状态栏：深色主题下使用 `viewport-fit=cover` + `env(safe-area-inset-*)` 内边距
+- 底部安全区：Tab Bar 预留 `padding-bottom: env(safe-area-inset-bottom)`
+- 横竖屏：竖屏适配为主，横屏保留响应式布局不破坏
 
 ## 7. 实现方式
 
