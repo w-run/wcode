@@ -1,0 +1,117 @@
+@use 'tokens' as *;
+
+// ============================================================
+// Markdown 正文排版（落地页 / 详情页共用）
+// 极简风格：宽松行高、克制字号、色块代码区
+// ============================================================
+
+.markdown {
+  font-size: 15px;
+  line-height: 1.8;
+  color: $color-text;
+
+  > :first-child {
+    margin-top: 0;
+  }
+
+  > :last-child {
+    margin-bottom: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 600;
+    line-height: 1.4;
+    margin: 1.6em 0 0.6em;
+  }
+
+  h1 {
+    font-size: 1.5em;
+  }
+
+  h2 {
+    font-size: 1.3em;
+  }
+
+  h3 {
+    font-size: 1.15em;
+  }
+
+  p {
+    margin: 0.8em 0;
+  }
+
+  ul,
+  ol {
+    margin: 0.8em 0;
+    padding-left: 1.5em;
+  }
+
+  li {
+    margin: 0.25em 0;
+  }
+
+  a {
+    color: $color-accent;
+
+    &:hover {
+      color: $color-accent-hover;
+    }
+  }
+
+  code {
+    font-family: $font-mono;
+    font-size: 0.9em;
+    padding: 2px 6px;
+    border-radius: 6px;
+    background: $color-surface-2;
+  }
+
+  pre {
+    margin: 1em 0;
+    padding: $space-4;
+    border-radius: $radius-lg;
+    background: $color-surface-2;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.6;
+
+    code {
+      background: transparent;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    margin: 1em 0;
+    padding: 2px 0 2px $space-4;
+    border-left: 3px solid $color-accent-light;
+    color: $color-text-muted;
+  }
+
+  table {
+    margin: 1em 0;
+    border-collapse: collapse;
+    font-size: 0.95em;
+  }
+
+  th,
+  td {
+    padding: 8px 12px;
+    border: 1px solid $color-surface-2;
+  }
+
+  th {
+    background: $color-surface-2;
+    font-weight: 600;
+  }
+
+  img {
+    max-width: 100%;
+    border-radius: $radius-md;
+  }
+}

@@ -1,15 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
 import AppShell from '@/components/layout/AppShell.vue'
 import AppHeader from '@/components/layout/AppHeader.vue'
 import AppSidebar from '@/components/layout/AppSidebar.vue'
 import AppTabBar from '@/components/layout/AppTabBar.vue'
 
+const route = useRoute()
+/** 无布局页面（如对外落地页）：只渲染 router-view */
+const isBare = computed(() => route.meta.bare === true)
+
 const sidebarOpen = ref(false)
 </script>
 
 <template>
-  <AppShell>
+  <router-view v-if="isBare" />
+
+  <AppShell v-else>
     <AppHeader @toggle-sidebar="sidebarOpen = !sidebarOpen" />
     <AppSidebar v-model="sidebarOpen" />
     <div class="page-content">

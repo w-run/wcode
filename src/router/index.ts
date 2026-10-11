@@ -55,6 +55,13 @@ const router = createRouter({
       component: () => import('@/views/pull/PullDetailPage.vue'),
       props: true,
     },
+    {
+      path: '/r/:owner/:name',
+      name: 'landing',
+      component: () => import('@/views/landing/LandingPage.vue'),
+      props: true,
+      meta: { bare: true },
+    },
   ],
 })
 
