@@ -5,7 +5,7 @@
     "generated": "2026-10-11T00:00:00+08:00",
     "status_enum": { "0": "done", "1": "planned", "2": "pending" },
     "priority_enum": ["P0", "P1", "P2"],
-    "total": 1
+    "total": 4
   },
   "issues": [
     {
@@ -15,7 +15,40 @@
       "status": 0,
       "priority": "P0",
       "source": null,
-      "commits": ["feat/scaffold 分支提交"],
+      "commits": ["4bae170"],
+      "created": "2026-10-11",
+      "closed": "2026-10-11"
+    },
+    {
+      "id": "design-atoms",
+      "component": "design",
+      "title": "基础 UI 组件库（Button/Input/Badge/Avatar/Card + BentoGrid/BentoCard），圆润风格、零硬编码",
+      "status": 0,
+      "priority": "P0",
+      "source": null,
+      "commits": ["96f855f"],
+      "created": "2026-10-11",
+      "closed": "2026-10-11"
+    },
+    {
+      "id": "design-layout",
+      "component": "design",
+      "title": "布局与状态组件（AppShell/Header/Sidebar/TabBar + EmptyState/Skeleton/ErrorState + _mixins）",
+      "status": 0,
+      "priority": "P0",
+      "source": null,
+      "commits": ["0d7f1b0"],
+      "created": "2026-10-11",
+      "closed": "2026-10-11"
+    },
+    {
+      "id": "api-client",
+      "component": "api",
+      "title": "Gitea OpenAPI v1 客户端封装（client/errors/types/repos/issues + 6 项 mock 单测）",
+      "status": 0,
+      "priority": "P0",
+      "source": null,
+      "commits": ["df823a1"],
       "created": "2026-10-11",
       "closed": "2026-10-11"
     }

@@ -6,9 +6,9 @@
   },
 
   "roadmap": [
-    { "phase": "S0", "title": "环境", "items": ["部署/确认 Gitea，启用 [openapi]", "建 DNS/Nginx 骨架（/ → 前端 :3001，/api/v1 → Gitea :3000）", "拉取前端 Git 仓库骨架"], "done": 1, "total": 3 },
-    { "phase": "S1", "title": "设计系统", "items": ["颜色令牌（米白底 + 主题色 #D62839）", "间距/圆角/阴影规范（圆润风格）", "bento 栅格组件", "响应式断点 + 移动端布局规范", "空态/加载态/错误态"], "done": 2, "total": 5 },
-    { "phase": "S2", "title": "API 层", "items": ["OpenAPI v1 客户端封装（自动补 baseURL）", "请求拦截器", "错误统一处理"], "done": 0, "total": 3 },
+    { "phase": "S0", "title": "环境", "items": ["部署/确认 Gitea，启用 [openapi]", "建 DNS/Nginx 骨架（/ → 前端 :3001，/api/v1 → Gitea :3000）", "拉取前端 Git 仓库骨架"], "done": 3, "total": 3 },
+    { "phase": "S1", "title": "设计系统", "items": ["颜色令牌（米白底 + 主题色 #D62839）", "间距/圆角/阴影规范（圆润风格）", "bento 栅格组件", "响应式断点 + 移动端布局规范", "空态/加载态/错误态"], "done": 5, "total": 5 },
+    { "phase": "S2", "title": "API 层", "items": ["OpenAPI v1 客户端封装（自动补 baseURL）", "请求拦截器", "错误统一处理"], "done": 3, "total": 3 },
     { "phase": "S3", "title": "核心页", "items": ["仪表盘（置顶仓库大卡 + star/issue/PR 计数小卡）", "仓库卡片网格（语言色点/更新时间/star）", "仓库详情（README 大卡 + 侧栏信息卡 + 分支/提交时间线）"], "done": 0, "total": 3 },
     { "phase": "S4", "title": "代码浏览", "items": ["文件树", "代码查看（语法高亮 Shiki）", "README 渲染"], "done": 0, "total": 3 },
     { "phase": "S4.5", "title": "落地页生成器", "items": ["路由 /r/:owner/:name?t=模板名", "4 套内置模板（极简/科技/企业/卡片）", ".page/*.tpl 自定义模板（沙箱化）", "无 README 兜底卡片"], "done": 0, "total": 4 },
@@ -22,14 +22,14 @@
     { "id": "todo-init-env", "content": "初始化前端工程（pnpm + Vue 3 + TS + Vite + SCSS）", "priority": "P0", "status": "0", "related": "S0" },
     { "id": "todo-init-git", "content": "git init 并创建 develop/main 分支", "priority": "P0", "status": "0", "related": "S0" },
     { "id": "todo-design-tokens", "content": "设计系统：颜色令牌与间距规范（已落地 _tokens/_root/_reset）", "priority": "P0", "status": "1", "related": "S1" },
-    { "id": "todo-api-client", "content": "API 层：封装 Gitea OpenAPI v1 客户端", "priority": "P0", "status": "1", "related": "S2" },
+    { "id": "todo-api-client", "content": "API 层：封装 Gitea OpenAPI v1 客户端", "priority": "P0", "status": "0", "related": "S2" },
     { "id": "todo-dashboard", "content": "仪表盘实现", "priority": "P0", "status": "1", "related": "S3" },
     { "id": "todo-repo-list", "content": "仓库列表页实现", "priority": "P0", "status": "1", "related": "S3" }
   ],
 
   "components": [
-    { "id": "design", "name": "设计系统", "prefix": "design", "progress": 30, "check": true, "note": "令牌/重置就绪，bento 组件待建" },
-    { "id": "api", "name": "API 层", "prefix": "api", "progress": 0, "check": false, "note": "S2 待启动" },
+    { "id": "design", "name": "设计系统", "prefix": "design", "progress": 80, "check": true, "note": "令牌/基础组件/布局/状态组件就绪，等待页面集成" },
+    { "id": "api", "name": "API 层", "prefix": "api", "progress": 90, "check": true, "note": "client/repos/issues 就绪，剩余按需补充" },
     { "id": "dashboard", "name": "仪表盘", "prefix": "dashboard", "progress": 0, "check": false, "note": "S3 待启动" },
     { "id": "repo", "name": "仓库", "prefix": "repo", "progress": 0, "check": false, "note": "S3 待启动" },
     { "id": "landing", "name": "落地页", "prefix": "landing", "progress": 0, "check": false, "note": "S4.5 待启动" },
