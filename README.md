@@ -42,6 +42,21 @@ Nginx :80/443
 | [.agents/reference/status.md](.agents/reference/status.md) | 状态速查 |
 | [.agents/knowledge/README.md](.agents/knowledge/README.md) | 经验库索引 |
 
+## 部署
+
+```
+Nginx :80
+ ├── /            → 前端静态站（dist/，部署到 /var/www/wcode）
+ ├── /api/v1      → 反向代理 Gitea :3000（OpenAPI）
+ └── /user/login  → Gitea 登录页（同域 Cookie 认证）
+```
+
+```sh
+./deploy/deploy.sh          # 一键部署（安装→门禁→rsync→nginx reload）
+```
+
+配置模板见 `deploy/nginx.conf`（需改 `server_name` 后放入 `/etc/nginx/conf.d/`）。
+
 ## 开发流程（摘要）
 
 1. 基于 `develop` 拉分支：`feat/<描述>`、`fix/<描述>`、`doc/<描述>`。

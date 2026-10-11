@@ -118,7 +118,7 @@
         "Nginx 反代完整配置",
         "一键部署脚本"
       ],
-      "done": 0,
+      "done": 4,
       "total": 4
     }
   ],
@@ -243,9 +243,9 @@
       "id": "deploy",
       "name": "部署",
       "prefix": "deploy",
-      "progress": 0,
+      "progress": 80,
       "check": false,
-      "note": "S6 待启动"
+      "note": "S6 完成：Nginx+一键脚本+性能优化"
     }
   ]
 }
