@@ -57,6 +57,26 @@ Nginx :80
 
 配置模板见 `deploy/nginx.conf`（需改 `server_name` 后放入 `/etc/nginx/conf.d/`）。
 
+## 本地 CI Runner
+
+对标 GitHub Actions 的工作流执行器（GH Actions 受 `workflow` scope 限制时的本地替代）：
+
+```sh
+pnpm runner workflows/ci.yml            # 执行工作流
+pnpm runner workflows/ci.yml --job check  # 只跑某个 job
+```
+
+支持 `on / env / jobs / needs / steps / run / uses / if / continue-on-error` 子集。
+详见 [doc/modules/runner.md](doc/modules/runner.md)。
+
+## MCP 服务
+
+```sh
+GITEA_TOKEN=<token> pnpm mcp   # 启动 stdio MCP 服务（AI 客户端接入）
+```
+
+详见 [doc/modules/mcp.md](doc/modules/mcp.md)。
+
 ## 开发流程（摘要）
 
 1. 基于 `develop` 拉分支：`feat/<描述>`、`fix/<描述>`、`doc/<描述>`。

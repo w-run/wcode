@@ -17,7 +17,12 @@ pnpm preview            # 预览构建产物
 pnpm type-check         # vue-tsc --noEmit（全量类型检查）
 pnpm lint               # eslint . --fix 校验 + prettier --check
 pnpm sass               # sass --no-source-map --style=compressed src/assets:dist
-pnpm test               # vitest run（单元测试）
+pnpm test               # vitest run（单元测试 + 组件测试）
+pnpm check              # 一键门禁 = type-check + lint + test + vite build
+
+# 服务与工作流
+pnpm mcp                # 启动 stdio MCP 服务（GITEA_TOKEN 鉴权）
+pnpm runner workflows/ci.yml   # 本地工作流执行器（对标 GitHub Actions）
 pnpm check              # 一键门禁 = type-check + lint + test
 ```
 
