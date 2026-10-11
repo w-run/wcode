@@ -1,0 +1,172 @@
+<script setup lang="ts">
+import { computed } from 'vue'
+import type { Repository } from '@/api/types'
+import { formatCount } from '@/utils/format'
+
+const props = defineProps<{
+  repo: Repository
+}>()
+
+/** 语言色点 class：_tokens.scss 中的 $color-lang-* 语义色（未知语言回退默认灰） */
+const langClass = computed(() => {
+  const lang = (props.repo.language ?? '').toLowerCase()
+  const known = ['js', 'ts', 'python', 'rust', 'go', 'cpp']
+  return known.includes(lang) ? `lang-dot--${lang}` : 'lang-dot--default'
+})
+
+/** 更新时间：ISO 字符串 → `YYYY-MM-DD` */
+const updatedText = computed(() => {
+  const date = new Date(props.repo.updated_at ?? '')
+  if (Number.isNaN(date.getTime())) return '—'
+  const y = date.getFullYear()
+  const m = String(date.getMonth() + 1).padStart(2, '0')
+  const d = String(date.getDate()).padStart(2, '0')
+  return `${y}-${m}-${d}`
+})
+</script>
+
+<template>
+  <article class="pinned-repo">
+    <header class="pinned-repo__head">
+      <h3 class="pinned-repo__name">{{ repo.full_name || repo.name }}</h3>
+      <span class="pinned-repo__stars" title="star 数">
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path
+            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01z"
+          />
+        </svg>
+        {{ formatCount(repo.stars_count ?? 0) }}
+      </span>
+    </header>
+
+    <p v-if="repo.description" class="pinned-repo__desc">
+      {{ repo.description }}
+    </p>
+
+    <footer class="pinned-repo__meta">
+      <span class="pinned-repo__lang">
+        <span class="lang-dot" :class="langClass" aria-hidden="true" />
+        {{ repo.language || 'Unknown' }}
+      </span>
+      <span class="pinned-repo__updated">更新于 {{ updatedText }}</span>
+    </footer>
+  </article>
+</template>
+
+<style lang="scss" scoped>
+.pinned-repo {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-6;
+  background: $color-surface;
+  box-shadow: $shadow-sm;
+  border-radius: $radius-lg;
+  transition: box-shadow $transition-fast;
+
+  &:hover {
+    box-shadow: $shadow-lg;
+  }
+
+  &__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+  }
+
+  &__name {
+    margin: 0;
+    font-size: 1.0625rem;
+    font-weight: 700;
+    color: $color-text;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  &__stars {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    flex-shrink: 0;
+    font-size: 0.8125rem;
+    font-weight: 600;
+    color: $color-text-muted;
+    font-variant-numeric: tabular-nums;
+  }
+
+  &__desc {
+    margin: 0;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: $color-text-muted;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  &__meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $space-3;
+    margin-top: auto;
+  }
+
+  &__lang {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    font-size: 0.8125rem;
+    color: $color-text-muted;
+  }
+
+  &__updated {
+    font-size: 0.75rem;
+    color: $color-text-muted;
+  }
+}
+
+.lang-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+
+  &--default {
+    background: $color-text-muted;
+  }
+
+  &--js {
+    background: $color-lang-js;
+  }
+
+  &--ts {
+    background: $color-lang-ts;
+  }
+
+  &--python {
+    background: $color-lang-python;
+  }
+
+  &--rust {
+    background: $color-lang-rust;
+  }
+
+  &--go {
+    background: $color-lang-go;
+  }
+
+  &--cpp {
+    background: $color-lang-cpp;
+  }
+}
+</style>
