@@ -1,0 +1,56 @@
+// ============================================================
+// CSS 自定义属性（运行时引用）
+// 将 _tokens.scss 的 SCSS 变量输出为 :root 下的 CSS 变量
+// ============================================================
+
+@use 'tokens' as *;
+
+:root {
+  // 色彩
+  --color-bg: #{$color-bg};
+  --color-surface: #{$color-surface};
+  --color-surface-2: #{$color-surface-2};
+  --color-text: #{$color-text};
+  --color-text-muted: #{$color-text-muted};
+  --color-accent: #{$color-accent};
+  --color-accent-hover: #{$color-accent-hover};
+  --color-accent-light: #{$color-accent-light};
+  --color-danger: #{$color-danger};
+  --color-danger-light: #{$color-danger-light};
+  --color-success: #{$color-success};
+  --color-success-light: #{$color-success-light};
+  --color-warning: #{$color-warning};
+  --color-warning-light: #{$color-warning-light};
+
+  // 间距
+  --space-1: #{$space-1};
+  --space-2: #{$space-2};
+  --space-3: #{$space-3};
+  --space-4: #{$space-4};
+  --space-6: #{$space-6};
+  --space-8: #{$space-8};
+  --space-12: #{$space-12};
+  --space-16: #{$space-16};
+
+  // 圆角
+  --radius-sm: #{$radius-sm};
+  --radius-md: #{$radius-md};
+  --radius-lg: #{$radius-lg};
+  --radius-xl: #{$radius-xl};
+  --radius-full: #{$radius-full};
+
+  // 阴影
+  --shadow-sm: #{$shadow-sm};
+  --shadow-md: #{$shadow-md};
+  --shadow-lg: #{$shadow-lg};
+  --shadow-accent: #{$shadow-accent};
+
+  // 字体
+  --font-sans: #{$font-sans};
+  --font-mono: #{$font-mono};
+
+  // 断点（JS 读取断点值时用）
+  --bp-tablet: #{$bp-tablet};
+  --bp-desktop: #{$bp-desktop};
+  --bp-wide: #{$bp-wide};
+}
