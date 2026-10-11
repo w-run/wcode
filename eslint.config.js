@@ -15,4 +15,12 @@ export default defineConfigWithVueTs(
   },
   pluginVue.configs['flat/essential'],
   vueTsConfigs.recommended,
+  {
+    name: 'app/component-names',
+    files: ['src/components/**/*.vue'],
+    rules: {
+      // UI 原子组件允许单词名（Button/Input/Card/Badge/Avatar 等）
+      'vue/multi-word-component-names': 'off',
+    },
+  },
 )
