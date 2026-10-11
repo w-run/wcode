@@ -24,7 +24,7 @@ Nginx :80/443
 |------|---|
 | Gitea 版本 | ≥ 2.x，全新部署 |
 | 部署平台 | w-box（Rocky Linux） |
-| 代码托管 | w-box 自己的 Gitea（"狗粮"自托管） |
+| 代码托管 | GitHub（w-run/bento-git）+ 后端 Gitea w-box 自托管 |
 | 功能优先级 | P0 仪表盘+仓库列表+详情+文件浏览 / P0.5 **落地页生成器 + .page 自定义模板** / P1 Issue/PR/搜索 / P1.5 **MCP 服务 + 镜像同步** / P2 设置 |
 
 ---

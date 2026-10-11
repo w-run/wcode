@@ -2,6 +2,8 @@
 
 > 保留 Gitea 后端全部能力，用全新前端替换默认 Web UI。风格：**圆润 · 胶囊按钮 · 大圆角卡片 · 色块区分 · 留白**。主题色 `#D62839`（深红）。
 
+GitHub：https://github.com/w-run/bento-git
+
 ## 技术栈
 
 Vue 3 + TypeScript + Vite + SCSS，包管理器 pnpm。

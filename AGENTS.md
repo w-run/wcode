@@ -17,7 +17,7 @@
 - **技术栈**：Vue 3 + TypeScript + Vite + SCSS + Pinia + pnpm。
 - **后端**：Gitea（≥ 2.x，启用 `[openapi]`），前端同域调用 `/api/v1`，Cookie 会话免 token。
 - **部署**：w-box（Rocky Linux），Nginx :80/443 反代（`/` → 前端，`/api/v1` → Gitea :3000）。
-- **代码托管**：w-box 自建 Gitea（"狗粮"自托管）。
+- **代码托管**：GitHub（`w-run/bento-git`，默认分支 `develop`）；后端 Gitea 为 w-box 自托管。
 - **功能规划**：见 `wcode.md`（Roadmap 原始来源，已同步至 `doc/data.json.roadmap`）。
 
 ---
