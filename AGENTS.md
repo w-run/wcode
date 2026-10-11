@@ -4,7 +4,7 @@
 >
 > IMPORTANT: 全程思考/回复/文档优先使用简体中文。
 >
-> 本项目参考 `MeuOS-Kit` 的工程规约体系，但为**前端项目**做了适配（pnpm + Vite + Vue 3 + TypeScript + Tailwind CSS 4）。
+> 本项目参考 `MeuOS-Kit` 的工程规约体系，但为**前端项目**做了适配（pnpm + Vite + Vue 3 + TypeScript + SCSS）。
 > harness 会自动加载本文件；详细参考下放到 `.agents/reference/`，按需读取。
 
 ---
@@ -13,7 +13,7 @@
 
 - **项目名称**：Bento Git（wcode）
 - **定位**：保留 Gitea 后端全部能力，用全新前端替换默认 Web UI；风格为**扁平化 · 便当盒卡片 · 留白**。
-- **技术栈**：Vue 3 + TypeScript + Vite + Tailwind CSS 4 + Pinia + pnpm。
+- **技术栈**：Vue 3 + TypeScript + Vite + SCSS + Pinia + pnpm。
 - **后端**：Gitea（≥ 2.x，启用 `[openapi]`），前端同域调用 `/api/v1`，Cookie 会话免 token。
 - **部署**：w-box（Rocky Linux），Nginx :80/443 反代（`/` → 前端，`/api/v1` → Gitea :3000）。
 - **代码托管**：w-box 自建 Gitea（"狗粮"自托管）。

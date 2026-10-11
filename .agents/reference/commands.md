@@ -16,6 +16,7 @@ pnpm preview            # 预览构建产物
 # 门禁（提交前必须全过）
 pnpm type-check         # vue-tsc --noEmit（全量类型检查）
 pnpm lint               # eslint . --fix 校验 + prettier --check
+pnpm sass               # sass --no-source-map --style=compressed src/assets:dist
 pnpm test               # vitest run（单元测试）
 pnpm check              # 一键门禁 = type-check + lint + test
 ```

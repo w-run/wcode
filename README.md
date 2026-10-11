@@ -4,7 +4,7 @@
 
 ## 技术栈
 
-Vue 3 + TypeScript + Vite + Tailwind CSS 4 + Pinia，包管理器 pnpm。
+Vue 3 + TypeScript + Vite + SCSS，包管理器 pnpm。
 
 ## 快速开始
 
@@ -23,7 +23,7 @@ Nginx :80/443
  ├── /api/v1      → 反向代理 Gitea :3000（OpenAPI）
  └── /user/login  → Gitea 登录页（复用原生认证）
 
-前端：Vue 3 + TypeScript + Vite + Tailwind CSS 4
+前端：Vue 3 + TypeScript + Vite + SCSS
 认证：同域 Cookie 会话（前端调 /api/v1，免 token 管理）
 ```
 

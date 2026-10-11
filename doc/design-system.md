@@ -104,4 +104,27 @@
 
 ## 7. 实现方式
 
-所有令牌以 CSS 变量定义在 `src/assets/tokens.css`，通过 Tailwind CSS 4 的 `@theme` 指令映射为 utility 类。组件直接使用 utility 类，不硬编码颜色/间距值。
+所有令牌以 **SCSS 变量 + CSS 自定义属性**双重定义：
+
+- `src/assets/styles/_tokens.scss` — SCSS 变量（编译期，供样式引用）
+- `src/assets/styles/_root.scss` — 将令牌输出为 `:root` 下的 CSS 自定义属性
+
+```scss
+// _tokens.scss
+$color-bg: #FAFAF8;
+$color-accent: #3B82F6;
+$space-4: 16px;
+$radius-lg: 12px;
+$shadow-bento: 0 0 0 1px #E8E8E3, 0 4px 12px rgba(0, 0, 0, 0.05);
+
+// _root.scss
+:root {
+  --color-bg: #{$color-bg};
+  --color-accent: #{$color-accent};
+  --space-4: #{$space-4};
+  --radius-lg: #{$radius-lg};
+  --shadow-bento: #{$shadow-bento};
+}
+```
+
+组件样式使用 `<style lang="scss" scoped>`，通过 SCSS 变量或 CSS 自定义属性取值，**禁止硬编码颜色/间距**。全局样式统一从 `src/assets/styles/main.scss` 引入。

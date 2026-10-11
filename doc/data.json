@@ -19,7 +19,7 @@
   ],
 
   "todos": [
-    { "id": "todo-init-env", "content": "初始化前端工程（pnpm + Vue 3 + TS + Vite + Tailwind 4）", "priority": "P0", "status": "1", "related": "S0" },
+    { "id": "todo-init-env", "content": "初始化前端工程（pnpm + Vue 3 + TS + Vite + SCSS）", "priority": "P0", "status": "1", "related": "S0" },
     { "id": "todo-init-git", "content": "git init 并创建 develop/main 分支", "priority": "P0", "status": "1", "related": "S0" },
     { "id": "todo-design-tokens", "content": "设计系统：颜色令牌与间距规范", "priority": "P0", "status": "1", "related": "S1" },
     { "id": "todo-api-client", "content": "API 层：封装 Gitea OpenAPI v1 客户端", "priority": "P0", "status": "1", "related": "S2" },
