@@ -13,7 +13,7 @@
 
 - **项目名称**：Bento Git（wcode）
 - **定位**：保留 Gitea 后端全部能力，用全新前端替换默认 Web UI；风格为**圆润 · 便当盒卡片 · 色块区分 · 留白**（按钮多用胶囊/大圆角/圆形，避免硬边框，优先色块区分区域）。主题色 `#D62839`。
-- **响应式/移动端**：**移动端优先**（mobile-first），全站须支持移动端浏览（断点布局、触摸目标 ≥44px、底部 Tab 导航、安全区适配）。详见 `doc/design-system.md` §5.4。
+- **响应式/移动端**：**响应式布局优先**，全站须兼容移动端浏览（断点布局、触摸目标 ≥44px、底部 Tab 导航、安全区适配）。详见 `doc/design-system.md` §5.4。
 - **技术栈**：Vue 3 + TypeScript + Vite + SCSS + Pinia + pnpm。
 - **后端**：Gitea（≥ 2.x，启用 `[openapi]`），前端同域调用 `/api/v1`，Cookie 会话免 token。
 - **部署**：w-box（Rocky Linux），Nginx :80/443 反代（`/` → 前端，`/api/v1` → Gitea :3000）。

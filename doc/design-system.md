@@ -104,12 +104,14 @@
 | desktop | `1024px+` | 3 | 33% |
 | wide | `1280px+` | 4 | 25% |
 
-### 5.4 移动端适配策略
+### 5.4 移动端兼容策略
+
+> 以桌面端为主形态，**兼容**移动端浏览。移动端不追求功能对等，保证核心功能可用、布局不破损即可。
 
 **视口配置（必须）：**
 
 ```html
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 ```
 
 **响应式实现约定：**
@@ -117,7 +119,7 @@
 | 场景 | 策略 |
 |------|------|
 | 栅格列数 | CSS Grid `grid-template-columns` 按断点响应式切换（§5.3） |
-| 隐藏/显示 | 移动端优先：`display: none` 在 mobile 断点隐藏次要信息；大屏反之 |
+| 隐藏/显示 | 按断点响应式：mobile 断点隐藏次要信息或收入 Drawer；大屏展示完整信息 |
 | 侧边栏 | 移动端收起为 Drawer（从左侧滑入），大屏固定展示 |
 | 导航 | 移动端底部 Tab Bar（5 个以内主入口）；大屏顶部横向导航 |
 | 图片 | `loading="lazy"` + `srcset` 多档适配，禁止固定 `width`/`height` 撑开布局 |
@@ -142,7 +144,6 @@
 | 图片 | WebP 优先，备选 JPEG/PNG；大图 `loading="lazy"` |
 | 代码高亮 | 首屏代码块不超过 50 行；超长文件懒加载分片渲染 |
 | 路由懒加载 | Vue `defineAsyncComponent` / `() => import()` 按路由懒加载 |
-| 预加载 | 首页资源 `<link rel="prefetch">`，次屏内容空闲时加载 |
 
 ## 6. 状态设计
 
@@ -164,7 +165,7 @@
 - 友好文案 + 重试按钮（胶囊形）
 - 避免技术术语暴露给用户
 
-### 6.4 移动端状态栏适配
+### 6.4 移动端状态栏兼容
 
 - 状态栏：深色主题下使用 `viewport-fit=cover` + `env(safe-area-inset-*)` 内边距
 - 底部安全区：Tab Bar 预留 `padding-bottom: env(safe-area-inset-bottom)`
