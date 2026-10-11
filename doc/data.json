@@ -10,9 +10,9 @@
     { "phase": "S1", "title": "设计系统", "items": ["颜色令牌（米白底 + 主题色 #D62839）", "间距/圆角/阴影规范（圆润风格）", "bento 栅格组件", "响应式断点 + 移动端布局规范", "空态/加载态/错误态"], "done": 5, "total": 5 },
     { "phase": "S2", "title": "API 层", "items": ["OpenAPI v1 客户端封装（自动补 baseURL）", "请求拦截器", "错误统一处理"], "done": 3, "total": 3 },
     { "phase": "S3", "title": "核心页", "items": ["仪表盘（置顶仓库大卡 + star/issue/PR 计数小卡）", "仓库卡片网格（语言色点/更新时间/star）", "仓库详情（README 大卡 + 侧栏信息卡 + 分支/提交时间线）"], "done": 3, "total": 3 },
-    { "phase": "S4", "title": "代码浏览", "items": ["文件树", "代码查看（语法高亮 Shiki）", "README 渲染"], "done": 0, "total": 3 },
+    { "phase": "S4", "title": "代码浏览", "items": ["文件树", "代码查看（语法高亮 Shiki）", "README 渲染"], "done": 3, "total": 3 },
     { "phase": "S4.5", "title": "落地页生成器", "items": ["路由 /r/:owner/:name?t=模板名", "4 套内置模板（极简/科技/企业/卡片）", ".page/*.tpl 自定义模板（沙箱化）", "无 README 兜底卡片"], "done": 0, "total": 4 },
-    { "phase": "S5", "title": "协作流", "items": ["Issue 列表与详情", "PR 列表与详情", "全局搜索"], "done": 0, "total": 3 },
+    { "phase": "S5", "title": "协作流", "items": ["Issue 列表与详情", "PR 列表与详情", "全局搜索"], "done": 2, "total": 3 },
     { "phase": "S5.5", "title": "MCP 服务", "items": ["MCP 服务进程（SSE/stdio）", "工具集（repo_*/issue_*/pull_*/code_search/file_*）", "鉴权（API Token）", "客户端接入（Claude Desktop/Cursor）"], "done": 0, "total": 4 },
     { "phase": "S5.6", "title": "镜像同步", "items": ["单向拉取（Pull Mirror）", "单向推送（Push Mirror）", "双向同步 + 冲突检测", "远端平台（GitHub/Gitee/GitLab/通用 Git）"], "done": 0, "total": 4 },
     { "phase": "S6", "title": "收尾", "items": ["移动端细节打磨（触摸目标/手势/安全区）", "懒加载与性能优化", "Nginx 反代完整配置", "一键部署脚本"], "done": 0, "total": 4 }
