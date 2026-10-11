@@ -5,8 +5,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      name: 'home',
-      component: () => import('@/views/HomePage.vue'),
+      name: 'dashboard',
+      component: () => import('@/views/dashboard/DashboardPage.vue'),
+    },
+    {
+      path: '/repos',
+      name: 'repo-list',
+      component: () => import('@/views/repository/RepoListPage.vue'),
+    },
+    {
+      path: '/repos/:owner/:name',
+      name: 'repo-detail',
+      component: () => import('@/views/repository/RepoDetailPage.vue'),
+      props: true,
     },
   ],
 })
