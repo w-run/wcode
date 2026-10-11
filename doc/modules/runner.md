@@ -39,6 +39,31 @@ jobs:
       - uses: actions/checkout@v4   # 内置动作（本地标记跳过）
 ```
 
+### matrix 矩阵
+
+```yaml
+jobs:
+  build:
+    strategy:
+      matrix:
+        node: [18, 20]
+        os: [linux, macos]
+    steps:
+      - run: echo "node=${{ matrix.node }} os=${{ matrix.os }}"
+```
+
+每个组合独立执行一遍 job，任一组合失败则 job 判失败（`needs` 依赖该 job 的后续 job 会跳过）。
+
+### 表达式插值
+
+| 表达式 | 取值 |
+|--------|------|
+| `${{ matrix.X }}` | 当前矩阵组合的字段值 |
+| `${{ env.X }}` | 工作流 / job 级环境变量 |
+| `${{ github.X }}` | 预留（本地为空） |
+
+插值可用于 `run`、`env`、`name`。
+
 ## 条件表达式
 
 | 表达式 | 含义 |
@@ -53,8 +78,14 @@ jobs:
 
 - `uses:` 内置动作（`actions/checkout` 等）**不映射执行**，仅标记跳过（本地无云环境）
 - `runs-on` 仅作展示，不选择实际运行环境（本地即当前机器）
-- `secrets` / `matrix` / `strategy` 暂未支持
+- `secrets` / `strategy.fail-fast` / `matrix.include|exclude` 暂未支持
 - 本地无条件触发，`on` 仅作元信息记录
+
+## matrix 演示
+
+```sh
+pnpm runner workflows/matrix-demo.yml   # 4 组合 + needs 依赖 job
+```
 
 ## 输出
 

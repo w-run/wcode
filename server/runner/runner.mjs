@@ -8,9 +8,10 @@
  *
  * 支持的 GitHub Actions 配置子集:
  *   name / on / env
- *   jobs.<id>.{ name, needs, runs-on, env, steps }
+ *   jobs.<id>.{ name, needs, runs-on, env, strategy.matrix, steps }
  *   steps[].{ name, run, uses, env, if, working-directory, continue-on-error }
  *
+ * 表达式插值: ${{ matrix.X }} / ${{ env.X }} / ${{ github.X }}
  * 条件表达式: always() / success() / failure() / cancelled() / 布尔字面量
  * `uses:` 内置动作（actions/checkout 等）本地不可执行，会标记跳过。
  */
@@ -53,14 +54,31 @@ function sh(command, { env, cwd }) {
   })
 }
 
-function evalCondition(cond, ctx) {
-  if (cond === undefined || cond === null || cond === '') return true
-  const c = String(cond).trim().toLowerCase()
-  if (c === 'always()' || c === 'true') return true
-  if (c === 'success()') return ctx.success
-  if (c === 'failure()') return !ctx.success
-  if (c === 'cancelled()' || c === 'false') return false
-  return true
+/** 解析 ${{ a.b.c }} 表达式并用 ctx 求值 */
+function interpolate(str, ctx) {
+  if (typeof str !== 'string') return str
+  return str.replace(/\$\{\{\s*([^}]+?)\s*\}\}/g, (_m, expr) => {
+    const path = expr.trim().split('.')
+    let val = ctx
+    for (const p of path) val = val == null ? undefined : val[p]
+    return val === undefined || val === null ? '' : String(val)
+  })
+}
+
+/** 展开 strategy.matrix 为组合列表（笛卡尔积，忽略 include/exclude） */
+function matrixCombos(matrix) {
+  if (!matrix) return [{}]
+  const keys = Object.keys(matrix).filter(
+    (k) => k !== 'include' && k !== 'exclude',
+  )
+  let combos = [{}]
+  for (const k of keys) {
+    const vals = Array.isArray(matrix[k]) ? matrix[k] : [matrix[k]]
+    const next = []
+    for (const c of combos) for (const v of vals) next.push({ ...c, [k]: v })
+    combos = next
+  }
+  return combos.length ? combos : [{}]
 }
 
 /** 归一化 needs：支持字符串或数组 */
@@ -87,48 +105,47 @@ function orderJobs(jobs) {
   return result
 }
 
+function evalCondition(cond, ctx) {
+  if (cond === undefined || cond === null || cond === '') return true
+  const c = String(cond).trim().toLowerCase()
+  if (c === 'always()' || c === 'true') return true
+  if (c === 'success()') return ctx.success
+  if (c === 'failure()') return !ctx.success
+  if (c === 'cancelled()' || c === 'false') return false
+  return true
+}
+
 const results = {}
 
-async function runJob(jobId) {
-  const job = wf.jobs[jobId]
-  const name = job.name || jobId
-  const jobEnv = { ...process.env, ...wfEnv, ...(job.env || {}) }
-  const depsOk = depsOf(job).every((d) => results[d]?.status === 'success')
-
-  log('')
-  log(
-    color(C.cyan, `▶ job: ${name}`) +
-      (job['runs-on'] ? color(C.gray, `  [${job['runs-on']}]`) : ''),
-  )
-
-  if (!depsOk) {
-    log(color(C.yellow, '  ⤼ 跳过（依赖未成功）'))
-    results[jobId] = { status: 'skipped' }
-    return
-  }
-
-  const start = Date.now()
+/** 执行一个 job 的 steps（单个 matrix 组合） */
+async function runSteps(job, combo, baseEnv) {
   let success = true
+  const makeCtx = () => ({ matrix: combo, env: baseEnv, github: {} })
 
   for (const step of job.steps || []) {
+    const ctx = makeCtx()
     const title =
-      step.name ||
-      (step.run
-        ? String(step.run).split('\n')[0].slice(0, 60)
-        : step.uses || 'step')
+      step.name != null
+        ? interpolate(step.name, ctx)
+        : step.run
+          ? interpolate(String(step.run), ctx).split('\n')[0].slice(0, 60)
+          : step.uses || 'step'
 
     if (!evalCondition(step.if, { success })) {
       log(color(C.gray, `  ⤼ 跳过: ${title}`))
       continue
     }
 
-    const stepEnv = { ...jobEnv, ...(step.env || {}) }
+    const stepEnv = { ...baseEnv }
+    for (const [k, v] of Object.entries(step.env || {})) {
+      stepEnv[k] = interpolate(String(v), ctx)
+    }
     const cwd = step['working-directory'] || process.cwd()
     log(color(C.gray, `  → ${title}`))
 
     let code = 0
     if (step.run) {
-      code = await sh(String(step.run), { env: stepEnv, cwd })
+      code = await sh(interpolate(String(step.run), ctx), { env: stepEnv, cwd })
     } else if (step.uses) {
       log(color(C.gray, `     (uses: ${step.uses} — 内置动作，本地跳过)`))
     }
@@ -143,11 +160,49 @@ async function runJob(jobId) {
       }
     }
   }
+  return success
+}
+
+async function runJob(jobId) {
+  const job = wf.jobs[jobId]
+  const name = job.name || jobId
+  const jobEnv = { ...process.env, ...wfEnv }
+  for (const [k, v] of Object.entries(job.env || {})) {
+    jobEnv[k] = interpolate(String(v), { env: wfEnv })
+  }
+  const depsOk = depsOf(job).every((d) => results[d]?.status === 'success')
+
+  log('')
+  log(
+    color(C.cyan, `▶ job: ${name}`) +
+      (job['runs-on'] ? color(C.gray, `  [${job['runs-on']}]`) : ''),
+  )
+
+  if (!depsOk) {
+    log(color(C.yellow, '  ⤼ 跳过（依赖未成功）'))
+    results[jobId] = { status: 'skipped' }
+    return
+  }
+
+  const combos = matrixCombos(job.strategy?.matrix)
+  const start = Date.now()
+  let ok = true
+
+  for (const combo of combos) {
+    if (combos.length > 1) {
+      const label = Object.entries(combo)
+        .map(([k, v]) => `${k}=${v}`)
+        .join(', ')
+      log(color(C.gray, `  ▸ 组合 [${label}]`))
+    }
+    const pass = await runSteps(job, combo, jobEnv)
+    if (!pass) ok = false
+  }
 
   const ms = Date.now() - start
-  results[jobId] = { status: success ? 'success' : 'failure', ms }
+  results[jobId] = { status: ok ? 'success' : 'failure', ms }
   log(
-    success
+    ok
       ? color(C.green, `✓ ${name} (${ms}ms)`)
       : color(C.red, `✖ ${name} (${ms}ms)`),
   )

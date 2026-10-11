@@ -1,0 +1,30 @@
+# Runner matrix 能力演示：pnpm runner workflows/matrix-demo.yml
+name: matrix 演示
+
+on: [push]
+
+jobs:
+  build-matrix:
+    name: 多平台矩阵
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20]
+        os: [linux, macos]
+    steps:
+      - name: 打印组合
+        run: echo "组合 node=${{ matrix.node }} os=${{ matrix.os }}"
+
+      - name: 环境变量插值
+        env:
+          NODE_VER: ${{ matrix.node }}
+          TARGET_OS: ${{ matrix.os }}
+        run: echo "NODE_VER=$NODE_VER TARGET_OS=$TARGET_OS"
+
+  after:
+    name: 依赖矩阵的后续 job
+    runs-on: ubuntu-latest
+    needs: build-matrix
+    steps:
+      - name: 全部矩阵通过后执行
+        run: echo "矩阵全部通过，进入后续 job"
