@@ -4,39 +4,248 @@
     "note": "权威状态源。roadmap/Todos/Components 三部分。易过时，权威最终以本文件为准。",
     "generated": "2026-10-11T00:00:00+08:00"
   },
-
   "roadmap": [
-    { "phase": "S0", "title": "环境", "items": ["部署/确认 Gitea，启用 [openapi]", "建 DNS/Nginx 骨架（/ → 前端 :3001，/api/v1 → Gitea :3000）", "拉取前端 Git 仓库骨架"], "done": 3, "total": 3 },
-    { "phase": "S1", "title": "设计系统", "items": ["颜色令牌（米白底 + 主题色 #D62839）", "间距/圆角/阴影规范（圆润风格）", "bento 栅格组件", "响应式断点 + 移动端布局规范", "空态/加载态/错误态"], "done": 5, "total": 5 },
-    { "phase": "S2", "title": "API 层", "items": ["OpenAPI v1 客户端封装（自动补 baseURL）", "请求拦截器", "错误统一处理"], "done": 3, "total": 3 },
-    { "phase": "S3", "title": "核心页", "items": ["仪表盘（置顶仓库大卡 + star/issue/PR 计数小卡）", "仓库卡片网格（语言色点/更新时间/star）", "仓库详情（README 大卡 + 侧栏信息卡 + 分支/提交时间线）"], "done": 3, "total": 3 },
-    { "phase": "S4", "title": "代码浏览", "items": ["文件树", "代码查看（语法高亮 Shiki）", "README 渲染"], "done": 3, "total": 3 },
-    { "phase": "S4.5", "title": "落地页生成器", "items": ["路由 /r/:owner/:name?t=模板名", "4 套内置模板（极简/科技/企业/卡片）", ".page/*.tpl 自定义模板（沙箱化）", "无 README 兜底卡片"], "done": 0, "total": 4 },
-    { "phase": "S5", "title": "协作流", "items": ["Issue 列表与详情", "PR 列表与详情", "全局搜索"], "done": 2, "total": 3 },
-    { "phase": "S5.5", "title": "MCP 服务", "items": ["MCP 服务进程（SSE/stdio）", "工具集（repo_*/issue_*/pull_*/code_search/file_*）", "鉴权（API Token）", "客户端接入（Claude Desktop/Cursor）"], "done": 0, "total": 4 },
-    { "phase": "S5.6", "title": "镜像同步", "items": ["单向拉取（Pull Mirror）", "单向推送（Push Mirror）", "双向同步 + 冲突检测", "远端平台（GitHub/Gitee/GitLab/通用 Git）"], "done": 0, "total": 4 },
-    { "phase": "S6", "title": "收尾", "items": ["移动端细节打磨（触摸目标/手势/安全区）", "懒加载与性能优化", "Nginx 反代完整配置", "一键部署脚本"], "done": 0, "total": 4 }
+    {
+      "phase": "S0",
+      "title": "环境",
+      "items": [
+        "部署/确认 Gitea，启用 [openapi]",
+        "建 DNS/Nginx 骨架（/ → 前端 :3001，/api/v1 → Gitea :3000）",
+        "拉取前端 Git 仓库骨架"
+      ],
+      "done": 3,
+      "total": 3
+    },
+    {
+      "phase": "S1",
+      "title": "设计系统",
+      "items": [
+        "颜色令牌（米白底 + 主题色 #D62839）",
+        "间距/圆角/阴影规范（圆润风格）",
+        "bento 栅格组件",
+        "响应式断点 + 移动端布局规范",
+        "空态/加载态/错误态"
+      ],
+      "done": 5,
+      "total": 5
+    },
+    {
+      "phase": "S2",
+      "title": "API 层",
+      "items": [
+        "OpenAPI v1 客户端封装（自动补 baseURL）",
+        "请求拦截器",
+        "错误统一处理"
+      ],
+      "done": 3,
+      "total": 3
+    },
+    {
+      "phase": "S3",
+      "title": "核心页",
+      "items": [
+        "仪表盘（置顶仓库大卡 + star/issue/PR 计数小卡）",
+        "仓库卡片网格（语言色点/更新时间/star）",
+        "仓库详情（README 大卡 + 侧栏信息卡 + 分支/提交时间线）"
+      ],
+      "done": 3,
+      "total": 3
+    },
+    {
+      "phase": "S4",
+      "title": "代码浏览",
+      "items": [
+        "文件树",
+        "代码查看（语法高亮 Shiki）",
+        "README 渲染"
+      ],
+      "done": 3,
+      "total": 3
+    },
+    {
+      "phase": "S4.5",
+      "title": "落地页生成器",
+      "items": [
+        "路由 /r/:owner/:name?t=模板名",
+        "4 套内置模板（极简/科技/企业/卡片）",
+        ".page/*.tpl 自定义模板（沙箱化）",
+        "无 README 兜底卡片"
+      ],
+      "done": 3,
+      "total": 4
+    },
+    {
+      "phase": "S5",
+      "title": "协作流",
+      "items": [
+        "Issue 列表与详情",
+        "PR 列表与详情",
+        "全局搜索"
+      ],
+      "done": 3,
+      "total": 3
+    },
+    {
+      "phase": "S5.5",
+      "title": "MCP 服务",
+      "items": [
+        "MCP 服务进程（SSE/stdio）",
+        "工具集（repo_*/issue_*/pull_*/code_search/file_*）",
+        "鉴权（API Token）",
+        "客户端接入（Claude Desktop/Cursor）"
+      ],
+      "done": 0,
+      "total": 4
+    },
+    {
+      "phase": "S5.6",
+      "title": "镜像同步",
+      "items": [
+        "单向拉取（Pull Mirror）",
+        "单向推送（Push Mirror）",
+        "双向同步 + 冲突检测",
+        "远端平台（GitHub/Gitee/GitLab/通用 Git）"
+      ],
+      "done": 0,
+      "total": 4
+    },
+    {
+      "phase": "S6",
+      "title": "收尾",
+      "items": [
+        "移动端细节打磨（触摸目标/手势/安全区）",
+        "懒加载与性能优化",
+        "Nginx 反代完整配置",
+        "一键部署脚本"
+      ],
+      "done": 0,
+      "total": 4
+    }
   ],
-
   "todos": [
-    { "id": "todo-init-env", "content": "初始化前端工程（pnpm + Vue 3 + TS + Vite + SCSS）", "priority": "P0", "status": "0", "related": "S0" },
-    { "id": "todo-init-git", "content": "git init 并创建 develop/main 分支", "priority": "P0", "status": "0", "related": "S0" },
-    { "id": "todo-design-tokens", "content": "设计系统：颜色令牌与间距规范（已落地 _tokens/_root/_reset）", "priority": "P0", "status": "1", "related": "S1" },
-    { "id": "todo-api-client", "content": "API 层：封装 Gitea OpenAPI v1 客户端", "priority": "P0", "status": "0", "related": "S2" },
-    { "id": "todo-dashboard", "content": "仪表盘实现", "priority": "P0", "status": "0", "related": "S3" },
-    { "id": "todo-repo-list", "content": "仓库列表页实现", "priority": "P0", "status": "0", "related": "S3" }
+    {
+      "id": "todo-init-env",
+      "content": "初始化前端工程（pnpm + Vue 3 + TS + Vite + SCSS）",
+      "priority": "P0",
+      "status": "0",
+      "related": "S0"
+    },
+    {
+      "id": "todo-init-git",
+      "content": "git init 并创建 develop/main 分支",
+      "priority": "P0",
+      "status": "0",
+      "related": "S0"
+    },
+    {
+      "id": "todo-design-tokens",
+      "content": "设计系统：颜色令牌与间距规范（已落地 _tokens/_root/_reset）",
+      "priority": "P0",
+      "status": "1",
+      "related": "S1"
+    },
+    {
+      "id": "todo-api-client",
+      "content": "API 层：封装 Gitea OpenAPI v1 客户端",
+      "priority": "P0",
+      "status": "0",
+      "related": "S2"
+    },
+    {
+      "id": "todo-dashboard",
+      "content": "仪表盘实现",
+      "priority": "P0",
+      "status": "0",
+      "related": "S3"
+    },
+    {
+      "id": "todo-repo-list",
+      "content": "仓库列表页实现",
+      "priority": "P0",
+      "status": "0",
+      "related": "S3"
+    }
   ],
-
   "components": [
-    { "id": "design", "name": "设计系统", "prefix": "design", "progress": 100, "check": true, "note": "S1 完成：令牌/基础组件/布局/状态组件全部就绪" },
-    { "id": "api", "name": "API 层", "prefix": "api", "progress": 90, "check": true, "note": "client/repos/issues 就绪，剩余按需补充" },
-    { "id": "dashboard", "name": "仪表盘", "prefix": "dashboard", "progress": 100, "check": true, "note": "S3 完成：DashboardPage + StatCard + PinnedRepoCard" },
-    { "id": "repo", "name": "仓库", "prefix": "repo", "progress": 100, "check": true, "note": "S3 完成：RepoListPage + RepoDetailPage + RepoCard + repos store" },
-    { "id": "landing", "name": "落地页", "prefix": "landing", "progress": 0, "check": false, "note": "S4.5 待启动" },
-    { "id": "flow", "name": "协作流", "prefix": "flow", "progress": 0, "check": false, "note": "S5 待启动" },
-    { "id": "mcp", "name": "MCP 服务", "prefix": "mcp", "progress": 0, "check": false, "note": "S5.5 待启动" },
-    { "id": "mirror", "name": "镜像同步", "prefix": "mirror", "progress": 0, "check": false, "note": "S5.6 待启动" },
-    { "id": "settings", "name": "设置", "prefix": "settings", "progress": 0, "check": false, "note": "S6 待启动" },
-    { "id": "deploy", "name": "部署", "prefix": "deploy", "progress": 0, "check": false, "note": "S6 待启动" }
+    {
+      "id": "design",
+      "name": "设计系统",
+      "prefix": "design",
+      "progress": 100,
+      "check": true,
+      "note": "S1 完成：令牌/基础组件/布局/状态组件全部就绪"
+    },
+    {
+      "id": "api",
+      "name": "API 层",
+      "prefix": "api",
+      "progress": 90,
+      "check": true,
+      "note": "client/repos/issues 就绪，剩余按需补充"
+    },
+    {
+      "id": "dashboard",
+      "name": "仪表盘",
+      "prefix": "dashboard",
+      "progress": 100,
+      "check": true,
+      "note": "S3 完成：DashboardPage + StatCard + PinnedRepoCard"
+    },
+    {
+      "id": "repo",
+      "name": "仓库",
+      "prefix": "repo",
+      "progress": 100,
+      "check": true,
+      "note": "S3 完成：RepoListPage + RepoDetailPage + RepoCard + repos store"
+    },
+    {
+      "id": "landing",
+      "name": "落地页",
+      "prefix": "landing",
+      "progress": 75,
+      "check": true,
+      "note": "内置 4 模板完成，.page/*.tpl 自定义待做"
+    },
+    {
+      "id": "flow",
+      "name": "协作流",
+      "prefix": "flow",
+      "progress": 0,
+      "check": false,
+      "note": "S5 待启动"
+    },
+    {
+      "id": "mcp",
+      "name": "MCP 服务",
+      "prefix": "mcp",
+      "progress": 0,
+      "check": false,
+      "note": "S5.5 待启动"
+    },
+    {
+      "id": "mirror",
+      "name": "镜像同步",
+      "prefix": "mirror",
+      "progress": 0,
+      "check": false,
+      "note": "S5.6 待启动"
+    },
+    {
+      "id": "settings",
+      "name": "设置",
+      "prefix": "settings",
+      "progress": 0,
+      "check": false,
+      "note": "S6 待启动"
+    },
+    {
+      "id": "deploy",
+      "name": "部署",
+      "prefix": "deploy",
+      "progress": 0,
+      "check": false,
+      "note": "S6 待启动"
+    }
   ]
 }
