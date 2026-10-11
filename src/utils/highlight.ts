@@ -1,15 +1,46 @@
 /**
- * shiki 语法高亮封装
+ * shiki 语法高亮封装（细粒度按需加载）
  *
- * - 懒加载单例 highlighter，避免首屏阻塞
- * - 使用 JavaScript 正则引擎（纯 JS，无需 wasm，构建更稳）
- * - `highlight(code, lang)` 返回 `<pre class="shiki">…</pre>` HTML
- * - 语言不在预加载集合时回退 `text`
+ * - 使用 shiki/core + 显式语言/主题，仅打包用到的 13 种语言，避免整包 10MB
+ * - JavaScript 正则引擎（纯 JS，无需 wasm，构建更稳）
+ * - 懒加载单例 highlighter，首次调用才创建
  */
-import { createHighlighter, type Highlighter } from 'shiki'
+import { createHighlighterCore, type HighlighterCore } from 'shiki/core'
 import { createJavaScriptRegexEngine } from 'shiki/engine/javascript'
+import githubDark from 'shiki/themes/github-dark.mjs'
+import langJs from 'shiki/langs/javascript.mjs'
+import langTs from 'shiki/langs/typescript.mjs'
+import langPython from 'shiki/langs/python.mjs'
+import langRust from 'shiki/langs/rust.mjs'
+import langGo from 'shiki/langs/go.mjs'
+import langCpp from 'shiki/langs/cpp.mjs'
+import langVue from 'shiki/langs/vue.mjs'
+import langHtml from 'shiki/langs/html.mjs'
+import langCss from 'shiki/langs/css.mjs'
+import langJson from 'shiki/langs/json.mjs'
+import langMarkdown from 'shiki/langs/markdown.mjs'
+import langShell from 'shiki/langs/shellscript.mjs'
+import langYaml from 'shiki/langs/yaml.mjs'
+
+export const CODE_THEME = 'github-dark'
 
 const LANGS = [
+  langJs,
+  langTs,
+  langPython,
+  langRust,
+  langGo,
+  langCpp,
+  langVue,
+  langHtml,
+  langCss,
+  langJson,
+  langMarkdown,
+  langShell,
+  langYaml,
+]
+
+const LOADED_LANGS = new Set<string>([
   'javascript',
   'typescript',
   'python',
@@ -21,14 +52,10 @@ const LANGS = [
   'css',
   'json',
   'markdown',
-  'shell',
+  'shellscript',
   'yaml',
   'text',
-] as const
-
-export const CODE_THEME = 'github-dark'
-
-const LOADED_LANGS = new Set<string>(LANGS)
+])
 
 const EXT_LANG: Record<string, string> = {
   js: 'javascript',
@@ -56,20 +83,20 @@ const EXT_LANG: Record<string, string> = {
   jsonc: 'json',
   md: 'markdown',
   markdown: 'markdown',
-  sh: 'shell',
-  bash: 'shell',
-  zsh: 'shell',
+  sh: 'shellscript',
+  bash: 'shellscript',
+  zsh: 'shellscript',
   yml: 'yaml',
   yaml: 'yaml',
 }
 
-let highlighterPromise: Promise<Highlighter> | null = null
+let highlighterPromise: Promise<HighlighterCore> | null = null
 
-function getHighlighter(): Promise<Highlighter> {
+function getHighlighter(): Promise<HighlighterCore> {
   if (!highlighterPromise) {
-    highlighterPromise = createHighlighter({
-      themes: [CODE_THEME],
-      langs: [...LANGS],
+    highlighterPromise = createHighlighterCore({
+      themes: [githubDark],
+      langs: LANGS,
       engine: createJavaScriptRegexEngine(),
     })
   }
@@ -90,7 +117,7 @@ function normalizeLang(lang?: string | null): string {
   if (LOADED_LANGS.has(lower)) return lower
   if (lower === 'js' || lower === 'node') return 'javascript'
   if (lower === 'ts') return 'typescript'
-  if (lower === 'sh') return 'shell'
+  if (lower === 'sh' || lower === 'shell') return 'shellscript'
   if (lower === 'py') return 'python'
   return 'text'
 }
@@ -98,6 +125,13 @@ function normalizeLang(lang?: string | null): string {
 /** 将源码高亮为 HTML 字符串（异步，首次会加载 highlighter） */
 export async function highlight(code: string, lang?: string): Promise<string> {
   const resolved = normalizeLang(lang)
+  if (resolved === 'text') {
+    return `<pre class="shiki"><code>${escapeHtml(code)}</code></pre>`
+  }
   const hl = await getHighlighter()
   return hl.codeToHtml(code, { lang: resolved, theme: CODE_THEME })
+}
+
+function escapeHtml(s: string): string {
+  return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
 }

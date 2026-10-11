@@ -29,4 +29,15 @@ export default defineConfig({
     environment: 'node',
     include: ['src/**/*.spec.ts'],
   },
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          // shiki 语法高亮体积大，拆为独立 chunk，仅在代码查看时懒加载
+          if (id.includes('shiki') || id.includes('@shikijs')) return 'shiki'
+          return undefined
+        },
+      },
+    },
+  },
 })
