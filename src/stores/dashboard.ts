@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { listRepos } from '@/api/repos'
+import { listRepos, searchRepos } from '@/api/repos'
 import type { Repository } from '@/api/types'
 
 /** 数据来源：api=真实后端，mock=后端不可达时的降级示例数据 */
@@ -149,11 +149,22 @@ export const useDashboardStore = defineStore('dashboard', {
         })
         this.repos = repos
         this.source = 'api'
-      } catch (err) {
-        // 优雅降级：后端不可达 / 未登录时回退示例数据
+      } catch {
+        // 未登录 / 无权限时，降级为公开仓库搜索（仍展示真实数据）
+        try {
+          const repos = await searchRepos('', { limit: 50 })
+          if (repos.length) {
+            this.repos = repos
+            this.source = 'api'
+            return
+          }
+        } catch {
+          // 后端不可达，继续降级
+        }
+        // 优雅降级：后端不可达时回退示例数据
         this.repos = MOCK_REPOS
         this.source = 'mock'
-        this.error = err instanceof Error ? err.message : '数据加载失败'
+        this.error = '后端不可达，展示示例数据'
       } finally {
         this.loading = false
       }
