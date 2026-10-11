@@ -56,6 +56,13 @@ onMounted(async () => {
           {{ store.currentRepo.full_name }}
         </h1>
         <div class="repo-detail-page__actions">
+          <router-link
+            v-if="store.currentRepo.default_branch"
+            :to="`/repos/${owner}/${name}/browse/${store.currentRepo.default_branch}`"
+            class="code-btn"
+          >
+            浏览代码
+          </router-link>
           <span v-if="store.currentRepo.private" class="tag tag--muted"
             >私有</span
           >
@@ -485,6 +492,21 @@ onMounted(async () => {
 }
 
 // ---- 标签 ----
+.code-btn {
+  padding: 0.3rem 0.9rem;
+  border-radius: $radius-full;
+  background: $color-accent;
+  color: #fff;
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-decoration: none;
+  transition: background $transition-fast;
+
+  &:hover {
+    background: $color-accent-hover;
+  }
+}
+
 .tag {
   padding: 0.25rem 0.625rem;
   border-radius: $radius-full;

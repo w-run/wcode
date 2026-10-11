@@ -37,6 +37,12 @@ const router = createRouter({
       props: true,
     },
     {
+      path: '/repos/:owner/:name/browse/:refName/:path*',
+      name: 'repo-browse',
+      component: () => import('@/views/repository/CodeBrowsePage.vue'),
+      props: true,
+    },
+    {
       path: '/repos/:owner/:name/issues',
       name: 'repo-issues',
       component: () => import('@/views/issue/RepoIssuesPage.vue'),
