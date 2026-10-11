@@ -1,0 +1,33 @@
+# 依赖
+node_modules/
+.pnpm-store/
+
+# 构建产物
+dist/
+dist-ssr/
+*.local
+coverage/
+
+# 编辑器与系统
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# 环境变量（本地）
+.env
+.env.*
+!.env.example
+
+# Agent 独立工作树（不进主仓）
+.agents/worktrees/
+
+# 日志
+*.log
+npm-debug.log*
+pnpm-debug.log*
