@@ -16,3 +16,13 @@ export { searchRepos, listRepos, getRepo, getReadme } from './repos'
 
 // Issue
 export { listIssues, getIssue, createIssue } from './issues'
+
+// Pull Request
+export {
+  listPulls,
+  getPull,
+  createPull,
+  mergePull,
+  listComments,
+  createComment,
+} from './pulls'
