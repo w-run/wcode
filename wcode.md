@@ -1,4 +1,4 @@
-# Bento Git — Gitea 定制前端项目规划
+# wcode — Gitea 定制前端项目规划
 
 > 目标：保留 Gitea 后端全部能力，用全新前端替换默认 Web UI，风格为**圆润 · 便当盒卡片 · 色块区分 · 留白**（按钮多用胶囊/大圆角/圆形，避免硬边框，优先色块区分区域）。主题色 `#D62839`。
 
@@ -24,7 +24,7 @@ Nginx :80/443
 |------|---|
 | Gitea 版本 | ≥ 2.x，全新部署 |
 | 部署平台 | w-box（Rocky Linux） |
-| 代码托管 | GitHub（w-run/bento-git）+ 后端 Gitea w-box 自托管 |
+| 代码托管 | GitHub（w-run/wcode）+ 后端 Gitea w-box 自托管 |
 | 功能优先级 | P0 仪表盘+仓库列表+详情+文件浏览 / P0.5 **落地页生成器 + .page 自定义模板** / P1 Issue/PR/搜索 / P1.5 **MCP 服务 + 镜像同步** / P2 设置 |
 
 ---

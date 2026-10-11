@@ -1,6 +1,6 @@
 {
   "meta": {
-    "project": "Bento Git (wcode)",
+    "project": "wcode",
     "note": "issue 权威源（索引）。技术详情见 doc/issues/<ID>.md。编号 <模块前缀>-<关键词>，前缀见 AGENTS.md §2。",
     "generated": "2026-10-11T00:00:00+08:00",
     "status_enum": { "0": "done", "1": "planned", "2": "pending" },

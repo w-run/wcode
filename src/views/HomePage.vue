@@ -4,7 +4,7 @@ const version = '0.1.0'
 
 <template>
   <main class="home">
-    <h1 class="home__title">Bento Git</h1>
+    <h1 class="home__title">wcode</h1>
     <p class="home__desc">
       保留 Gitea 后端全部能力，用全新前端替换默认 Web UI。
     </p>

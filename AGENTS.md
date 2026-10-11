@@ -1,4 +1,4 @@
-# Bento Git — Gitea 定制前端 · Agent 项目规约
+# wcode — Gitea 定制前端 · Agent 项目规约
 
 > Update: 2026-10-11
 >
@@ -11,13 +11,13 @@
 
 ## 0. 项目定位
 
-- **项目名称**：Bento Git（wcode）
+- **项目名称**：wcode
 - **定位**：保留 Gitea 后端全部能力，用全新前端替换默认 Web UI；风格为**圆润 · 便当盒卡片 · 色块区分 · 留白**（按钮多用胶囊/大圆角/圆形，避免硬边框，优先色块区分区域）。主题色 `#D62839`。
 - **响应式/移动端**：**响应式布局优先**，全站须兼容移动端浏览（断点布局、触摸目标 ≥44px、底部 Tab 导航、安全区适配）。详见 `doc/design-system.md` §5.4。
 - **技术栈**：Vue 3 + TypeScript + Vite + SCSS + Pinia + pnpm。
 - **后端**：Gitea（≥ 2.x，启用 `[openapi]`），前端同域调用 `/api/v1`，Cookie 会话免 token。
 - **部署**：w-box（Rocky Linux），Nginx :80/443 反代（`/` → 前端，`/api/v1` → Gitea :3000）。
-- **代码托管**：GitHub（`w-run/bento-git`，默认分支 `develop`）；后端 Gitea 为 w-box 自托管。
+- **代码托管**：GitHub（`w-run/wcode`，默认分支 `develop`）；后端 Gitea 为 w-box 自托管。
 - **功能规划**：见 `wcode.md`（Roadmap 原始来源，已同步至 `doc/data.json.roadmap`）。
 
 ---
