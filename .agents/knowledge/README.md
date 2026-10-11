@@ -5,7 +5,9 @@
 
 ## 索引
 
-_（暂无条目，随开发过程累积）_
+| 文件 | 分类 | 要点 |
+|:-----|:----:|:-----|
+| [feedback_pnpm_allow_builds.md](feedback_pnpm_allow_builds.md) | 纪律 | pnpm 11 供应链策略拦截 esbuild/@parcel-watcher 构建脚本；须在 pnpm-workspace.yaml 设 allowBuilds 批准 |
 
 <!-- 新增条目时按下表格式登记：
 
