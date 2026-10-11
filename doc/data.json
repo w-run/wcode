@@ -94,7 +94,7 @@
         "鉴权（API Token）",
         "客户端接入（Claude Desktop/Cursor）"
       ],
-      "done": 0,
+      "done": 2,
       "total": 4
     },
     {
@@ -106,7 +106,7 @@
         "双向同步 + 冲突检测",
         "远端平台（GitHub/Gitee/GitLab/通用 Git）"
       ],
-      "done": 0,
+      "done": 1,
       "total": 4
     },
     {
