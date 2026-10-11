@@ -71,7 +71,7 @@
         ".page/*.tpl 自定义模板（沙箱化）",
         "无 README 兜底卡片"
       ],
-      "done": 3,
+      "done": 4,
       "total": 4
     },
     {
@@ -203,9 +203,9 @@
       "id": "landing",
       "name": "落地页",
       "prefix": "landing",
-      "progress": 75,
+      "progress": 100,
       "check": true,
-      "note": "内置 4 模板完成，.page/*.tpl 自定义待做"
+      "note": "S4.5 完成：内置 4 模板 + .page/*.tpl 自定义"
     },
     {
       "id": "flow",
