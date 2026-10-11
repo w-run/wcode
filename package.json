@@ -11,7 +11,8 @@
     "lint": "eslint . --fix && prettier --check .",
     "test": "vitest run",
     "check": "pnpm type-check && pnpm lint && pnpm test && vite build",
-    "sass": "sass --no-source-map --style=compressed src/assets/styles:dist"
+    "sass": "sass --no-source-map --style=compressed src/assets/styles:dist",
+    "mcp": "node server/mcp/index.mjs"
   },
   "dependencies": {
     "pinia": "^3.0.1",
