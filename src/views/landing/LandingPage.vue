@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { computed, onMounted, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
-import { getRepo, getReadme } from '@/api/repos'
+import { getContents, getFileRaw, getRepo, getReadme } from '@/api/repos'
 import { decodeContent } from '@/utils/markdown'
 import type { Repository } from '@/api/types'
 import MinimalTemplate from '@/components/landing/MinimalTemplate.vue'
 import TechTemplate from '@/components/landing/TechTemplate.vue'
 import EnterpriseTemplate from '@/components/landing/EnterpriseTemplate.vue'
 import CardTemplate from '@/components/landing/CardTemplate.vue'
+import CustomTemplate from '@/components/landing/CustomTemplate.vue'
 
 const props = defineProps<{
   owner: string
@@ -17,19 +18,17 @@ const props = defineProps<{
 const route = useRoute()
 const router = useRouter()
 
-const TEMPLATES = [
+const BUILTIN = [
   { id: 'minimal', label: '极简', component: MinimalTemplate },
   { id: 'tech', label: '科技', component: TechTemplate },
   { id: 'enterprise', label: '企业', component: EnterpriseTemplate },
   { id: 'card', label: '卡片', component: CardTemplate },
 ] as const
 
-type TemplateId = (typeof TEMPLATES)[number]['id']
-
-const templateId = ref<TemplateId>(
-  ((route.query.t as string) ||
-    (localStorage.getItem('landing-template') as TemplateId) ||
-    'minimal') as TemplateId,
+const templateId = ref(
+  (route.query.t as string) ||
+    localStorage.getItem('landing-template') ||
+    'minimal',
 )
 
 const repo = ref<Repository | null>(null)
@@ -38,11 +37,47 @@ const hasReadme = ref(true)
 const loading = ref(true)
 const error = ref<string | null>(null)
 
-const activeTemplate = computed(
+// 仓库 .page/*.tpl 自定义模板
+const customTpls = ref<string[]>([])
+const customTplContent = ref('')
+
+const isCustom = computed(() => templateId.value.startsWith('custom:'))
+const customFile = computed(() => templateId.value.slice('custom:'.length))
+
+const activeBuiltin = computed(
   () =>
-    TEMPLATES.find((t) => t.id === templateId.value)?.component ??
+    BUILTIN.find((t) => t.id === templateId.value)?.component ??
     MinimalTemplate,
 )
+
+async function loadCustomTpls() {
+  try {
+    const items = await getContents(
+      props.owner,
+      props.name,
+      '.page',
+      repo.value?.default_branch,
+    )
+    customTpls.value = items
+      .filter((i) => i.type !== 'dir' && i.name?.endsWith('.tpl'))
+      .map((i) => i.name as string)
+  } catch {
+    customTpls.value = []
+  }
+}
+
+async function loadCustomTpl(file: string) {
+  try {
+    customTplContent.value = await getFileRaw(
+      props.owner,
+      props.name,
+      repo.value?.default_branch ?? 'main',
+      `.page/${file}`,
+    )
+  } catch {
+    customTplContent.value = '<p>模板加载失败</p>'
+  }
+}
 
 async function load() {
   loading.value = true
@@ -57,6 +92,8 @@ async function load() {
       hasReadme.value = false
       markdown.value = ''
     }
+    await loadCustomTpls()
+    if (isCustom.value) await loadCustomTpl(customFile.value)
   } catch (err) {
     error.value = err instanceof Error ? err.message : '仓库加载失败'
   } finally {
@@ -64,10 +101,13 @@ async function load() {
   }
 }
 
-function selectTemplate(id: TemplateId) {
+async function selectTemplate(id: string) {
   templateId.value = id
   localStorage.setItem('landing-template', id)
   router.replace({ query: { ...route.query, t: id } })
+  if (id.startsWith('custom:')) {
+    await loadCustomTpl(id.slice('custom:'.length))
+  }
 }
 
 onMounted(load)
@@ -75,10 +115,10 @@ onMounted(load)
 
 <template>
   <div class="landing">
-    <div class="landing__bar">
+    <div v-if="!isCustom" class="landing__bar">
       <div class="landing__switcher" role="tablist" aria-label="选择落地页模板">
         <button
-          v-for="t in TEMPLATES"
+          v-for="t in BUILTIN"
           :key="t.id"
           type="button"
           class="landing__tab"
@@ -86,6 +126,16 @@ onMounted(load)
           @click="selectTemplate(t.id)"
         >
           {{ t.label }}
+        </button>
+        <button
+          v-for="f in customTpls"
+          :key="f"
+          type="button"
+          class="landing__tab landing__tab--custom"
+          :class="{ 'landing__tab--active': templateId === `custom:${f}` }"
+          @click="selectTemplate(`custom:${f}`)"
+        >
+          {{ f.replace(/\.tpl$/, '') }}
         </button>
       </div>
 
@@ -99,14 +149,20 @@ onMounted(load)
         >
           查看仓库
         </a>
-        <router-link
-          :to="`/repos/${owner}/${name}`"
-          class="landing__link landing__link--app"
-        >
+        <router-link :to="`/repos/${owner}/${name}`" class="landing__link">
           打开应用
         </router-link>
       </div>
     </div>
+
+    <button
+      v-else
+      type="button"
+      class="landing__back"
+      @click="selectTemplate('minimal')"
+    >
+      ← 返回内置模板
+    </button>
 
     <template v-if="loading">
       <div class="landing__loading">
@@ -118,8 +174,16 @@ onMounted(load)
       无法加载仓库 {{ owner }}/{{ name }}
     </p>
 
+    <CustomTemplate
+      v-else-if="repo && isCustom"
+      :repo="repo"
+      :markdown="markdown"
+      :has-readme="hasReadme"
+      :tpl="customTplContent"
+    />
+
     <component
-      :is="activeTemplate"
+      :is="activeBuiltin"
       v-else-if="repo"
       :repo="repo"
       :markdown="markdown"
@@ -149,6 +213,7 @@ onMounted(load)
 
 .landing__switcher {
   display: flex;
+  flex-wrap: wrap;
   gap: 4px;
   padding: 3px;
   background: $color-surface-2;
@@ -177,6 +242,10 @@ onMounted(load)
     font-weight: 500;
     box-shadow: $shadow-sm;
   }
+
+  &--custom {
+    font-style: italic;
+  }
 }
 
 .landing__links {
@@ -188,6 +257,25 @@ onMounted(load)
   font-size: 13px;
   color: $color-text-muted;
   text-decoration: none;
+
+  &:hover {
+    color: $color-accent;
+  }
+}
+
+.landing__back {
+  position: fixed;
+  top: $space-3;
+  left: $space-6;
+  z-index: $z-sticky;
+  padding: 6px 16px;
+  border: none;
+  border-radius: $radius-full;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  color: $color-text-muted;
+  font-size: 13px;
+  cursor: pointer;
 
   &:hover {
     color: $color-accent;
@@ -212,6 +300,7 @@ onMounted(load)
   &:nth-child(odd) {
     width: 60%;
   }
+
   &:nth-child(even) {
     width: 90%;
   }
