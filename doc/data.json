@@ -94,7 +94,7 @@
         "鉴权（API Token）",
         "客户端接入（Claude Desktop/Cursor）"
       ],
-      "done": 3,
+      "done": 4,
       "total": 4
     },
     {
@@ -106,7 +106,7 @@
         "双向同步 + 冲突检测",
         "远端平台（GitHub/Gitee/GitLab/通用 Git）"
       ],
-      "done": 1,
+      "done": 3,
       "total": 4
     },
     {
@@ -219,25 +219,25 @@
       "id": "mcp",
       "name": "MCP 服务",
       "prefix": "mcp",
-      "progress": 0,
+      "progress": 100,
       "check": false,
-      "note": "S5.5 待启动"
+      "note": "S5.5 完成：stdio MCP 服务 + 7 工具"
     },
     {
       "id": "mirror",
       "name": "镜像同步",
       "prefix": "mirror",
-      "progress": 0,
+      "progress": 75,
       "check": false,
-      "note": "S5.6 待启动"
+      "note": "S5.6：镜像管理页 + 平台引导完成"
     },
     {
       "id": "settings",
       "name": "设置",
       "prefix": "settings",
-      "progress": 0,
+      "progress": 50,
       "check": false,
-      "note": "S6 待启动"
+      "note": "镜像设置页就绪"
     },
     {
       "id": "deploy",

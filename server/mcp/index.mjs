@@ -96,6 +96,32 @@ const TOOLS = [
       required: ['owner', 'repo'],
     },
   },
+  {
+    name: 'repo_get',
+    description: '获取仓库元数据（描述/语言/star/默认分支等）',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        owner: { type: 'string' },
+        repo: { type: 'string' },
+      },
+      required: ['owner', 'repo'],
+    },
+  },
+  {
+    name: 'file_read',
+    description: '读取仓库中的文件内容（文本）',
+    inputSchema: {
+      type: 'object',
+      properties: {
+        owner: { type: 'string' },
+        repo: { type: 'string' },
+        path: { type: 'string', description: '文件路径，如 src/main.ts' },
+        ref: { type: 'string', description: '分支/tag，默认默认分支' },
+      },
+      required: ['owner', 'repo', 'path'],
+    },
+  },
 ]
 
 async function callTool(name, args) {
@@ -145,6 +171,30 @@ async function callTool(name, args) {
         `/repos/${owner}/${repo}/pulls?state=${state}&limit=50`,
       )
       return data.map((p) => `#${p.number} [${p.state}] ${p.title}`).join('\n')
+    }
+    case 'repo_get': {
+      const { owner, repo } = args
+      const r = await gitea(`/repos/${owner}/${repo}`)
+      return [
+        `仓库: ${r.full_name}`,
+        `描述: ${r.description ?? '（无）'}`,
+        `语言: ${r.language ?? '（未知）'}  默认分支: ${r.default_branch}`,
+        `Stars: ${r.stars_count ?? 0}  Forks: ${r.forks_count ?? 0}  Issues: ${r.open_issues_count ?? 0}`,
+        `地址: ${r.html_url ?? ''}`,
+      ].join('\n')
+    }
+    case 'file_read': {
+      const { owner, repo, path, ref } = args
+      const q = ref ? `?ref=${encodeURIComponent(ref)}` : ''
+      const data = await gitea(`/repos/${owner}/${repo}/contents/${path}${q}`)
+      const item = Array.isArray(data) ? data[0] : data
+      if (!item || item.type === 'dir') {
+        throw new Error(`路径是目录或不存在: ${path}`)
+      }
+      if (item.encoding === 'base64' && item.content) {
+        return Buffer.from(item.content, 'base64').toString('utf8')
+      }
+      return String(item.content ?? '')
     }
     default:
       throw new Error(`未知工具: ${name}`)

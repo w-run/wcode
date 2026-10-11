@@ -177,6 +177,26 @@ onMounted(load)
         {{ creating ? '创建中...' : '创建镜像' }}
       </button>
     </section>
+
+    <section class="mirror__guide">
+      <h2 class="mirror__subtitle">平台接入指引</h2>
+      <ul class="guide-list">
+        <li>
+          <strong>GitHub</strong> — Personal Access Token，Scope 仅需
+          <code>repo</code>
+        </li>
+        <li><strong>Gitee</strong> — 私有令牌（access_token）</li>
+        <li>
+          <strong>GitLab</strong> — Project/Deploy Token（read_repository +
+          write_repository）
+        </li>
+      </ul>
+      <p class="mirror__note">
+        <strong>双向同步</strong
+        >：同时配置「拉取」与「推送」两条镜像。检测到两侧分支分叉时，Gitea
+        会暂停同步并告警，需人工合并后再恢复，避免回写覆盖。
+      </p>
+    </section>
   </div>
 </template>
 
@@ -390,6 +410,48 @@ onMounted(load)
   &:disabled {
     opacity: 0.5;
     cursor: not-allowed;
+  }
+}
+
+.mirror__guide {
+  margin-top: $space-4;
+  padding: $space-6;
+  background: $color-surface;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+}
+
+.guide-list {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  font-size: 13.5px;
+  color: $color-text;
+
+  strong {
+    font-weight: 600;
+  }
+
+  code {
+    padding: 1px 6px;
+    border-radius: 6px;
+    background: $color-surface-2;
+    font-family: $font-mono;
+    font-size: 0.9em;
+  }
+}
+
+.mirror__note {
+  margin-top: $space-6;
+  font-size: 13px;
+  color: $color-text-muted;
+  line-height: 1.7;
+
+  strong {
+    color: $color-text;
   }
 }
 
