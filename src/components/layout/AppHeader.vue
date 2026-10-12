@@ -1,7 +1,11 @@
 <script setup lang="ts">
+import { useTheme } from '@/composables/useTheme'
+
 defineEmits<{
   toggleSidebar: []
 }>()
+
+const { theme, toggleTheme } = useTheme()
 </script>
 
 <template>
@@ -14,6 +18,14 @@ defineEmits<{
       </router-link>
       <div class="header-actions">
         <slot name="actions" />
+        <button
+          class="icon-btn"
+          type="button"
+          :aria-label="theme === 'dark' ? '切换到亮色' : '切换到暗色'"
+          @click="toggleTheme"
+        >
+          <WdIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="18" />
+        </button>
         <button class="avatar-btn" type="button" aria-label="用户菜单">
           <span class="avatar-placeholder" />
         </button>
@@ -26,14 +38,24 @@ defineEmits<{
         <span class="logo-dot" />
         wcode
       </router-link>
-      <button
-        class="menu-btn"
-        type="button"
-        aria-label="打开菜单"
-        @click="$emit('toggle-sidebar')"
-      >
-        <WdIcon name="menu" :size="20" />
-      </button>
+      <div class="header-actions">
+        <button
+          class="icon-btn"
+          type="button"
+          :aria-label="theme === 'dark' ? '切换到亮色' : '切换到暗色'"
+          @click="toggleTheme"
+        >
+          <WdIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="18" />
+        </button>
+        <button
+          class="menu-btn"
+          type="button"
+          aria-label="打开菜单"
+          @click="$emit('toggle-sidebar')"
+        >
+          <WdIcon name="menu" :size="20" />
+        </button>
+      </div>
     </div>
   </header>
 </template>
@@ -111,6 +133,28 @@ defineEmits<{
 
   &:hover {
     background: var(--wd-field);
+  }
+}
+
+.icon-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--wd-radius-pill);
+  color: var(--wd-ink-2);
+  cursor: pointer;
+  transition:
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
+
+  &:hover {
+    background: var(--wd-field);
+    color: var(--wd-ink);
   }
 }
 

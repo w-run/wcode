@@ -4,6 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>wcode</title>
+    <script>
+      // 防闪烁：在首屏渲染前应用主题
+      ;(function () {
+        try {
+          var t = localStorage.getItem('wcode-theme')
+          if (!t) {
+            t = window.matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light'
+          }
+          if (t === 'dark')
+            document.documentElement.setAttribute('data-theme', 'dark')
+        } catch (e) {}
+      })()
+    </script>
   </head>
   <body>
     <div id="app"></div>
