@@ -1,55 +1,55 @@
 <script setup lang="ts">
-type BadgeVariant = 'default' | 'accent' | 'success' | 'warning' | 'danger'
+/**
+ * 兼容适配层：渲染 wdesign 语义色标签。
+ * wdesign WdTag 仅有 tint/gray/dark，无法表达 success/danger 等状态色，
+ * 故保留本地 pill 样式，色块走 wdesign 语义变量。
+ */
+type Variant = 'default' | 'accent' | 'success' | 'warning' | 'danger'
 
-withDefaults(
+const props = withDefaults(
   defineProps<{
-    variant?: BadgeVariant
+    variant?: Variant
   }>(),
-  {
-    variant: 'default',
-  },
+  { variant: 'default' },
 )
 </script>
 
 <template>
-  <span class="badge" :class="`badge--${variant}`"><slot /></span>
+  <span class="badge" :class="`badge--${props.variant}`">
+    <slot />
+  </span>
 </template>
 
 <style lang="scss" scoped>
 .badge {
   display: inline-flex;
   align-items: center;
-  gap: $space-1;
-  padding: $space-1 $space-3;
-  border-radius: $radius-full;
-  font-size: 0.75rem;
+  gap: var(--wd-space-1);
+  padding: 2px 10px;
+  border-radius: var(--wd-radius-pill);
+  font-size: 12px;
   font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
+  line-height: 1.6;
+}
 
-  &--default {
-    background: $color-surface-2;
-    color: $color-text-muted;
-  }
-
-  &--accent {
-    background: $color-accent-light;
-    color: $color-accent;
-  }
-
-  &--success {
-    background: $color-success-light;
-    color: $color-success;
-  }
-
-  &--warning {
-    background: $color-warning-light;
-    color: $color-warning;
-  }
-
-  &--danger {
-    background: $color-danger-light;
-    color: $color-danger;
-  }
+.badge--default {
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+}
+.badge--accent {
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
+}
+.badge--success {
+  background: var(--wd-success-soft);
+  color: var(--wd-success);
+}
+.badge--warning {
+  background: var(--wd-warning-soft);
+  color: var(--wd-warning);
+}
+.badge--danger {
+  background: var(--wd-tint-2);
+  color: var(--wd-red-hover);
 }
 </style>

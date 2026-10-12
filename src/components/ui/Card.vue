@@ -1,29 +1,17 @@
 <script setup lang="ts">
-withDefaults(
+/**
+ * 兼容适配层：渲染 wdesign 的 WdCard（白底 · 大圆角 · 单层阴影 · 无边框）。
+ */
+const props = withDefaults(
   defineProps<{
     padding?: boolean
   }>(),
-  {
-    padding: true,
-  },
+  { padding: true },
 )
 </script>
 
 <template>
-  <div class="card" :class="{ 'card--flush': !padding }">
+  <WdCard :padding="props.padding ? 'md' : 'sm'">
     <slot />
-  </div>
+  </WdCard>
 </template>
-
-<style lang="scss" scoped>
-.card {
-  background: $color-surface;
-  box-shadow: $shadow-md;
-  border-radius: $radius-lg;
-  padding: $space-6;
-
-  &--flush {
-    padding: 0;
-  }
-}
-</style>

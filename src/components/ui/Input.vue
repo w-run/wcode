@@ -1,81 +1,33 @@
 <script setup lang="ts">
-const model = defineModel<string>({ default: '' })
-
+/**
+ * 兼容适配层：渲染 wdesign 的 WdInput（胶囊/圆角输入框，可选 icon/suffix 插槽）。
+ */
 withDefaults(
   defineProps<{
+    modelValue?: string
     type?: string
     placeholder?: string
     disabled?: boolean
   }>(),
-  {
-    type: 'text',
-    placeholder: '',
-    disabled: false,
-  },
+  { modelValue: '', type: 'text', placeholder: '', disabled: false },
 )
+
+const emit = defineEmits<{ (e: 'update:modelValue', value: string): void }>()
 </script>
 
 <template>
-  <div class="input" :class="{ 'input--disabled': disabled }">
-    <span v-if="$slots.prefix" class="input__affix">
+  <WdInput
+    :model-value="modelValue"
+    :type="type"
+    :placeholder="placeholder"
+    :disabled="disabled"
+    @update:model-value="emit('update:modelValue', $event)"
+  >
+    <template v-if="$slots.prefix" #icon>
       <slot name="prefix" />
-    </span>
-    <input
-      v-model="model"
-      class="input__field"
-      :type="type"
-      :placeholder="placeholder"
-      :disabled="disabled"
-    />
-    <span v-if="$slots.suffix" class="input__affix">
+    </template>
+    <template v-if="$slots.suffix" #suffix>
       <slot name="suffix" />
-    </span>
-  </div>
+    </template>
+  </WdInput>
 </template>
-
-<style lang="scss" scoped>
-.input {
-  display: flex;
-  align-items: center;
-  gap: $space-2;
-  min-height: 2.75rem;
-  padding: 0 $space-4;
-  border-radius: $radius-md;
-  background: $color-surface-2;
-  transition: background-color 0.2s ease;
-
-  &:focus-within {
-    background: $color-accent-light;
-  }
-
-  &--disabled {
-    opacity: 0.6;
-    cursor: not-allowed;
-  }
-
-  &__field {
-    flex: 1;
-    min-width: 0;
-    border: none;
-    outline: none;
-    background: transparent;
-    font-family: inherit;
-    font-size: 0.875rem;
-    color: $color-text;
-
-    &::placeholder {
-      color: $color-text-muted;
-    }
-
-    &:disabled {
-      cursor: not-allowed;
-    }
-  }
-
-  &__affix {
-    display: inline-flex;
-    align-items: center;
-    color: $color-text-muted;
-  }
-}
-</style>
