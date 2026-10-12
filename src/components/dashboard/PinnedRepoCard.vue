@@ -1,11 +1,20 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { Repository } from '@/api/types'
 import { formatCount } from '@/utils/format'
 
 const props = defineProps<{
   repo: Repository
 }>()
+
+const router = useRouter()
+
+/** 点击进入仓库详情（owner/name 取自 full_name） */
+function navigate() {
+  const [owner, repoName] = props.repo.full_name.split('/')
+  router.push(`/repos/${owner}/${repoName}`)
+}
 
 /** 语言色点 class：_tokens.scss 中的 $color-lang-* 语义色（未知语言回退默认灰） */
 const langClass = computed(() => {
@@ -26,7 +35,13 @@ const updatedText = computed(() => {
 </script>
 
 <template>
-  <article class="pinned-repo">
+  <article
+    class="pinned-repo"
+    role="link"
+    tabindex="0"
+    @click="navigate"
+    @keydown.enter="navigate"
+  >
     <header class="pinned-repo__head">
       <h3 class="pinned-repo__name">{{ repo.full_name || repo.name }}</h3>
       <span class="pinned-repo__stars" title="star 数">
@@ -69,6 +84,7 @@ const updatedText = computed(() => {
   box-shadow: $shadow-sm;
   border-radius: $radius-lg;
   transition: box-shadow $transition-fast;
+  cursor: pointer;
 
   &:hover {
     box-shadow: $shadow-lg;

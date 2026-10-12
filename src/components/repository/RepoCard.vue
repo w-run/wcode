@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { computed } from 'vue'
+import { useRouter } from 'vue-router'
 import type { Repository } from '@/api/types'
 import { getLangColor } from '@/utils/langColors'
 import { formatCount } from '@/utils/format'
@@ -7,6 +8,8 @@ import { formatCount } from '@/utils/format'
 const props = defineProps<{
   repo: Repository
 }>()
+
+const router = useRouter()
 
 const langColor = computed(() => getLangColor(props.repo.language))
 
@@ -27,10 +30,22 @@ function formatRelativeTime(iso?: string): string {
   if (months < 12) return `${months} 个月前`
   return `${Math.floor(months / 12)} 年前`
 }
+
+/** 点击进入仓库详情（owner/name 取自 full_name，兼容字段缺失） */
+function navigate() {
+  const [owner, repoName] = props.repo.full_name.split('/')
+  router.push(`/repos/${owner}/${repoName}`)
+}
 </script>
 
 <template>
-  <article class="repo-card">
+  <article
+    class="repo-card"
+    role="link"
+    tabindex="0"
+    @click="navigate"
+    @keydown.enter="navigate"
+  >
     <div class="repo-card__head">
       <span
         v-if="langColor"
@@ -96,6 +111,7 @@ function formatRelativeTime(iso?: string): string {
   transition:
     box-shadow 0.2s ease,
     transform 0.2s ease;
+  cursor: pointer;
 
   &:hover {
     box-shadow: $shadow-lg;
