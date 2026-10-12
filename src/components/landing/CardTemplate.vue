@@ -32,14 +32,14 @@ const sections = splitMarkdownSections(props.markdown)
           {{ s.title }}
         </h2>
         <!-- eslint-disable-next-line vue/no-v-html -- renderMarkdown 已转义 -->
-        <div class="markdown" v-html="renderMarkdown(s.body)" />
+        <div class="wd-markdown" v-html="renderMarkdown(s.body)" />
       </article>
     </section>
 
     <section v-else-if="hasReadme" class="cards__grid">
       <article class="card card--full">
         <!-- eslint-disable-next-line vue/no-v-html -- renderMarkdown 已转义 -->
-        <div class="markdown" v-html="renderMarkdown(markdown)" />
+        <div class="wd-markdown" v-html="renderMarkdown(markdown)" />
       </article>
     </section>
 

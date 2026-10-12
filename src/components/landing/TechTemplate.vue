@@ -37,7 +37,7 @@ defineProps<{
       <!-- eslint-disable-next-line vue/no-v-html -- renderMarkdown 已转义 -->
       <div
         v-if="hasReadme"
-        class="markdown"
+        class="wd-markdown"
         v-html="renderMarkdown(markdown)"
       />
 
@@ -49,33 +49,27 @@ defineProps<{
 <style lang="scss" scoped>
 .tech {
   min-height: 100vh;
-  background:
-    radial-gradient(
-      circle at 50% -10%,
-      rgba(214, 40, 57, 0.28),
-      transparent 55%
-    ),
-    #0d0f13;
-  color: #fff;
+  background: var(--wd-bg);
+  color: var(--wd-ink);
 }
 
 .tech__hero {
   max-width: 800px;
   margin: 0 auto;
-  padding: $space-16 $space-6 $space-12;
+  padding: var(--wd-space-12) var(--wd-space-6) var(--wd-space-8);
   text-align: center;
 }
 
 .tech__lang {
   display: inline-block;
   padding: 4px 14px;
-  margin-bottom: $space-4;
-  border-radius: $radius-full;
-  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: var(--wd-space-4);
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
   font-size: 12px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.7);
+  color: var(--wd-ink-2);
 }
 
 .tech__name {
@@ -83,25 +77,22 @@ defineProps<{
   font-weight: 700;
   letter-spacing: -0.03em;
   line-height: 1.1;
-  background: linear-gradient(120deg, #fff 30%, #ff8a95);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+  color: var(--wd-ink);
 }
 
 .tech__desc {
   max-width: 520px;
-  margin: $space-4 auto 0;
+  margin: var(--wd-space-4) auto 0;
   font-size: 16px;
-  color: rgba(255, 255, 255, 0.6);
+  color: var(--wd-ink-2);
   line-height: 1.7;
 }
 
 .tech__stats {
   display: flex;
   justify-content: center;
-  gap: $space-8;
-  margin-top: $space-8;
+  gap: var(--wd-space-8);
+  margin-top: var(--wd-space-8);
 }
 
 .tech__stat {
@@ -118,63 +109,19 @@ defineProps<{
     font-size: 12px;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.4);
+    color: var(--wd-ink-2);
   }
 }
 
 .tech__body {
   max-width: 760px;
   margin: 0 auto;
-  padding: $space-8 $space-6 $space-16;
-
-  :deep(.markdown) {
-    color: rgba(255, 255, 255, 0.82);
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-      color: #fff;
-    }
-
-    a {
-      color: #ff8a95;
-
-      &:hover {
-        color: #ffb0b8;
-      }
-    }
-
-    code {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffd7db;
-    }
-
-    pre {
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    blockquote {
-      border-color: $color-accent;
-      color: rgba(255, 255, 255, 0.6);
-    }
-
-    th,
-    td {
-      border-color: rgba(255, 255, 255, 0.12);
-    }
-
-    th {
-      background: rgba(255, 255, 255, 0.06);
-    }
-  }
+  padding: var(--wd-space-8) var(--wd-space-6) var(--wd-space-12);
 }
 
 .tech__empty {
   text-align: center;
-  padding: $space-12 0;
-  color: rgba(255, 255, 255, 0.5);
+  padding: var(--wd-space-12) 0;
+  color: var(--wd-ink-2);
 }
 </style>

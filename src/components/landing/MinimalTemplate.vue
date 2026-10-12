@@ -29,7 +29,7 @@ defineProps<{
       <!-- eslint-disable-next-line vue/no-v-html -- renderMarkdown 已转义 -->
       <div
         v-if="hasReadme"
-        class="markdown"
+        class="wd-markdown"
         v-html="renderMarkdown(markdown)"
       />
 

@@ -97,7 +97,7 @@ function scrollTo(index: number) {
           >
             <h2 class="ent__section-title">{{ s.title }}</h2>
             <!-- eslint-disable-next-line vue/no-v-html -- renderMarkdown 已转义 -->
-            <div class="markdown" v-html="renderMarkdown(s.body)" />
+            <div class="wd-markdown" v-html="renderMarkdown(s.body)" />
           </section>
 
           <div

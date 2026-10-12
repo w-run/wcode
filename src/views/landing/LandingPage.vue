@@ -195,7 +195,7 @@ onMounted(load)
 <style lang="scss" scoped>
 .landing {
   min-height: 100vh;
-  background: $color-bg;
+  background: var(--wd-bg);
 }
 
 .landing__bar {
@@ -205,10 +205,10 @@ onMounted(load)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-3;
-  padding: $space-3 $space-6;
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-3) var(--wd-space-6);
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .landing__switcher {
@@ -216,31 +216,31 @@ onMounted(load)
   flex-wrap: wrap;
   gap: 4px;
   padding: 3px;
-  background: $color-surface-2;
-  border-radius: $radius-full;
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-pill);
 }
 
 .landing__tab {
   padding: 6px 16px;
   border: none;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   background: transparent;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   font-size: 13px;
   cursor: pointer;
   transition:
-    background $transition-fast,
-    color $transition-fast;
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &--active {
-    background: $color-surface;
-    color: $color-accent;
+    background: var(--wd-card);
+    color: var(--wd-red);
     font-weight: 500;
-    box-shadow: $shadow-sm;
+    box-shadow: var(--wd-shadow-sm);
   }
 
   &--custom {
@@ -250,51 +250,51 @@ onMounted(load)
 
 .landing__links {
   display: flex;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 }
 
 .landing__link {
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   text-decoration: none;
 
   &:hover {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 }
 
 .landing__back {
   position: fixed;
-  top: $space-3;
-  left: $space-6;
+  top: var(--wd-space-3);
+  left: var(--wd-space-6);
   z-index: $z-sticky;
   padding: 6px 16px;
   border: none;
-  border-radius: $radius-full;
-  background: rgba(255, 255, 255, 0.8);
-  backdrop-filter: blur(8px);
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow-sm);
+  color: var(--wd-ink-2);
   font-size: 13px;
   cursor: pointer;
 
   &:hover {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 }
 
 .landing__loading {
   max-width: 720px;
-  margin: $space-16 auto 0;
+  margin: var(--wd-space-16) auto 0;
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  padding: 0 $space-6;
+  gap: var(--wd-space-3);
+  padding: 0 var(--wd-space-6);
 }
 
 .landing__shimmer {
   height: 18px;
-  border-radius: $radius-sm;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-sm);
+  background: var(--wd-field);
   animation: landing-shimmer 1.5s ease-in-out infinite;
 
   &:nth-child(odd) {
@@ -307,8 +307,8 @@ onMounted(load)
 }
 
 .landing__error {
-  padding: $space-16 $space-6;
-  color: $color-text-muted;
+  padding: var(--wd-space-16) var(--wd-space-6);
+  color: var(--wd-ink-2);
   text-align: center;
 }
 
