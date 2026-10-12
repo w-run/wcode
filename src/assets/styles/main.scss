@@ -1,3 +1,5 @@
-@use 'root';
+// wcode 全局样式入口
+// 设计令牌与 base 由 wdesign 提供（见 src/main.ts 的 `import 'wdesign/styles'`）
+@use 'fonts';
 @use 'reset';
 @use 'markdown';

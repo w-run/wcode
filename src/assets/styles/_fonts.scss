@@ -1,0 +1,14 @@
+// ============================================================
+// 字体（自托管 Mona Sans Latin + 中文系统回退）
+// wdesign 的 _fonts.scss 期望 17.7MB 中文 ttf，故此处自建，
+// 中文走系统字体（PingFang SC / Microsoft YaHei）。
+// 字体文件位于 public/fonts/
+// ============================================================
+
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('/fonts/mona-sans-vf.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}

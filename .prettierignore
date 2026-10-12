@@ -5,3 +5,5 @@ coverage
 *.md
 .agents
 doc
+packages
+public

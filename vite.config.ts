@@ -8,6 +8,8 @@ export default defineConfig({
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
+    // wdesign 声明 vue 为 peerDependency，避免重复打包
+    dedupe: ['vue'],
   },
   css: {
     preprocessorOptions: {
