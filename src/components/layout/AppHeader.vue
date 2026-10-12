@@ -1,8 +1,17 @@
+<script setup lang="ts">
+defineEmits<{
+  toggleSidebar: []
+}>()
+</script>
+
 <template>
   <header class="app-header">
     <!-- 桌面端：左上 logo + 右上用户菜单 -->
     <div class="header-desktop">
-      <router-link to="/" class="logo">wcode</router-link>
+      <router-link to="/" class="logo">
+        <span class="logo-dot" />
+        wcode
+      </router-link>
       <div class="header-actions">
         <slot name="actions" />
         <button class="avatar-btn" type="button" aria-label="用户菜单">
@@ -13,37 +22,21 @@
 
     <!-- 移动端：居中 logo + 汉堡按钮 -->
     <div class="header-mobile">
-      <router-link to="/" class="logo">wcode</router-link>
+      <router-link to="/" class="logo">
+        <span class="logo-dot" />
+        wcode
+      </router-link>
       <button
         class="menu-btn"
         type="button"
         aria-label="打开菜单"
         @click="$emit('toggle-sidebar')"
       >
-        <svg
-          width="20"
-          height="20"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <line x1="3" y1="6" x2="21" y2="6" />
-          <line x1="3" y1="12" x2="21" y2="12" />
-          <line x1="3" y1="18" x2="21" y2="18" />
-        </svg>
+        <WdIcon name="menu" :size="20" />
       </button>
     </div>
   </header>
 </template>
-
-<script setup lang="ts">
-defineEmits<{
-  toggleSidebar: []
-}>()
-</script>
 
 <style lang="scss" scoped>
 .app-header {
@@ -51,29 +44,27 @@ defineEmits<{
   top: 0;
   z-index: $z-sticky;
   height: 56px;
-  background: $color-surface;
-  box-shadow: $shadow-sm;
+  background: var(--wd-bg);
+  box-shadow: var(--wd-shadow-sm);
 
-  // 桌面端布局
   .header-desktop {
     display: none;
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 $space-6;
+    padding: 0 var(--wd-space-6);
 
     @include media-up($bp-desktop) {
       display: flex;
     }
   }
 
-  // 移动端布局
   .header-mobile {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 100%;
-    padding: 0 $space-4;
+    padding: 0 var(--wd-space-4);
 
     @include media-up($bp-desktop) {
       display: none;
@@ -82,17 +73,27 @@ defineEmits<{
 }
 
 .logo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--wd-space-2);
   font-size: 18px;
   font-weight: 700;
-  color: $color-accent;
+  color: var(--wd-red);
   text-decoration: none;
   letter-spacing: -0.5px;
+}
+
+.logo-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: var(--wd-space-3);
 }
 
 .avatar-btn {
@@ -104,12 +105,12 @@ defineEmits<{
   padding: 0;
   background: transparent;
   border: none;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 }
 
@@ -117,8 +118,8 @@ defineEmits<{
   display: block;
   width: 32px;
   height: 32px;
-  border-radius: $radius-full;
-  background: $color-accent-light;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-tint-2);
 }
 
 .menu-btn {
@@ -130,13 +131,13 @@ defineEmits<{
   padding: 0;
   background: transparent;
   border: none;
-  border-radius: $radius-full;
-  color: $color-text;
+  border-radius: var(--wd-radius-pill);
+  color: var(--wd-ink);
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 }
 </style>
