@@ -173,7 +173,7 @@
       "prefix": "design",
       "progress": 100,
       "check": true,
-      "note": "S1 完成：令牌/基础组件/布局/状态组件全部就绪"
+      "note": "S1 完成 + WDesign 全站重构（依赖引入/组件/布局/双主题/落地页）"
     },
     {
       "id": "api",
