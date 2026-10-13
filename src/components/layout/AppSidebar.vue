@@ -128,7 +128,7 @@ function onNavigate() {
     flex-direction: column;
     align-items: center;
     width: 84px;
-    padding: var(--wd-space-5) 0 var(--wd-space-4);
+    padding: var(--wd-space-6) 0 var(--wd-space-4);
     background: var(--wd-bg);
   }
 }

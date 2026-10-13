@@ -263,7 +263,7 @@ onMounted(() => {
   background: var(--wd-red);
 }
 .dash-hero__lead {
-  margin: 0 0 var(--wd-space-5);
+  margin: 0 0 var(--wd-space-6);
   font-size: 15px;
   line-height: 1.8;
   color: var(--wd-ink-2);
@@ -417,7 +417,7 @@ onMounted(() => {
 .dash-col {
   display: flex;
   flex-direction: column;
-  padding: var(--wd-space-5, 20px);
+  padding: var(--wd-space-6);
   background: var(--wd-card);
   border-radius: var(--wd-radius-lg);
   box-shadow: var(--wd-shadow-sm);
