@@ -209,7 +209,7 @@
   color: var(--wd-ink, #191b1f);
   background: none;
   border: none;
-  border-radius: var(--wd-radius-sm, 8px);
+  border-radius: var(--wd-radius-xs);
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
   transition: background-color var(--wd-dur-fast, .18s) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));

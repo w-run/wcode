@@ -103,6 +103,7 @@ $wd-focus-ring:      rgba(214, 40, 57, .22) !default;
 $wd-focus-ring-soft: rgba(214, 40, 57, .14) !default;
 
 // --- Radius · 圆润是风格核心 --------------------------------
+$wd-radius-xs:   8px  !default; // 小控件内元素（chip / 角标 / 小图标块）
 $wd-radius-sm:   12px !default;
 $wd-radius-md:   16px !default;
 $wd-radius-lg:   24px !default;
@@ -118,8 +119,11 @@ $wd-space-1:  4px  !default;
 $wd-space-2:  8px  !default;
 $wd-space-3:  12px !default;
 $wd-space-4:  16px !default;
+$wd-space-5:  20px !default;
 $wd-space-6:  24px !default;
+$wd-space-7:  28px !default;
 $wd-space-8:  32px !default;
+$wd-space-10: 40px !default;
 $wd-space-12: 48px !default;
 $wd-space-16: 64px !default;
 
