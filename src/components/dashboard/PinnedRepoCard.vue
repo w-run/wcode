@@ -2,7 +2,7 @@
 import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import type { Repository } from '@/api/types'
-import { formatCount } from '@/utils/format'
+import { formatCount, formatRelativeTime } from '@/utils/format'
 
 const props = defineProps<{
   repo: Repository
@@ -23,15 +23,8 @@ const langClass = computed(() => {
   return known.includes(lang) ? `lang-dot--${lang}` : 'lang-dot--default'
 })
 
-/** 更新时间：ISO 字符串 → `YYYY-MM-DD` */
-const updatedText = computed(() => {
-  const date = new Date(props.repo.updated_at ?? '')
-  if (Number.isNaN(date.getTime())) return '—'
-  const y = date.getFullYear()
-  const m = String(date.getMonth() + 1).padStart(2, '0')
-  const d = String(date.getDate()).padStart(2, '0')
-  return `${y}-${m}-${d}`
-})
+/** 更新时间：相对时间（2 天前 / 3 小时前 …） */
+const updatedText = computed(() => formatRelativeTime(props.repo.updated_at))
 </script>
 
 <template>
@@ -43,6 +36,9 @@ const updatedText = computed(() => {
     @keydown.enter="navigate"
   >
     <header class="pinned-repo__head">
+      <span class="pinned-repo__icon" aria-hidden="true">
+        <WdIcon name="folder" :size="18" />
+      </span>
       <h3 class="pinned-repo__name">{{ repo.full_name || repo.name }}</h3>
       <span class="pinned-repo__stars" title="star 数">
         <svg
@@ -76,113 +72,153 @@ const updatedText = computed(() => {
 
 <style lang="scss" scoped>
 .pinned-repo {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: var(--wd-space-3);
   padding: var(--wd-space-6);
   background: var(--wd-card);
-  box-shadow: var(--wd-shadow-sm);
   border-radius: var(--wd-radius-lg);
-  transition: box-shadow var(--wd-dur-fast) var(--wd-ease);
+  box-shadow: var(--wd-shadow-sm);
   cursor: pointer;
+  transition:
+    transform $wd-dur-slow $wd-ease-spring-soft,
+    box-shadow $wd-dur-slow $wd-ease-smooth;
 
   &:hover {
+    transform: translateY(-3px);
     box-shadow: var(--wd-shadow-pop);
   }
 
-  &__head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--wd-space-3);
+  /* 左侧红色强调条：hover 时从顶部生长 */
+  &::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    bottom: 50%;
+    width: 4px;
+    border-radius: 0 4px 4px 0;
+    background: var(--wd-red);
+    opacity: 0;
+    transition:
+      top $wd-dur-slow $wd-ease-out,
+      bottom $wd-dur-slow $wd-ease-out,
+      opacity $wd-dur-slow $wd-ease-smooth;
   }
-
-  &__name {
-    margin: 0;
-    font-size: 1.0625rem;
-    font-weight: 700;
-    color: var(--wd-ink);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-
-  &__stars {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--wd-space-1);
-    flex-shrink: 0;
-    font-size: 0.8125rem;
-    font-weight: 600;
-    color: var(--wd-ink-2);
-    font-variant-numeric: tabular-nums;
-  }
-
-  &__desc {
-    margin: 0;
-    font-size: 0.875rem;
-    line-height: 1.6;
-    color: var(--wd-ink-2);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-  }
-
-  &__meta {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: var(--wd-space-3);
-    margin-top: auto;
-  }
-
-  &__lang {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--wd-space-2);
-    font-size: 0.8125rem;
-    color: var(--wd-ink-2);
-  }
-
-  &__updated {
-    font-size: 0.75rem;
-    color: var(--wd-ink-2);
+  &:hover::before {
+    top: 16px;
+    bottom: 16px;
+    opacity: 1;
   }
 }
 
-.lang-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: var(--wd-radius-pill);
+.pinned-repo__head {
+  display: flex;
+  align-items: center;
+  gap: var(--wd-space-2);
+  min-width: 0;
+}
+
+.pinned-repo__icon {
   flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 34px;
+  height: 34px;
+  border-radius: 11px;
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
+}
 
-  &--default {
-    background: var(--wd-ink-2);
-  }
+.pinned-repo__name {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.015em;
+  color: var(--wd-ink);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color $wd-dur-slow $wd-ease-smooth;
 
-  &--js {
-    background: $lang-js;
+  .pinned-repo:hover & {
+    color: var(--wd-red);
   }
+}
 
-  &--ts {
-    background: $lang-ts;
-  }
+.pinned-repo__stars {
+  margin-left: auto;
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--wd-ink-2);
+  font-variant-numeric: tabular-nums;
+}
 
-  &--python {
-    background: $lang-python;
-  }
+.pinned-repo__desc {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.65;
+  color: var(--wd-ink-2);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 44px;
+}
 
-  &--rust {
-    background: $lang-rust;
-  }
+.pinned-repo__meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--wd-space-2);
+  margin-top: auto;
+}
 
-  &--go {
-    background: $lang-go;
-  }
+.pinned-repo__lang {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--wd-ink-3);
+}
 
-  &--cpp {
-    background: $lang-cpp;
-  }
+.lang-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.lang-dot--default {
+  background: var(--wd-ink-4);
+}
+.lang-dot--js {
+  background: $lang-js;
+}
+.lang-dot--ts {
+  background: $lang-ts;
+}
+.lang-dot--python {
+  background: $lang-python;
+}
+.lang-dot--rust {
+  background: $lang-rust;
+}
+.lang-dot--go {
+  background: $lang-go;
+}
+.lang-dot--cpp {
+  background: $lang-cpp;
+}
+
+.pinned-repo__updated {
+  font-size: 12px;
+  color: var(--wd-ink-3);
+  font-variant-numeric: tabular-nums;
 }
 </style>

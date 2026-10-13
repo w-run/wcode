@@ -47,7 +47,7 @@ const HTML_FILE = process.env.WCODE_HTML || 'index.html'
 const STYLE_FILE = process.env.WCODE_STYLES || 'src/assets/styles/main.scss'
 
 /** Vite 的 scss.additionalData 等价物：每个 SCSS 入口前置注入（跨项目可覆盖/关闭） */
-const INJECT = process.env.WCODE_INJECT ?? `@use "@/assets/styles/_tokens.scss" as *;\n@use "@/assets/styles/_mixins.scss" as *;\n`
+const INJECT = process.env.WCODE_INJECT ?? `@use "wdesign/styles/tokens" as *;\n@use "@/assets/styles/_tokens.scss" as *;\n@use "@/assets/styles/_mixins.scss" as *;\n`
 
 /* ------------------------------------------------------------------ *
  *  解析：'@/x' 与 'wdesign' 家族
@@ -242,10 +242,115 @@ function copyStatic() {
   return n
 }
 
+/**
+ * 生成裁剪版图标数据：只保留源码中作为字符串出现过的图标名。
+ * 图标名是 kebab-case 字面量（如 name="home"、icon: 'folder'），静态可析取。
+ * 返回 null 表示无法安全解析，调用方应回退全量。
+ */
+function trimIconsData(iconsSrc) {
+  try {
+    const raw = fs.readFileSync(iconsSrc, 'utf8')
+    // 文件形如：window.WD_ICONS = {...}; window.WD_ICON_COUNT = 431;
+    // 用括号匹配（含字符串状态）精确截取 JSON 对象
+    const start = raw.indexOf('{')
+    if (start < 0) return null
+    let depth = 0
+    let inStr = false
+    let esc = false
+    let end = -1
+    for (let i = start; i < raw.length; i++) {
+      const ch = raw[i]
+      if (inStr) {
+        if (esc) esc = false
+        else if (ch === '\\') esc = true
+        else if (ch === '"') inStr = false
+        continue
+      }
+      if (ch === '"') inStr = true
+      else if (ch === '{') depth++
+      else if (ch === '}') {
+        depth--
+        if (depth === 0) {
+          end = i
+          break
+        }
+      }
+    }
+    if (end < 0) return null
+    const data = JSON.parse(raw.slice(start, end + 1))
+
+    // 收集源码中的所有字符串字面量
+    const words = new Set()
+    const walk = (dir) => {
+      for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+        if (ent.name === 'node_modules' || ent.name.startsWith('.')) continue
+        const p = path.join(dir, ent.name)
+        if (ent.isDirectory()) walk(p)
+        else if (/\.(vue|ts|js|mjs)$/.test(ent.name)) {
+          const txt = fs.readFileSync(p, 'utf8')
+          for (const m of txt.matchAll(/['"`]([a-z0-9]+(?:-[a-z0-9]+)*)['"`]/g)) {
+            words.add(m[1])
+          }
+        }
+      }
+    }
+    walk(SRC)
+
+    // 保底：布局/交互常用图标，避免动态拼接时漏掉
+    for (const n of [
+      'home', 'folder', 'search', 'info-circle', 'git-pull-request', 'settings',
+      'menu', 'sun', 'moon', 'star', 'close', 'check', 'chevron-down', 'chevron-right',
+      'arrow-right', 'arrow-left', 'user', 'plus', 'refresh', 'warning', 'trash',
+    ]) {
+      words.add(n)
+    }
+
+    const kept = {}
+    for (const [key, svg] of Object.entries(data)) {
+      const name = key.split('/')[1]
+      if (words.has(name)) kept[key] = svg
+    }
+    if (!Object.keys(kept).length) return null
+
+    const payload =
+      '/* WDesign Icons — trimmed at build time (source-referenced only) */\n' +
+      'window.WD_ICONS = ' +
+      JSON.stringify(kept) +
+      ';\n'
+    console.log(
+      `  图标裁剪: ${Object.keys(data).length} → ${Object.keys(kept).length} 个` +
+        ` (${(raw.length / 1024).toFixed(0)}KB → ${(payload.length / 1024).toFixed(0)}KB)`,
+    )
+    return payload
+  } catch {
+    return null
+  }
+}
+
 function buildHTML() {
   let html = fs.readFileSync(path.join(ROOT, HTML_FILE), 'utf8')
   html = html.replace('</head>', '  <link rel="stylesheet" href="/assets/app.css?v=__BUILD__" />\n  </head>')
   html = html.replace(/src="[^"]*main\.ts"/, 'src="/assets/app.js?v=__BUILD__"')
+
+  // 图标数据：WdIcon 的回退路径依赖 window.WD_ICONS（非 Vite 环境没有 import.meta.glob）
+  // —— 必须在 app.js 之前同步加载，否则首屏图标为空
+  // 同时按源码实际引用裁剪，避免把 595 个图标（约 1.5MB）整包下发
+  const iconsSrc = path.join(PKG, 'wdesign-icons', 'icons.data.js')
+  if (fs.existsSync(iconsSrc)) {
+    fs.mkdirSync(path.join(DIST, 'assets'), { recursive: true })
+    const out = path.join(DIST, 'assets', 'icons.data.js')
+    const trimmed = trimIconsData(iconsSrc)
+    if (trimmed != null) {
+      fs.writeFileSync(out, trimmed)
+    } else {
+      fs.copyFileSync(iconsSrc, out) // 裁剪失败时退回全量，保证正确性
+    }
+    html = html.replace(
+      /<script type="module"/,
+      '<script src="/assets/icons.data.js?v=__BUILD__"></script>\n    <script type="module"',
+    )
+  }
+
   html = html.replace(/__BUILD__/g, buildId)
   fs.writeFileSync(path.join(DIST, 'index.html'), html)
 }
