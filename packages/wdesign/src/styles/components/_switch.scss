@@ -1,0 +1,44 @@
+// Soft Bento · Red — Switch
+.wd-switch {
+  position: relative;
+  width: 54px;
+  height: 33px;
+  flex: none;
+  padding: 0;
+  border: 0;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
+  cursor: pointer;
+  transition: background var(--wd-dur) ease;
+}
+.wd-switch:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+.wd-switch--off { background: var(--wd-ink-3); }
+
+.wd-switch__knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 27px;
+  height: 27px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(25,27,31,.10);
+  transition: transform var(--wd-dur) ease;
+  transform: translateX(21px);
+}
+.wd-switch--off .wd-switch__knob { transform: translateX(0); }
+/* ---- 微交互（精致版）---- */
+.wd-switch__knob { transition: transform var(--wd-dur) var(--wd-ease-spring); }
+.wd-switch:not(.wd-switch--off):hover { box-shadow: 0 0 0 4px var(--wd-tint-2); }
+.wd-switch--off:hover { box-shadow: 0 0 0 4px var(--wd-ring-soft); }
+/* toggle 后外环脉冲 —— 通过两个不同名的动画随类切换重新触发 */
+.wd-switch::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  pointer-events: none;
+}
+.wd-switch:not(.wd-switch--off)::after { animation: wd-switch-ring-on var(--wd-dur-slow) var(--wd-ease-out); }
+.wd-switch--off::after { animation: wd-switch-ring-off var(--wd-dur-slow) var(--wd-ease-out); }
+

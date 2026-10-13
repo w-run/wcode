@@ -220,8 +220,8 @@ onMounted(async () => {
 .pull-detail-page {
   display: flex;
   flex-direction: column;
-  gap: $space-6;
-  padding: $space-6;
+  gap: var(--wd-space-6);
+  padding: var(--wd-space-6);
   max-width: 900px;
   margin: 0 auto;
 }
@@ -232,14 +232,14 @@ onMounted(async () => {
     align-items: flex-start;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: $space-4;
+    gap: var(--wd-space-4);
   }
 
   &__titlebar {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: var(--wd-space-3);
     min-width: 0;
   }
 
@@ -248,12 +248,12 @@ onMounted(async () => {
     font-size: 1.25rem;
     font-weight: 700;
     line-height: 1.4;
-    color: $color-text;
+    color: var(--wd-ink);
     word-break: break-word;
   }
 
   &__number {
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     font-weight: 500;
   }
 
@@ -261,66 +261,66 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__merge-done {
     font-size: 0.875rem;
     font-weight: 600;
-    color: $color-success;
+    color: var(--wd-success);
   }
 
   &__merge-error,
   &__comment-error {
     font-size: 0.8125rem;
-    color: $color-danger;
+    color: var(--wd-danger);
   }
 
   &__branches {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-3;
-    padding: $space-4;
-    background: $color-surface;
-    border-radius: $radius-lg;
-    box-shadow: $shadow-sm;
+    gap: var(--wd-space-3);
+    padding: var(--wd-space-4);
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-lg);
+    box-shadow: var(--wd-shadow-sm);
   }
 
   &__author {
     display: inline-flex;
     align-items: center;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     margin-left: auto;
     font-size: 0.8125rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &__card {
-    background: $color-surface;
-    border-radius: $radius-lg;
-    box-shadow: $shadow-sm;
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-lg);
+    box-shadow: var(--wd-shadow-sm);
   }
 
   &__body {
-    padding: $space-6;
+    padding: var(--wd-space-6);
     font-size: 0.875rem;
     line-height: 1.7;
-    color: $color-text;
+    color: var(--wd-ink);
     overflow-wrap: break-word;
   }
 
   &__comments {
     display: flex;
     flex-direction: column;
-    gap: $space-4;
+    gap: var(--wd-space-4);
   }
 
   &__section-title {
     margin: 0;
     font-size: 0.875rem;
     font-weight: 700;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__comment-list {
@@ -329,43 +329,43 @@ onMounted(async () => {
     list-style: none;
     display: flex;
     flex-direction: column;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__comments-empty {
-    padding: $space-4;
+    padding: var(--wd-space-4);
   }
 
   &__add-comment {
     display: flex;
     flex-direction: column;
-    gap: $space-3;
-    padding: $space-4;
-    background: $color-surface;
-    border-radius: $radius-lg;
-    box-shadow: $shadow-sm;
+    gap: var(--wd-space-3);
+    padding: var(--wd-space-4);
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-lg);
+    box-shadow: var(--wd-shadow-sm);
   }
 
   &__textarea {
     width: 100%;
     box-sizing: border-box;
-    padding: $space-3 $space-4;
+    padding: var(--wd-space-3) var(--wd-space-4);
     border: none;
-    border-radius: $radius-md;
-    background: $color-surface-2;
+    border-radius: var(--wd-radius-md);
+    background: var(--wd-field);
     font-family: inherit;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: $color-text;
+    color: var(--wd-ink);
     resize: vertical;
     outline: none;
 
     &:focus {
-      background: $color-accent-light;
+      background: var(--wd-tint-2);
     }
 
     &::placeholder {
-      color: $color-text-muted;
+      color: var(--wd-ink-2);
     }
   }
 
@@ -378,10 +378,10 @@ onMounted(async () => {
 // 分支胶囊
 .branch-chip {
   padding: 0.25rem 0.875rem;
-  border-radius: $radius-full;
-  background: $color-surface-2;
-  color: $color-text-muted;
-  font-family: $font-mono;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+  font-family: var(--wd-font-mono);
   font-size: 0.75rem;
   max-width: 16rem;
   overflow: hidden;
@@ -389,8 +389,8 @@ onMounted(async () => {
   white-space: nowrap;
 
   &--base {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
   }
 }
 
@@ -398,17 +398,17 @@ onMounted(async () => {
   flex-shrink: 0;
   width: 0.875rem;
   height: 0.875rem;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 // 单条评论
 .comment {
   display: flex;
-  gap: $space-3;
-  padding: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 
   &__main {
     flex: 1;
@@ -418,26 +418,26 @@ onMounted(async () => {
   &__head {
     display: flex;
     align-items: baseline;
-    gap: $space-3;
-    margin-bottom: $space-2;
+    gap: var(--wd-space-3);
+    margin-bottom: var(--wd-space-2);
   }
 
   &__author {
     font-size: 0.8125rem;
     font-weight: 600;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__time {
     font-size: 0.75rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &__body {
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: $color-text;
+    color: var(--wd-ink);
     overflow-wrap: break-word;
     white-space: pre-wrap;
   }
@@ -449,11 +449,11 @@ onMounted(async () => {
   h2,
   h3,
   h4 {
-    margin: $space-6 0 $space-3;
+    margin: var(--wd-space-6) 0 var(--wd-space-3);
     font-weight: 600;
-    color: $color-text;
-    border-bottom: 1px solid $color-surface-2;
-    padding-bottom: $space-2;
+    color: var(--wd-ink);
+    border-bottom: 1px solid var(--wd-field);
+    padding-bottom: var(--wd-space-2);
   }
 
   h1 {
@@ -467,11 +467,11 @@ onMounted(async () => {
   }
 
   p {
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
   }
 
   a {
-    color: $color-accent;
+    color: var(--wd-red);
     text-decoration: none;
 
     &:hover {
@@ -481,67 +481,67 @@ onMounted(async () => {
 
   ul,
   ol {
-    margin: 0 0 $space-4;
-    padding-left: $space-6;
+    margin: 0 0 var(--wd-space-4);
+    padding-left: var(--wd-space-6);
   }
 
   li {
-    margin-bottom: $space-1;
+    margin-bottom: var(--wd-space-1);
   }
 
   pre {
-    padding: $space-4;
-    background: $color-surface-2;
-    border-radius: $radius-md;
+    padding: var(--wd-space-4);
+    background: var(--wd-field);
+    border-radius: var(--wd-radius-md);
     overflow-x: auto;
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
   }
 
   code.inline-code {
     padding: 0.125rem 0.375rem;
-    background: $color-surface-2;
-    border-radius: $radius-sm;
-    font-family: $font-mono;
+    background: var(--wd-field);
+    border-radius: var(--wd-radius-sm);
+    font-family: var(--wd-font-mono);
     font-size: 0.8125rem;
-    color: $color-accent;
+    color: var(--wd-red);
   }
 
   blockquote {
-    margin: 0 0 $space-4;
-    padding: $space-3 $space-4;
-    border-left: 3px solid $color-accent;
-    background: $color-accent-light;
-    border-radius: 0 $radius-md $radius-md 0;
-    color: $color-text-muted;
+    margin: 0 0 var(--wd-space-4);
+    padding: var(--wd-space-3) var(--wd-space-4);
+    border-left: 3px solid var(--wd-red);
+    background: var(--wd-tint-2);
+    border-radius: 0 var(--wd-radius-md) var(--wd-radius-md) 0;
+    color: var(--wd-ink-2);
   }
 
   table {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
     font-size: 0.8125rem;
   }
 
   th,
   td {
-    padding: $space-2 $space-3;
+    padding: var(--wd-space-2) var(--wd-space-3);
     text-align: left;
-    border-bottom: 1px solid $color-surface-2;
+    border-bottom: 1px solid var(--wd-field);
   }
 
   th {
     font-weight: 600;
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 
   img {
     max-width: 100%;
     height: auto;
-    border-radius: $radius-md;
+    border-radius: var(--wd-radius-md);
   }
 
   input[type='checkbox'] {
-    margin-right: $space-2;
+    margin-right: var(--wd-space-2);
   }
 }
 </style>

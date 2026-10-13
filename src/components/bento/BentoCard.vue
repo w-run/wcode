@@ -28,22 +28,22 @@ withDefaults(
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  background: $color-surface;
-  box-shadow: $shadow-md;
-  border-radius: $radius-lg;
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow);
+  border-radius: var(--wd-radius-lg);
 
   &__header {
-    padding: $space-6 $space-6 0;
+    padding: var(--wd-space-6) var(--wd-space-6) 0;
   }
 
   &__body {
     flex: 1;
     min-width: 0;
-    padding: $space-6;
+    padding: var(--wd-space-6);
   }
 
   &__footer {
-    padding: 0 $space-6 $space-6;
+    padding: 0 var(--wd-space-6) var(--wd-space-6);
   }
 
   &--flush &__body {

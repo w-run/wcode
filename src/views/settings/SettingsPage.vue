@@ -123,101 +123,101 @@ async function test() {
 }
 
 .settings__head {
-  margin-bottom: $space-6;
+  margin-bottom: var(--wd-space-6);
 }
 
 .settings__title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .settings__desc {
-  margin-top: $space-2;
+  margin-top: var(--wd-space-2);
   font-size: 14px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .card {
-  padding: $space-6;
-  margin-bottom: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-6);
+  margin-bottom: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .card__title {
   font-size: 1rem;
   font-weight: 600;
-  margin-bottom: $space-4;
+  margin-bottom: var(--wd-space-4);
 }
 
 .field-label {
   display: block;
-  margin-bottom: $space-2;
+  margin-bottom: var(--wd-space-2);
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .field {
   width: 100%;
-  padding: $space-2 $space-3;
+  padding: var(--wd-space-2) var(--wd-space-3);
   border: none;
-  border-radius: $radius-md;
-  background: $color-bg;
-  color: $color-text;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-bg);
+  color: var(--wd-ink);
   font-size: 13px;
-  font-family: $font-mono;
+  font-family: var(--wd-font-mono);
 
   &::placeholder {
-    font-family: $font-sans;
-    color: $color-text-muted;
+    font-family: var(--wd-font-family);
+    color: var(--wd-ink-2);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px $color-accent-light;
+    box-shadow: 0 0 0 2px var(--wd-tint-2);
   }
 }
 
 .card__actions {
   display: flex;
-  gap: $space-2;
-  margin-top: $space-4;
+  gap: var(--wd-space-2);
+  margin-top: var(--wd-space-4);
 }
 
 .btn {
-  padding: $space-2 $space-4;
+  padding: var(--wd-space-2) var(--wd-space-4);
   border: none;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   font-size: 13px;
   cursor: pointer;
 
   &--primary {
-    background: $color-accent;
+    background: var(--wd-red);
     color: #fff;
 
     &:hover {
-      background: $color-accent-hover;
+      background: var(--wd-red-hover);
     }
   }
 
   &--secondary {
-    background: $color-surface-2;
-    color: $color-text;
+    background: var(--wd-field);
+    color: var(--wd-ink);
 
     &:hover {
-      background: $color-accent-light;
-      color: $color-accent;
+      background: var(--wd-tint-2);
+      color: var(--wd-red);
     }
   }
 
   &--ghost {
     background: transparent;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
 
     &:hover {
-      color: $color-danger;
+      color: var(--wd-danger);
     }
   }
 
@@ -228,48 +228,48 @@ async function test() {
 }
 
 .test-result {
-  margin-top: $space-4;
-  padding: $space-2 $space-3;
-  border-radius: $radius-md;
+  margin-top: var(--wd-space-4);
+  padding: var(--wd-space-2) var(--wd-space-3);
+  border-radius: var(--wd-radius-md);
   font-size: 13px;
 
   &--ok {
-    background: $color-success-light;
-    color: $color-success;
+    background: var(--wd-success-soft);
+    color: var(--wd-success);
   }
 
   &--err {
-    background: $color-danger-light;
-    color: $color-danger;
+    background: var(--wd-tint-2);
+    color: var(--wd-danger);
   }
 }
 
 .guide {
-  padding-left: $space-6;
+  padding-left: var(--wd-space-6);
   margin: 0;
   font-size: 13.5px;
-  color: $color-text;
+  color: var(--wd-ink);
   line-height: 1.9;
 
   code {
     padding: 1px 6px;
     border-radius: 6px;
-    background: $color-surface-2;
-    font-family: $font-mono;
+    background: var(--wd-field);
+    font-family: var(--wd-font-mono);
     font-size: 0.9em;
   }
 }
 
 .note {
-  margin-top: $space-4;
+  margin-top: var(--wd-space-4);
   font-size: 12.5px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 
   code {
     padding: 1px 6px;
     border-radius: 6px;
-    background: $color-surface-2;
-    font-family: $font-mono;
+    background: var(--wd-field);
+    font-family: var(--wd-font-mono);
     font-size: 0.9em;
   }
 }

@@ -108,8 +108,8 @@ onMounted(() => {
 .repo-pulls-page {
   display: flex;
   flex-direction: column;
-  gap: $space-6;
-  padding: $space-6;
+  gap: var(--wd-space-6);
+  padding: var(--wd-space-6);
   max-width: 1280px;
   margin: 0 auto;
 
@@ -118,40 +118,40 @@ onMounted(() => {
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__heading {
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__title {
     margin: 0;
     font-size: 1.25rem;
     font-weight: 700;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__badge {
     padding: 0.25rem 0.75rem;
-    border-radius: $radius-full;
-    background: $color-warning-light;
-    color: $color-warning;
+    border-radius: var(--wd-radius-pill);
+    background: var(--wd-warning-soft);
+    color: var(--wd-warning);
     font-size: 0.75rem;
     font-weight: 500;
   }
 
   &__tabs {
     display: flex;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     flex-wrap: wrap;
   }
 
   &__grid {
     display: grid;
-    gap: $space-4;
+    gap: var(--wd-space-4);
     grid-template-columns: 1fr;
 
     @media (min-width: $bp-tablet) {
@@ -165,23 +165,23 @@ onMounted(() => {
 
   &__skeleton {
     height: 130px;
-    border-radius: $radius-lg;
-    background: $color-surface-2;
+    border-radius: var(--wd-radius-lg);
+    background: var(--wd-field);
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
   }
 }
 
 .tab-btn {
-  padding: $space-2 $space-4;
+  padding: var(--wd-space-2) var(--wd-space-4);
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface;
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  color: var(--wd-ink-2);
   font-family: inherit;
   font-size: 0.875rem;
   font-weight: 500;
   cursor: pointer;
-  box-shadow: $shadow-sm;
+  box-shadow: var(--wd-shadow-sm);
   transition:
     background-color 0.15s ease,
     color 0.15s ease,
@@ -189,17 +189,17 @@ onMounted(() => {
   min-height: 44px;
 
   &:hover {
-    background: $color-surface-2;
-    color: $color-text;
+    background: var(--wd-field);
+    color: var(--wd-ink);
   }
 
   &--active {
-    background: $color-accent;
+    background: var(--wd-red);
     color: #fff;
-    box-shadow: $shadow-accent;
+    box-shadow: var(--wd-shadow-accent);
 
     &:hover {
-      background: $color-accent-hover;
+      background: var(--wd-red-hover);
       color: #fff;
     }
   }

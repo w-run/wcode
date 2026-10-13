@@ -102,24 +102,24 @@ const updatedText = computed(() => formatRelativeTime(props.issue.updated_at))
 <style lang="scss" scoped>
 .issue-card {
   display: block;
-  padding: $space-4 $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-4) var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
   text-decoration: none;
   transition:
     box-shadow 0.2s ease,
     transform 0.2s ease;
 
   &:hover {
-    box-shadow: $shadow-md;
+    box-shadow: var(--wd-shadow);
     transform: translateY(-1px);
   }
 
   &__main {
     display: flex;
     align-items: flex-start;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__state {
@@ -133,11 +133,11 @@ const updatedText = computed(() => formatRelativeTime(props.issue.updated_at))
     }
 
     &.is-open {
-      color: $color-success;
+      color: var(--wd-success);
     }
 
     &.is-closed {
-      color: $color-danger;
+      color: var(--wd-danger);
     }
   }
 
@@ -146,21 +146,21 @@ const updatedText = computed(() => formatRelativeTime(props.issue.updated_at))
     min-width: 0;
     display: flex;
     flex-direction: column;
-    gap: $space-2;
+    gap: var(--wd-space-2);
   }
 
   &__head {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-2;
+    gap: var(--wd-space-2);
   }
 
   &__title {
     min-width: 0;
     font-size: 0.9375rem;
     font-weight: 600;
-    color: $color-text;
+    color: var(--wd-ink);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -169,7 +169,7 @@ const updatedText = computed(() => formatRelativeTime(props.issue.updated_at))
   &__label {
     flex-shrink: 0;
     padding: 0.0625rem 0.5rem;
-    border-radius: $radius-full;
+    border-radius: var(--wd-radius-pill);
     font-size: 0.6875rem;
     font-weight: 600;
     line-height: 1.5;
@@ -179,20 +179,20 @@ const updatedText = computed(() => formatRelativeTime(props.issue.updated_at))
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-3;
-    color: $color-text-muted;
+    gap: var(--wd-space-3);
+    color: var(--wd-ink-2);
     font-size: 0.75rem;
   }
 
   &__number {
-    font-family: $font-mono;
-    color: $color-text-muted;
+    font-family: var(--wd-font-mono);
+    color: var(--wd-ink-2);
   }
 
   &__comments {
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
+    gap: var(--wd-space-1);
 
     .icon {
       width: 0.875rem;

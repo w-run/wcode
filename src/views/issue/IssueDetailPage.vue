@@ -129,14 +129,14 @@ async function submit() {
 .issue__skeleton {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  padding: $space-4;
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-4);
 }
 
 .issue__line {
   height: 16px;
-  border-radius: $radius-sm;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-sm);
+  background: var(--wd-field);
   animation: issue-shimmer 1.5s ease-in-out infinite;
 
   &:nth-child(odd) {
@@ -148,40 +148,40 @@ async function submit() {
 }
 
 .issue__error {
-  padding: $space-8;
-  color: $color-danger;
+  padding: var(--wd-space-8);
+  color: var(--wd-danger);
   text-align: center;
 }
 
 .issue__retry {
-  margin-top: $space-3;
-  padding: $space-2 $space-4;
-  border-radius: $radius-full;
-  background: $color-accent;
+  margin-top: var(--wd-space-3);
+  padding: var(--wd-space-2) var(--wd-space-4);
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
 }
 
 .issue__head {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  margin-bottom: $space-4;
+  gap: var(--wd-space-3);
+  margin-bottom: var(--wd-space-4);
 }
 
 .issue__title {
   font-size: 1.5rem;
   font-weight: 700;
-  color: $color-text;
+  color: var(--wd-ink);
   line-height: 1.3;
 }
 
 .issue__meta {
   display: flex;
   align-items: center;
-  gap: $space-2;
-  margin-bottom: $space-4;
+  gap: var(--wd-space-2);
+  margin-bottom: var(--wd-space-4);
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .issue__author {
@@ -190,68 +190,68 @@ async function submit() {
 
 .issue__labels {
   display: flex;
-  gap: $space-1;
+  gap: var(--wd-space-1);
 }
 
 .issue__body {
-  padding: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  color: $color-text;
+  padding: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  color: var(--wd-ink);
   line-height: 1.7;
   white-space: pre-wrap;
-  box-shadow: $shadow-sm;
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .issue__comments {
-  margin-top: $space-6;
+  margin-top: var(--wd-space-6);
 }
 
 .issue__sub {
   font-size: 1rem;
   font-weight: 600;
-  color: $color-text;
-  margin-bottom: $space-4;
+  color: var(--wd-ink);
+  margin-bottom: var(--wd-space-4);
 }
 
 .issue__comment-skel {
   display: block;
   height: 60px;
-  margin-bottom: $space-3;
-  border-radius: $radius-md;
-  background: $color-surface-2;
+  margin-bottom: var(--wd-space-3);
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-field);
   animation: issue-shimmer 1.5s ease-in-out infinite;
 }
 
 .comment-list {
   padding: 0;
-  margin: 0 0 $space-4;
+  margin: 0 0 var(--wd-space-4);
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 }
 
 .comment {
   display: flex;
-  gap: $space-3;
+  gap: var(--wd-space-3);
   align-items: flex-start;
 }
 
 .comment__body {
   flex: 1;
-  padding: $space-3;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-3);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .comment__meta {
   display: flex;
-  gap: $space-2;
-  margin-bottom: $space-2;
+  gap: var(--wd-space-2);
+  margin-bottom: var(--wd-space-2);
   font-size: 12.5px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .comment__author {
@@ -259,7 +259,7 @@ async function submit() {
 }
 
 .comment__text {
-  color: $color-text;
+  color: var(--wd-ink);
   line-height: 1.6;
   white-space: pre-wrap;
 }
@@ -267,42 +267,42 @@ async function submit() {
 .issue__reply {
   display: flex;
   flex-direction: column;
-  gap: $space-2;
+  gap: var(--wd-space-2);
 }
 
 .issue__textarea {
-  padding: $space-3;
+  padding: var(--wd-space-3);
   border: none;
-  border-radius: $radius-md;
-  background: $color-surface;
-  color: $color-text;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-card);
+  color: var(--wd-ink);
   font: inherit;
   resize: vertical;
-  box-shadow: $shadow-sm;
+  box-shadow: var(--wd-shadow-sm);
 
   &::placeholder {
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px $color-accent-light;
+    box-shadow: 0 0 0 2px var(--wd-tint-2);
   }
 }
 
 .issue__submit {
   align-self: flex-end;
-  padding: $space-2 $space-4;
+  padding: var(--wd-space-2) var(--wd-space-4);
   border: none;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
   font-size: 13px;
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover:not(:disabled) {
-    background: $color-accent-hover;
+    background: var(--wd-red-hover);
   }
 
   &:disabled {

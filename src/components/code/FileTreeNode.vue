@@ -130,26 +130,26 @@ async function toggle() {
   height: 30px;
   padding-right: 8px;
   border: none;
-  border-radius: $radius-sm;
+  border-radius: var(--wd-radius-sm);
   background: transparent;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   font-size: 13px;
   line-height: 1;
   cursor: pointer;
   text-align: left;
   white-space: nowrap;
   transition:
-    background $transition-fast,
-    color $transition-fast;
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
-    color: $color-text;
+    background: var(--wd-field);
+    color: var(--wd-ink);
   }
 
   &--active {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
     font-weight: 500;
   }
 }
@@ -158,7 +158,7 @@ async function toggle() {
   flex-shrink: 0;
   width: 14px;
   height: 14px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   transform: rotate(-90deg);
   transition: transform 0.15s ease;
 
@@ -172,7 +172,7 @@ async function toggle() {
   width: 14px;
   height: 14px;
   margin-left: 14px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .tree-spinner {
@@ -180,9 +180,9 @@ async function toggle() {
   width: 10px;
   height: 10px;
   margin-left: 14px;
-  border: 1.5px solid $color-text-muted;
+  border: 1.5px solid var(--wd-ink-2);
   border-top-color: transparent;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   animation: tree-spin 0.7s linear infinite;
 }
 

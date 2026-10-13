@@ -1,0 +1,36 @@
+// Soft Bento · Red — Tag
+.wd-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 28px;
+  padding: 0 14px;
+  border-radius: var(--wd-radius-pill);
+  font-size: 13.5px;
+  font-weight: 600;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+.wd-tag--lg { height: 36px; padding: 0 20px; font-size: var(--wd-font-size-md); }
+.wd-tag--sm { height: 22px; padding: 0 10px; font-size: var(--wd-font-size-sm); }
+.wd-tag--tint { background: var(--wd-tint-2); color: var(--wd-red-active); }
+.wd-tag--gray { background: var(--wd-field); color: var(--wd-ink-2); }
+.wd-tag--dark { background: var(--wd-dark); color: var(--wd-dark-text); }
+.wd-tag:active { transform: scale(.96); }
+
+.wd-tag__dot {
+  width: 7px;
+  height: 7px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--wd-red);
+}
+.wd-tag__dot--success { background: var(--wd-success); }
+.wd-tag__dot--warning { background: var(--wd-warning); }
+.wd-tag__dot--gray { background: var(--wd-ink-3); }
+/* ---- 微交互（精致版）---- */
+.wd-tag { transition: background var(--wd-dur-fast) var(--wd-ease-out), color var(--wd-dur-fast) var(--wd-ease-out); }
+.wd-tag--tint:hover { background: var(--wd-tint-3); }
+.wd-tag--gray:hover { background: var(--wd-field-hover); }
+.wd-tag--dark:hover { background: var(--wd-dark-2); }
+

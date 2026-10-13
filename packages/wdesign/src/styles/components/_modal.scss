@@ -1,0 +1,57 @@
+// WDesign — Modal（对话框 · 实色遮罩，非毛玻璃）
+.wd-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.wd-modal__mask {
+  position: absolute;
+  inset: 0;
+  background: var(--wd-mask);
+}
+
+.wd-modal__panel {
+  position: relative;
+  width: 100%;
+  max-width: 440px;
+  padding: 26px 26px 24px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-xl);
+  box-shadow: var(--wd-shadow-lg);
+  animation: wd-modal-in var(--wd-dur-slow) ease;
+}
+@keyframes wd-modal-in {
+  from { opacity: 0; transform: translateY(14px) scale(.98); }
+}
+
+.wd-modal-fade-enter-active,
+.wd-modal-fade-leave-active { transition: opacity var(--wd-dur) ease; }
+.wd-modal-fade-enter-from,
+.wd-modal-fade-leave-to { opacity: 0; }
+
+.wd-modal__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.wd-modal__title { font-size: 18px; font-weight: 800; letter-spacing: -.01em; }
+
+
+.wd-modal__body { font-size: 14.5px; color: var(--wd-ink-2); line-height: 1.65; }
+
+.wd-modal__foot {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 24px;
+}
+/* ---- 微交互（精致版）---- */
+.wd-modal-fade-enter-active .wd-modal__panel { animation: wd-settle var(--wd-dur-slow) var(--wd-ease-out) both; }
+

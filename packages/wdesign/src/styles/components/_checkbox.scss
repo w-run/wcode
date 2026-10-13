@@ -1,0 +1,56 @@
+// WDesign — Checkbox
+.wd-checkbox {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--wd-ink);
+  user-select: none;
+}
+.wd-checkbox:focus-visible { outline: none; }
+.wd-checkbox:focus-visible .wd-checkbox__box { box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+
+.wd-checkbox__box {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--wd-field);
+  color: transparent;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease;
+}
+.wd-checkbox:hover .wd-checkbox__box { background: var(--wd-tint-1); }
+
+.wd-checkbox--checked .wd-checkbox__box { background: var(--wd-red); color: #fff; }
+.wd-checkbox--checked:hover .wd-checkbox__box { background: var(--wd-red-hover); }
+
+.wd-checkbox__label { line-height: 1.4; }
+.wd-checkbox--disabled { cursor: default; color: var(--wd-ink-3); }
+.wd-checkbox--disabled:hover .wd-checkbox__box { background: var(--wd-field); }
+.wd-checkbox--checked.wd-checkbox--disabled .wd-checkbox__box { background: var(--wd-tint-3); color: #fff; }
+/* ---- 微交互（精致版）---- */
+.wd-checkbox__box svg path {
+  stroke-dasharray: 26;
+  stroke-dashoffset: 26;
+}
+.wd-checkbox--checked .wd-checkbox__box svg path {
+  stroke-dashoffset: 0;
+  transition: stroke-dashoffset var(--wd-dur-slow) var(--wd-ease-out);
+}
+/* 选中瞬间：盒子轻微弹一下（红底回弹） */
+.wd-checkbox--checked .wd-checkbox__box {
+  animation: wd-check-pop var(--wd-dur-slow) var(--wd-ease-spring);
+}
+/* 取消选中：盒底色回落 */
+.wd-checkbox .wd-checkbox__box {
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease, transform var(--wd-dur) var(--wd-ease-out);
+}
+

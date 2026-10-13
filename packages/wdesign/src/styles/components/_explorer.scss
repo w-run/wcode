@@ -1,0 +1,195 @@
+// WDesign — Explorer（资源管理器 · 详情 / 图标 双视图）
+.wd-explorer {
+  display: grid;
+  grid-template-columns: 196px 1fr;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow);
+  overflow: hidden;
+}
+
+.wd-explorer__side {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  padding: 16px 12px;
+  background: var(--wd-bg);
+}
+.wd-explorer__side-title {
+  padding: 4px 10px 8px;
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  color: var(--wd-ink-3);
+}
+.wd-explorer__folder {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 12px;
+  min-height: 40px;
+  border: 0;
+  border-radius: var(--wd-radius-sm);
+  background: transparent;
+  color: var(--wd-ink-2);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease;
+}
+.wd-explorer__folder:hover { background: var(--wd-tint-1); color: var(--wd-ink); }
+.wd-explorer__folder--active {
+  background: var(--wd-card);
+  color: var(--wd-red-active);
+  box-shadow: var(--wd-shadow-sm);
+}
+.wd-explorer__count {
+  margin-left: auto;
+  font-size: 11px;
+  color: var(--wd-ink-3);
+  font-family: var(--wd-font-mono);
+}
+.wd-explorer__folder--active .wd-explorer__count { color: var(--wd-red-soft); }
+
+.wd-explorer__main { display: flex; flex-direction: column; min-width: 0; padding: 16px 18px 18px; }
+
+.wd-explorer__bar { display: flex; align-items: center; gap: 10px; margin-bottom: 12px; }
+.wd-explorer__path { display: flex; align-items: center; gap: 6px; min-width: 0; font-size: 13px; }
+.wd-explorer__crumb { color: var(--wd-ink-2); cursor: pointer; white-space: nowrap; }
+.wd-explorer__crumb:hover { color: var(--wd-red); }
+.wd-explorer__crumb--cur { color: var(--wd-ink); font-weight: 700; cursor: default; }
+.wd-explorer__sep { color: var(--wd-ink-3); }
+
+.wd-explorer__views {
+  margin-left: auto;
+  display: inline-flex;
+  gap: 4px;
+  padding: 4px;
+  background: var(--wd-field);
+  border-radius: 999px;
+}
+.wd-explorer__view-btn {
+  width: 30px;
+  height: 30px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--wd-ink-3);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease, box-shadow var(--wd-dur-fast) ease;
+}
+.wd-explorer__view-btn:hover { color: var(--wd-ink); }
+.wd-explorer__view-btn--active {
+  background: var(--wd-card);
+  color: var(--wd-red);
+  box-shadow: var(--wd-shadow-sm);
+}
+
+// ---- 详情视图
+.wd-explorer__table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed;
+  font-size: 13.5px;
+}
+.wd-explorer__table thead th {
+  padding: 9px 10px;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: var(--wd-ink-3);
+  text-align: left;
+  background: var(--wd-bg);
+}
+.wd-explorer__table thead th:first-child { border-radius: 10px 0 0 10px; }
+.wd-explorer__table thead th:last-child { border-radius: 0 10px 10px 0; }
+
+.wd-explorer__table tbody td {
+  height: 48px;
+  padding: 6px 10px;
+  vertical-align: middle;
+  border-top: 4px solid transparent;   // 行间留白（视觉分隔，不画线）
+}
+.wd-explorer__table tbody tr { cursor: pointer; transition: background var(--wd-dur-fast) ease; }
+.wd-explorer__table tbody tr:hover { background: var(--wd-tint-1); }
+
+.wd-explorer__table .is-num {
+  text-align: right;
+  font-family: var(--wd-font-mono);
+  font-size: 12.5px;
+  color: var(--wd-ink-2);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.wd-explorer__name { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.wd-explorer__file-chip {
+  width: 30px;
+  height: 30px;
+  flex: none;
+  border-radius: 9px;
+  background: var(--wd-tint-1);
+  color: var(--wd-red-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wd-explorer__file-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+// ---- 图标视图（Windows 式）
+.wd-explorer__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(108px, 1fr));
+  gap: 6px;
+}
+.wd-explorer__tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9px;
+  padding: 16px 8px 12px;
+  border: 0;
+  border-radius: var(--wd-radius-sm);
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  transition: background var(--wd-dur-fast) ease;
+}
+.wd-explorer__tile:hover { background: var(--wd-tint-1); }
+.wd-explorer__tile-icon {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  background: var(--wd-bg);
+  color: var(--wd-red-soft);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease;
+}
+.wd-explorer__tile:hover .wd-explorer__tile-icon { background: var(--wd-card); color: var(--wd-red); }
+.wd-explorer__tile-name {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  word-break: break-all;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.35;
+  text-align: center;
+}
+.wd-explorer__tile-size { font-size: 11px; color: var(--wd-ink-3); font-family: var(--wd-font-mono); }
+
+.wd-explorer__empty { padding: 44px 12px; text-align: center; font-size: 13px; color: var(--wd-ink-2); }
+
+/* 视图切换过渡（详情 ↔ 图标 / 文件夹切换） */
+.wd-fade-enter-active,
+.wd-fade-leave-active { transition: opacity var(--wd-dur) ease, transform var(--wd-dur) ease; }
+.wd-fade-enter-from,
+.wd-fade-leave-to { opacity: 0; transform: translateY(6px); }

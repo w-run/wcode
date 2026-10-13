@@ -1,0 +1,44 @@
+// WDesign — Badge（徽标）
+.wd-badge {
+  position: relative;
+  display: inline-flex;
+}
+
+.wd-badge__dot,
+.wd-badge__count {
+  position: absolute;
+  z-index: 1;
+  top: -4px;
+  right: -6px;
+}
+
+.wd-badge__dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--wd-red);
+  box-shadow: 0 0 0 3px var(--wd-card);
+}
+
+.wd-badge__count {
+  min-width: 19px;
+  height: 19px;
+  padding: 0 6px;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
+  color: #fff;
+  font-size: 11.5px;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 3px var(--wd-card);
+}
+
+.wd-badge--gray .wd-badge__dot,
+.wd-badge--gray .wd-badge__count { background: var(--wd-ink-3); }
+/* ---- 微交互（精致版）---- */
+.wd-badge__dot,
+.wd-badge__count { animation: wd-bloom var(--wd-dur) var(--wd-ease-out) both; }
+

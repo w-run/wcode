@@ -1,0 +1,17 @@
+// WDesign — Dot（状态圆点 · 原子基础件）
+// 被 Alert / Toast / Notification 复用
+.wd-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  flex: none;
+  border-radius: 50%;
+  background: currentColor;
+  color: var(--wd-ink-2);
+}
+.wd-dot--lg { width: 10px; height: 10px; }
+
+.wd-dot--info { color: var(--wd-ink-2); }
+.wd-dot--success { color: var(--wd-success); }
+.wd-dot--warning { color: var(--wd-warning); }
+.wd-dot--danger { color: var(--wd-red); }

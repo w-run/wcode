@@ -28,7 +28,7 @@ const sidebarOpen = ref(false)
 
 <style lang="scss" scoped>
 .page-content {
-  padding: $space-4;
+  padding: var(--wd-space-4);
   min-height: calc(100vh - 56px);
 
   // 移动端底部 Tab Bar 占位（内容不被遮挡）

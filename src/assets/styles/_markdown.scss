@@ -8,7 +8,7 @@
 .markdown {
   font-size: 15px;
   line-height: 1.8;
-  color: $color-text;
+  color: var(--wd-ink);
 
   > :first-child {
     margin-top: 0;
@@ -56,26 +56,26 @@
   }
 
   a {
-    color: $color-accent;
+    color: var(--wd-red);
 
     &:hover {
-      color: $color-accent-hover;
+      color: var(--wd-red-hover);
     }
   }
 
   code {
-    font-family: $font-mono;
+    font-family: var(--wd-font-mono);
     font-size: 0.9em;
     padding: 2px 6px;
     border-radius: 6px;
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 
   pre {
     margin: 1em 0;
-    padding: $space-4;
-    border-radius: $radius-lg;
-    background: $color-surface-2;
+    padding: var(--wd-space-4);
+    border-radius: var(--wd-radius-lg);
+    background: var(--wd-field);
     overflow-x: auto;
     font-size: 13px;
     line-height: 1.6;
@@ -88,9 +88,9 @@
 
   blockquote {
     margin: 1em 0;
-    padding: 2px 0 2px $space-4;
-    border-left: 3px solid $color-accent-light;
-    color: $color-text-muted;
+    padding: 2px 0 2px var(--wd-space-4);
+    border-left: 3px solid var(--wd-tint-2);
+    color: var(--wd-ink-2);
   }
 
   table {
@@ -102,16 +102,16 @@
   th,
   td {
     padding: 8px 12px;
-    border: 1px solid $color-surface-2;
+    border: 1px solid var(--wd-field);
   }
 
   th {
-    background: $color-surface-2;
+    background: var(--wd-field);
     font-weight: 600;
   }
 
   img {
     max-width: 100%;
-    border-radius: $radius-md;
+    border-radius: var(--wd-radius-md);
   }
 }

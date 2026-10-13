@@ -1,0 +1,133 @@
+// 分段字体的 unicode-range 映射需要 sass:map
+@use 'sass:map';
+
+// =============================================================
+//  Soft Bento · Red — Fonts（可选 · 可变字体 VF，远程加载）
+//
+//  字体方案：拉丁 Mona Sans + 中文 思源黑体（Source Han Sans SC）
+//  两者均为可变字体（Variable Font）：单文件覆盖 200–900 全字重。
+//
+//  字体文件已从 npm 包中拆出（包体瘦身），部署在
+//    https://box.w-run.net/npm/fonts/            （对应 w-box /workspace/static/npm/fonts/）
+//  可直接使用绝对 CDN 地址，无需本地字体文件。
+//  如需自定义 CDN：import 前重定义 $wd-font-cdn 即可。
+//
+//  用法：
+//   @import 'wdesign/src/styles/tokens';       // 确保用到 $wd-font-cdn
+//   @import 'wdesign/src/styles/fonts';
+//
+//  许可：两个字体均为 SIL OFL 1.1，可免费商用。
+// =============================================================
+
+// 字体 CDN 根（静态托管；可按实际情况覆盖）
+$wd-font-cdn: 'https://box.w-run.net/npm/fonts' !default;
+
+// ---------------------------------------------------------------------------
+// WDesignSans（自托管分段字体 · WIP）
+// 拉丁 / 日文 / 韩文符号 / GB2312 / BIG5 分段 + 4 字重，按 unicode-range 分发。
+// 文件路径可覆盖：$wd-fontsans-path
+//   · WCode  → /fonts/wdesignsans（public/fonts/wdesignsans）
+//   · blog   → /static/font/woff2
+// ---------------------------------------------------------------------------
+$wd-fontsans-path: '/fonts/wdesignsans' !default;
+
+$wd-fontsans-weights: (
+  200: 'Thin',
+  400: 'Regular',
+  700: 'Bold',
+  900: 'Heavy',
+);
+
+// 家族名 → (文件基名, unicode-range)
+$wd-fontsans-subsets: (
+  'WDesignSans Latin': (
+    file: 'WDesignSans-Latin',
+    range: 'U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215',
+  ),
+  'WDesignSans CJK Symbol': (
+    file: 'WDesignSans-CJK_symbol',
+    range: 'U+3000-303F, U+3040-309F, U+30A0-30FF, U+FF00-FFEF',
+  ),
+  'WDesignSans GB2312': (
+    file: 'WDesignSans-GB2312',
+    range: 'U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF, U+30000-3134F',
+  ),
+  'WDesignSans GB2312 Extra': (
+    file: 'WDesignSans-GB2312_extra',
+    range: 'U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF, U+30000-3134F',
+  ),
+  'WDesignSans BIG5': (
+    file: 'WDesignSans-BIG5',
+    range: 'U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF, U+30000-3134F',
+  ),
+  'WDesignSans BIG5 Extra': (
+    file: 'WDesignSans-BIG5_extra',
+    range: 'U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF, U+30000-3134F',
+  ),
+  'WDesignSans JIS': (
+    file: 'WDesignSans-JIS',
+    range: 'U+4E00-9FFF, U+3400-4DBF, U+20000-2A6DF, U+2A700-2B73F, U+2B740-2B81F, U+2B820-2CEAF, U+2CEB0-2EBEF, U+30000-3134F',
+  ),
+);
+
+@each $family, $cfg in $wd-fontsans-subsets {
+  @each $weight, $weight-name in $wd-fontsans-weights {
+    @font-face {
+      font-family: $family;
+      src: url('#{$wd-fontsans-path}/#{map.get($cfg, file)}-#{$weight-name}.woff2') format('woff2');
+      font-weight: $weight;
+      font-style: normal;
+      font-display: swap;
+      unicode-range: map.get($cfg, range);
+    }
+  }
+}
+
+// 语言 → 家族优先顺序（简繁日各自优先对应分区，避免字形串台）
+$wd-fontsans-stack: 'WDesignSans Latin', 'WDesignSans CJK Symbol', 'WDesignSans GB2312',
+  'WDesignSans GB2312 Extra', 'WDesignSans BIG5', 'WDesignSans BIG5 Extra', 'WDesignSans JIS' !default;
+$wd-fontsans-stack-tc: 'WDesignSans Latin', 'WDesignSans CJK Symbol', 'WDesignSans BIG5',
+  'WDesignSans BIG5 Extra', 'WDesignSans GB2312', 'WDesignSans GB2312 Extra', 'WDesignSans JIS' !default;
+$wd-fontsans-stack-ja: 'WDesignSans Latin', 'WDesignSans CJK Symbol', 'WDesignSans JIS',
+  'WDesignSans BIG5', 'WDesignSans BIG5 Extra', 'WDesignSans GB2312', 'WDesignSans GB2312 Extra' !default;
+
+// 按 html[lang] 自动切换（默认简中）
+html,
+html[lang='en'],
+html[lang^='en-'],
+html[lang='zh-CN'],
+html[lang='zh-cn'],
+html[lang='zh'] {
+  font-family: $wd-fontsans-stack;
+}
+html[lang='zh-TW'],
+html[lang='zh-tw'],
+html[lang='zh-HK'],
+html[lang='zh-hk'] {
+  font-family: $wd-fontsans-stack-tc;
+}
+html[lang='ja'],
+html[lang^='ja-'] {
+  font-family: $wd-fontsans-stack-ja;
+}
+
+// 拉丁 · Mona Sans VF（wght 200–900）
+// https://github.com/github/mona-sans
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('#{$wd-font-cdn}/mona-sans-vf.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+// 中文 · 思源黑体 SC VF（wght 200–900）
+// https://github.com/adobe-fonts/source-han-sans ｜ 可用 Noto Sans SC VF 直替
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('#{$wd-font-cdn}/noto-sans-sc-vf.woff2') format('woff2-variations'),
+       url('#{$wd-font-cdn}/noto-sans-sc-vf.ttf') format('truetype-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}

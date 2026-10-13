@@ -85,12 +85,12 @@ watch(
   flex-wrap: wrap;
   align-items: center;
   gap: 4px;
-  margin-bottom: $space-3;
+  margin-bottom: var(--wd-space-3);
   font-size: 13px;
 }
 
 .blob__crumb {
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   text-decoration: none;
 
   & + .blob__crumb::before {
@@ -100,12 +100,12 @@ watch(
   }
 
   &:last-child {
-    color: $color-text;
+    color: var(--wd-ink);
     font-weight: 500;
   }
 
   &:hover {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 }
 
@@ -113,16 +113,16 @@ watch(
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
 }
 
 .blob__line {
   display: block;
   height: 12px;
-  border-radius: $radius-sm;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-sm);
+  background: var(--wd-field);
   animation: blob-shimmer 1.5s ease-in-out infinite;
 }
 
@@ -131,8 +131,8 @@ watch(
 }
 
 .blob__error {
-  padding: $space-8;
-  color: $color-text-muted;
+  padding: var(--wd-space-8);
+  color: var(--wd-ink-2);
   text-align: center;
 }
 

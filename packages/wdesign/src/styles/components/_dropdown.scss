@@ -1,0 +1,48 @@
+// WDesign — Dropdown（下拉菜单）
+.wd-dropdown { position: relative; display: inline-flex; }
+.wd-dropdown__trigger {
+  display: inline-flex;
+  cursor: pointer;
+}
+.wd-dropdown__trigger:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+
+.wd-dropdown__menu {
+  position: absolute;
+  z-index: 50;
+  top: calc(100% + 8px);
+  left: 0;
+  min-width: 180px;
+  padding: 8px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  box-shadow: var(--wd-shadow-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.wd-dropdown__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 14px;
+  border: 0;
+  background: transparent;
+  border-radius: var(--wd-radius-sm);
+  font: inherit;
+  font-size: 14px;
+  color: var(--wd-ink);
+  cursor: pointer;
+  text-align: left;
+}
+.wd-dropdown__item:hover { background: var(--wd-bg); }
+.wd-dropdown__item--danger { color: var(--wd-red-active); }
+.wd-dropdown__item--danger:hover { background: var(--wd-tint-1); }
+.wd-dropdown__item--disabled { color: var(--wd-ink-3); pointer-events: none; }
+
+.wd-dropdown-pop-enter-active { transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease; }
+.wd-dropdown-pop-enter-from, .wd-dropdown-pop-leave-to { opacity: 0; transform: translateY(-4px); }
+.wd-dropdown-pop-leave-active { transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease; }
+/* ---- 微交互（精致版）---- */
+.wd-dropdown__menu { animation: wd-settle var(--wd-dur-fast) var(--wd-ease-out) both; }
+

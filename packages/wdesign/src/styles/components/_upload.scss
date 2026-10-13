@@ -1,0 +1,85 @@
+// WDesign — Upload（文件上传 · 拖拽区）
+.wd-upload {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.wd-upload__zone {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 32px 24px;
+  border: 2px dashed var(--wd-field);
+  border-radius: var(--wd-radius-lg);
+  background: var(--wd-bg);
+  cursor: pointer;
+  transition: border-color var(--wd-dur-fast) ease, background var(--wd-dur-fast) ease;
+  text-align: center;
+}
+.wd-upload__zone:hover,
+.wd-upload__zone--over {
+  border-color: var(--wd-red-soft);
+  background: var(--wd-tint-1);
+}
+.wd-upload__zone--over { animation: wd-upload-pulse .6s ease; }
+@keyframes wd-upload-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.012); }
+}
+
+.wd-upload__icon { color: var(--wd-ink-3); }
+.wd-upload__hint { font-size: 13.5px; color: var(--wd-ink-2); }
+.wd-upload__hint strong { color: var(--wd-red); font-weight: 700; }
+.wd-upload__browse { font-size: 13px; color: var(--wd-red); font-weight: 600; }
+.wd-upload__input { display: none; }
+
+.wd-upload__list { display: flex; flex-direction: column; gap: 8px; }
+
+.wd-upload__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 14px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-sm);
+  box-shadow: var(--wd-shadow);
+}
+.wd-upload__file-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+}
+.wd-upload__info { flex: 1; min-width: 0; }
+.wd-upload__name { font-size: 13.5px; font-weight: 600; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.wd-upload__meta { font-size: 11.5px; color: var(--wd-ink-2); margin-top: 2px; }
+.wd-upload__remove {
+  width: 28px;
+  height: 28px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--wd-ink-3);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease;
+}
+.wd-upload__remove:hover { background: var(--wd-tint-2); color: var(--wd-red); }
+
+.wd-upload__progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--wd-field);
+  margin-top: 4px;
+  overflow: hidden;
+}
+.wd-upload__progress-bar { height: 100%; border-radius: 999px; background: var(--wd-red); transition: width var(--wd-dur) ease; }

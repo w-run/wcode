@@ -1,0 +1,33 @@
+// WDesign — Alert（色块提示 · 圆点图标 · 无边框）
+.wd-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 16px 18px;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-field);
+  color: var(--wd-ink);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.wd-alert__icon { flex: none; margin-top: 5px; }
+
+.wd-alert__body { flex: 1; min-width: 0; }
+.wd-alert__title { font-weight: 700; font-size: 14.5px; }
+.wd-alert__desc { color: var(--wd-ink-2); margin-top: 2px; }
+
+.wd-alert__close {
+  flex: none;
+  border: 0;
+  background: transparent;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--wd-ink-3);
+  line-height: 0;
+}
+.wd-alert__close:hover { color: var(--wd-ink); }
+
+.wd-alert--success { background: var(--wd-success-soft); }
+.wd-alert--warning { background: var(--wd-warning-soft); }
+.wd-alert--danger { background: var(--wd-tint-2); }

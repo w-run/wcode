@@ -1,0 +1,71 @@
+// WDesign — Select
+.wd-select { position: relative; display: inline-block; min-width: 200px; }
+
+.wd-select__trigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+  height: 44px;
+  padding: 0 20px;
+  border: 0;
+  cursor: pointer;
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-pill);
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--wd-ink);
+  transition: background var(--wd-dur-fast) ease, box-shadow var(--wd-dur-fast) ease;
+}
+.wd-select__trigger--lg { height: 54px; padding: 0 26px; font-size: var(--wd-font-size-lg); }
+.wd-select__trigger--sm { height: 34px; padding: 0 12px; font-size: var(--wd-font-size-sm); }
+.wd-select__trigger:hover { background: var(--wd-field-hover); }
+.wd-select__trigger:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+.wd-select--open .wd-select__trigger { box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+
+.wd-select__placeholder { color: var(--wd-ink-3); }
+
+.wd-select--disabled { opacity: .6; pointer-events: none; }
+
+.wd-select__menu {
+  position: absolute;
+  z-index: 40;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  padding: 8px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  box-shadow: var(--wd-shadow-hover);
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  max-height: 264px;
+  overflow: auto;
+}
+.wd-select__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 11px 14px;
+  border: 0;
+  background: transparent;
+  border-radius: var(--wd-radius-sm);
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--wd-ink);
+  cursor: pointer;
+  text-align: left;
+}
+.wd-select__option:hover { background: var(--wd-field); }
+.wd-select__option--active { background: var(--wd-tint-2); color: var(--wd-red-active); font-weight: 600; }
+.wd-select__option-mark { flex: none; color: var(--wd-red); }
+
+.wd-select-pop-enter-active { transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease; }
+.wd-select-pop-enter-from, .wd-select-pop-leave-to { opacity: 0; transform: translateY(-4px); }
+.wd-select-pop-leave-active { transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease; }
+/* ---- 微交互（精致版）---- */
+.wd-select__menu { animation: wd-settle var(--wd-dur-fast) var(--wd-ease-out) both; }
+

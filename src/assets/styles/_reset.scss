@@ -19,21 +19,21 @@ html {
 
 body {
   min-height: 100vh;
-  font-family: $font-sans;
+  font-family: var(--wd-font-family);
   font-size: 16px;
   line-height: 1.6;
-  color: $color-text;
-  background: $color-bg;
+  color: var(--wd-ink);
+  background: var(--wd-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 a {
-  color: $color-accent;
+  color: var(--wd-red);
   text-decoration: none;
 
   &:hover {
-    color: $color-accent-hover;
+    color: var(--wd-red-hover);
   }
 }
 
@@ -60,7 +60,7 @@ svg {
 
 code,
 pre {
-  font-family: $font-mono;
+  font-family: var(--wd-font-mono);
 }
 
 ul,

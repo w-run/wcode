@@ -242,60 +242,60 @@ onMounted(load)
 }
 
 .mirror__head {
-  margin-bottom: $space-6;
+  margin-bottom: var(--wd-space-6);
 }
 
 .mirror__title {
   font-size: 1.5rem;
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .mirror__desc {
-  margin-top: $space-2;
-  color: $color-text-muted;
+  margin-top: var(--wd-space-2);
+  color: var(--wd-ink-2);
   font-size: 14px;
 }
 
 .mirror__banner {
-  padding: $space-2 $space-4;
-  margin-bottom: $space-4;
-  border-radius: $radius-md;
-  background: $color-warning-light;
-  color: $color-warning;
+  padding: var(--wd-space-2) var(--wd-space-4);
+  margin-bottom: var(--wd-space-4);
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-warning-soft);
+  color: var(--wd-warning);
   font-size: 13px;
 }
 
 .mirror__group-title {
-  margin: 0 0 $space-2 $space-2;
+  margin: 0 0 var(--wd-space-2) var(--wd-space-2);
   font-size: 13px;
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .mirror__list {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  margin-bottom: $space-8;
+  gap: var(--wd-space-3);
+  margin-bottom: var(--wd-space-8);
 }
 
 .mirror__skeleton {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
+  gap: var(--wd-space-3);
 }
 
 .mirror__skel {
   height: 64px;
-  border-radius: $radius-lg;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-lg);
+  background: var(--wd-field);
   animation: mirror-shimmer 1.5s ease-in-out infinite;
 }
 
 .mirror__empty {
-  padding: $space-8;
-  color: $color-text-muted;
+  padding: var(--wd-space-8);
+  color: var(--wd-ink-2);
   text-align: center;
   font-size: 14px;
 }
@@ -303,17 +303,17 @@ onMounted(load)
 .mirror-card {
   display: flex;
   align-items: center;
-  gap: $space-4;
-  padding: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  gap: var(--wd-space-4);
+  padding: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .mirror-card__main {
   display: flex;
   align-items: center;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   flex: 1;
   min-width: 0;
 }
@@ -321,18 +321,18 @@ onMounted(load)
 .mirror-card__badge {
   flex-shrink: 0;
   padding: 2px 10px;
-  border-radius: $radius-full;
-  background: $color-accent-light;
-  color: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
   font-size: 12px;
 }
 
 .mirror-card__dual {
   flex-shrink: 0;
   padding: 2px 10px;
-  border-radius: $radius-full;
-  background: $color-warning-light;
-  color: $color-warning;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-warning-soft);
+  color: var(--wd-warning);
   font-size: 12px;
 }
 
@@ -341,14 +341,14 @@ onMounted(load)
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 13px;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .mirror-card__meta {
   display: flex;
-  gap: $space-3;
+  gap: var(--wd-space-3);
   font-size: 12px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 
   @include media-down($bp-desktop) {
     display: none;
@@ -359,15 +359,15 @@ onMounted(load)
   flex-shrink: 0;
   padding: 6px 14px;
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface-2;
-  color: $color-text;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
+  color: var(--wd-ink);
   font-size: 12.5px;
   cursor: pointer;
 
   &:hover:not(:disabled) {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
   }
 
   &:disabled {
@@ -376,68 +376,68 @@ onMounted(load)
 }
 
 .mirror__form {
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .mirror__subtitle {
   font-size: 1rem;
   font-weight: 600;
-  color: $color-text;
-  margin-bottom: $space-4;
+  color: var(--wd-ink);
+  margin-bottom: var(--wd-space-4);
 }
 
 .segmented {
   display: inline-flex;
   gap: 4px;
   padding: 3px;
-  margin-bottom: $space-3;
-  background: $color-surface-2;
-  border-radius: $radius-full;
+  margin-bottom: var(--wd-space-3);
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-pill);
 }
 
 .segmented__item {
   padding: 6px 16px;
   border: none;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   background: transparent;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   font-size: 13px;
   cursor: pointer;
 
   &--active {
-    background: $color-surface;
-    color: $color-accent;
+    background: var(--wd-card);
+    color: var(--wd-red);
     font-weight: 500;
   }
 }
 
 .field {
   width: 100%;
-  padding: $space-2 $space-3;
+  padding: var(--wd-space-2) var(--wd-space-3);
   border: none;
-  border-radius: $radius-md;
-  background: $color-bg;
-  color: $color-text;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-bg);
+  color: var(--wd-ink);
   font-size: 13px;
 
   &::placeholder {
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 0 2px $color-accent-light;
+    box-shadow: 0 0 0 2px var(--wd-tint-2);
   }
 }
 
 .field-row {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: $space-3;
-  margin-top: $space-3;
+  gap: var(--wd-space-3);
+  margin-top: var(--wd-space-3);
 
   @include media-down($bp-tablet) {
     grid-template-columns: 1fr;
@@ -445,17 +445,17 @@ onMounted(load)
 }
 
 .mirror__submit {
-  margin-top: $space-4;
-  padding: $space-2 $space-6;
+  margin-top: var(--wd-space-4);
+  padding: var(--wd-space-2) var(--wd-space-6);
   border: none;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
   font-size: 13px;
   cursor: pointer;
 
   &:hover:not(:disabled) {
-    background: $color-accent-hover;
+    background: var(--wd-red-hover);
   }
 
   &:disabled {
@@ -465,11 +465,11 @@ onMounted(load)
 }
 
 .mirror__guide {
-  margin-top: $space-4;
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  margin-top: var(--wd-space-4);
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .guide-list {
@@ -478,9 +478,9 @@ onMounted(load)
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   font-size: 13.5px;
-  color: $color-text;
+  color: var(--wd-ink);
 
   strong {
     font-weight: 600;
@@ -489,20 +489,20 @@ onMounted(load)
   code {
     padding: 1px 6px;
     border-radius: 6px;
-    background: $color-surface-2;
-    font-family: $font-mono;
+    background: var(--wd-field);
+    font-family: var(--wd-font-mono);
     font-size: 0.9em;
   }
 }
 
 .mirror__note {
-  margin-top: $space-6;
+  margin-top: var(--wd-space-6);
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   line-height: 1.7;
 
   strong {
-    color: $color-text;
+    color: var(--wd-ink);
   }
 }
 

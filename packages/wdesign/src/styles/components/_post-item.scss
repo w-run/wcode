@@ -1,0 +1,83 @@
+// =============================================================
+//  WDesign — Post Item（文章条目）
+//  反向迭代（源：w-run/blog 的文章列表项）
+//  标题 + 摘要 + 标签的纵向排版；无日期（刻意）
+// =============================================================
+.wd-post-item {
+  position: relative;
+  display: block;
+  padding: 1.55rem 0;
+  transition:
+    transform var(--wd-dur-slow) var(--wd-ease-spring-soft, cubic-bezier(.34, 1.3, .64, 1)),
+    color var(--wd-dur-slow) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));
+  text-decoration: none;
+  color: inherit;
+}
+
+/* 分隔线（常态灰） */
+.wd-post-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--wd-ink-5);
+}
+
+/* 红线下划（hover 时从左绘制） */
+.wd-post-item::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  z-index: 1;
+  background: var(--wd-red);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform var(--wd-dur-reveal, .45s) var(--wd-ease-out, cubic-bezier(.16, 1, .3, 1));
+}
+
+.wd-post-item:hover {
+  transform: translateX(4px);
+}
+.wd-post-item:hover::before {
+  transform: scaleX(1);
+}
+.wd-post-item:hover .wd-post-item__title {
+  color: var(--wd-red);
+}
+.wd-post-item:active {
+  transform: translateX(2px);
+}
+
+.wd-post-item__title {
+  display: inline;
+  margin: 0;
+  font-size: 19px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--wd-ink);
+  transition: color var(--wd-dur-slow) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));
+}
+
+.wd-post-item__emoji {
+  margin-right: 0.5rem;
+  font-size: 17px;
+}
+
+.wd-post-item__summary {
+  margin: 0.5rem 0 0;
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--wd-ink-2);
+}
+
+.wd-post-item__tags {
+  display: flex;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  flex-wrap: wrap;
+}

@@ -1,0 +1,31 @@
+// WDesign — Notification（通知横幅 · 左下角）
+.wd-notification {
+  position: fixed;
+  left: 24px;
+  bottom: 24px;
+  z-index: 1000;
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  width: 360px;
+  max-width: calc(100% - 48px);
+  padding: 16px 18px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  box-shadow: var(--wd-shadow-pop);
+}
+
+.wd-notification__icon { flex: none; margin-top: 6px; }
+
+.wd-notification__body { flex: 1; min-width: 0; }
+.wd-notification__title { font-size: 14.5px; font-weight: 700; }
+.wd-notification__desc { margin-top: 3px; font-size: 13.5px; color: var(--wd-ink-2); line-height: 1.6; }
+
+
+.wd-notification-fade-enter-active,
+.wd-notification-fade-leave-active { transition: opacity var(--wd-dur-slow) ease, transform var(--wd-dur-slow) ease; }
+.wd-notification-fade-enter-from,
+.wd-notification-fade-leave-to { opacity: 0; transform: translateY(12px); }
+/* ---- 微交互（精致版）---- */
+.wd-notification-fade-enter-active { animation: wd-settle var(--wd-dur-slow) var(--wd-ease-out) both; }
+

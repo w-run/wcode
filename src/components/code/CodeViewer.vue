@@ -46,25 +46,25 @@ async function copy() {
 
 <style lang="scss" scoped>
 .code-viewer {
-  background: $color-surface;
-  border-radius: $radius-lg;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
   overflow: hidden;
-  box-shadow: $shadow-md;
+  box-shadow: var(--wd-shadow);
 }
 
 .code-viewer__bar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-3;
-  padding: $space-2 $space-3 $space-2 $space-4;
-  background: $color-surface-2;
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-2) var(--wd-space-3) var(--wd-space-2) var(--wd-space-4);
+  background: var(--wd-field);
 }
 
 .code-viewer__file {
-  font-family: $font-mono;
+  font-family: var(--wd-font-mono);
   font-size: 12.5px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -72,28 +72,28 @@ async function copy() {
 
 .code-viewer__copy {
   flex-shrink: 0;
-  padding: $space-1 $space-3;
+  padding: var(--wd-space-1) var(--wd-space-3);
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface;
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  color: var(--wd-ink-2);
   font-size: 12px;
   cursor: pointer;
   transition:
-    background $transition-fast,
-    color $transition-fast;
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
   }
 }
 
 .code-viewer__pre {
   margin: 0;
-  padding: $space-4;
+  padding: var(--wd-space-4);
   overflow-x: auto;
-  font-family: $font-mono;
+  font-family: var(--wd-font-mono);
   font-size: 13px;
   line-height: 1.7;
   tab-size: 2;
@@ -114,7 +114,7 @@ async function copy() {
     content: counter(line);
     display: inline-block;
     width: 2.5em;
-    margin-right: $space-3;
+    margin-right: var(--wd-space-3);
     color: rgba(255, 255, 255, 0.28);
     text-align: right;
     user-select: none;

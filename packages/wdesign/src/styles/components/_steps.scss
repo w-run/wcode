@@ -1,0 +1,55 @@
+// WDesign — Steps
+.wd-steps { display: flex; align-items: flex-start; width: 100%; }
+
+.wd-steps__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  flex: none;
+  max-width: 130px;
+}
+
+.wd-steps__dot {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 700;
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+}
+.wd-steps__item--process .wd-steps__dot { background: var(--wd-red); color: #fff; }
+.wd-steps__item--finish .wd-steps__dot { background: var(--wd-tint-2); color: var(--wd-red-active); }
+
+.wd-steps__label {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--wd-ink-2);
+  text-align: center;
+}
+.wd-steps__item--process .wd-steps__label { color: var(--wd-ink); }
+.wd-steps__desc {
+  display: block;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 11.5px;
+  color: var(--wd-ink-3);
+  margin-top: 2px;
+}
+
+.wd-steps__bar {
+  flex: 1;
+  height: 3px;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
+  margin: 13px 10px 0;
+}
+.wd-steps__bar--done { background: var(--wd-red); }
+/* ---- 微交互（精致版）---- */
+.wd-steps__item--process .wd-steps__dot { animation: wd-breathe 2.4s ease-in-out infinite; }
+.wd-steps__dot { transition: transform var(--wd-dur) var(--wd-ease-spring); }
+

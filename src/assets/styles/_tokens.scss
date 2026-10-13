@@ -1,77 +1,35 @@
 // ===============================================================
-//  wcode 设计令牌（编译期 SCSS 变量）
+//  wcode · 项目私有令牌
 //
-//  对齐 wdesign (Soft Bento · Red) 的别名兼容层：
-//  · 旧变量名 $color-* 指向 wdesign CSS 运行时变量 var(--wd-*)。
-//    → 暗色 [data-theme="dark"] 覆盖 --wd-* 后，全站自动生效，无需改动任何 .vue 文件。
-//  · 几何/字体令牌直接取 wdesign 数值（主题无关）。
-//  · 语言色、层级、过渡保留 wcode 原值（wdesign 无等价物）。
+//  ⚠️ 设计变量【不在此定义】。
+//     权威源：packages/wdesign/src/styles/_tokens.scss
+//       · 取值 → 运行时 CSS 变量 var(--wd-*)（由 wdesign 的 :root / 暗色层发射）
+//       · 编译期 → SCSS 变量 $wd-*
+//     组件里直接写 var(--wd-ink) / var(--wd-space-4) 即可。
 //
-//  规范：doc/design-system.md · wdesign 权威源：packages/wdesign/src/styles/_tokens.scss
-// =============================================================
+//  本文件只保留 wdesign 无对应物的项目私有令牌：
+//    · 语言语义色（GitHub 语言色，属数据而非设计令牌）
+//    · 响应式断点、层级（布局常量，无主题含义）
+//
+//  规范：doc/design-system.md
+// ===============================================================
 
-// ---- 语义色 → wdesign 运行时 CSS 变量 ----
-$color-bg: var(--wd-bg);
-$color-surface: var(--wd-card);
-$color-surface-2: var(--wd-field);
-$color-text: var(--wd-ink);
-$color-text-muted: var(--wd-ink-2);
-$color-accent: var(--wd-red);
-$color-accent-hover: var(--wd-red-hover);
-$color-accent-light: var(--wd-tint-2);
-$color-danger: var(--wd-danger);
-$color-danger-light: var(--wd-tint-2);
-$color-success: var(--wd-success);
-$color-success-light: var(--wd-success-soft);
-$color-warning: var(--wd-warning);
-$color-warning-light: var(--wd-warning-soft);
+// ---- 语言语义色 ----
+$lang-js:     #f7df1e;
+$lang-ts:     #3178c6;
+$lang-python: #3572a5;
+$lang-rust:   #dea584;
+$lang-go:     #00add8;
+$lang-cpp:    #f34b7d;
 
-// ---- 色彩：语言语义色（wdesign 无对应，保留原值）----
-$color-lang-js: #f7df1e;
-$color-lang-ts: #3178c6;
-$color-lang-python: #3572a5;
-$color-lang-rust: #dea584;
-$color-lang-go: #00add8;
-$color-lang-cpp: #f34b7d;
-
-// ---- 间距（4px 网格，对齐 wdesign 数值）----
-$space-1: 4px;
-$space-2: 8px;
-$space-3: 12px;
-$space-4: 16px;
-$space-6: 24px;
-$space-8: 32px;
-$space-12: 48px;
-$space-16: 64px;
-
-// ---- 圆角（全部对齐 wdesign）----
-$radius-sm: 12px;
-$radius-md: 16px;
-$radius-lg: 24px;
-$radius-xl: 32px;
-$radius-full: 999px;
-
-// ---- 阴影（wdesign 运行时变量，编译期引用）----
-$shadow-sm: var(--wd-shadow-sm);
-$shadow-md: var(--wd-shadow);
-$shadow-lg: var(--wd-shadow-pop);
-$shadow-accent: 0 8px 20px rgba(214, 40, 57, 0.28);
-
-// ---- 字体 ----
-$font-sans: var(--wd-font-family);
-$font-mono: var(--wd-font-mono);
-
-// ---- 响应式断点（保留，布局常量，无主题含义）----
-$bp-tablet: 640px;
+// ---- 响应式断点 ----
+$bp-tablet:  640px;
 $bp-desktop: 1024px;
-$bp-wide: 1280px;
+$bp-wide:    1280px;
 
-// ---- 层级（保留，wdesign 无对应）----
+// ---- 层级 ----
 $z-dropdown: 100;
-$z-sticky: 200;
-$z-drawer: 300;
-$z-modal: 400;
-$z-toast: 500;
-
-// ---- 过渡 ----
-$transition-fast: var(--wd-dur-fast) var(--wd-ease);
+$z-sticky:   200;
+$z-drawer:   300;
+$z-modal:    400;
+$z-toast:    500;

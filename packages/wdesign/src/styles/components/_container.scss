@@ -1,0 +1,7 @@
+// WDesign — Container（页面容器 · 布局）
+.wd-container {
+  width: 100%;
+  max-width: 1200px;
+  margin-inline: auto;
+  padding-inline: var(--wd-space-4);
+}

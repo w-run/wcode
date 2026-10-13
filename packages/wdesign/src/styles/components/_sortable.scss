@@ -1,0 +1,84 @@
+// WDesign — SortableList（拖动排序）
+.wd-sortable { position: relative; display: flex; flex-direction: column; gap: 8px; }
+.wd-sortable__list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.wd-sortable__item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-sm);
+  box-shadow: var(--wd-shadow);
+  cursor: grab;
+  transition: transform var(--wd-dur-fast) ease, box-shadow var(--wd-dur-fast) ease, background var(--wd-dur-fast) ease;
+}
+.wd-sortable__item:active { cursor: grabbing; }
+
+.wd-sortable__item--drag {
+  opacity: .55;
+  transform: scale(.98);
+  background: var(--wd-tint-1);
+  box-shadow: var(--wd-shadow-sm);
+}
+.wd-sortable__item--over {
+  background: var(--wd-tint-1);
+  box-shadow: 0 0 0 2px var(--wd-red-soft);
+}
+
+.wd-sortable__handle {
+  display: inline-flex;
+  color: var(--wd-ink-3);
+  flex: none;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+.wd-sortable__item--drag .wd-sortable__handle { cursor: grabbing; }
+.wd-sortable__label { font-size: 14px; font-weight: 600; }
+
+/* 拖动过程中悬浮镜像 */
+.wd-sortable__clone {
+  position: fixed;
+  z-index: 9999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 13px 16px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-sm);
+  box-shadow: var(--wd-shadow-lg);
+  opacity: .95;
+  transform: scale(1.06);
+  cursor: grabbing;
+}
+
+/* 放置指示线 */
+.wd-sortable__drop-line {
+  position: absolute;
+  left: 10px;
+  right: 10px;
+  height: 2px;
+  background: var(--wd-red);
+  border-radius: 999px;
+  z-index: 1000;
+}
+
+/* transition 动画 */
+.wd-sort-move {
+  transition: transform var(--wd-dur-slow) var(--wd-ease), opacity var(--wd-dur-slow) var(--wd-ease);
+}
+.wd-sort-enter-active,
+.wd-sort-leave-active {
+  transition: opacity var(--wd-dur) ease, transform var(--wd-dur) ease;
+}
+.wd-sort-enter-from,
+.wd-sort-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}

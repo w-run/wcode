@@ -135,8 +135,8 @@ onMounted(() => {
 .dashboard-page {
   display: flex;
   flex-direction: column;
-  gap: $space-8;
-  padding: $space-6;
+  gap: var(--wd-space-8);
+  padding: var(--wd-space-6);
   max-width: 1200px;
   margin: 0 auto;
 }
@@ -144,18 +144,18 @@ onMounted(() => {
 .dashboard-banner {
   display: flex;
   align-items: center;
-  gap: $space-2;
-  padding: $space-3 $space-4;
-  background: $color-warning-light;
-  border-radius: $radius-lg;
+  gap: var(--wd-space-2);
+  padding: var(--wd-space-3) var(--wd-space-4);
+  background: var(--wd-warning-soft);
+  border-radius: var(--wd-radius-lg);
   font-size: 0.875rem;
-  color: $color-warning;
+  color: var(--wd-warning);
 }
 
 .dashboard-stats {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 
   @media (min-width: $bp-tablet) {
     grid-template-columns: repeat(3, 1fr);
@@ -165,7 +165,7 @@ onMounted(() => {
 .dashboard-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 
   @media (min-width: $bp-tablet) {
     grid-template-columns: repeat(2, 1fr);
@@ -179,20 +179,20 @@ onMounted(() => {
 .dashboard-pinned {
   display: flex;
   flex-direction: column;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 }
 
 .dashboard-activity {
   display: flex;
   flex-direction: column;
-  gap: $space-4;
+  gap: var(--wd-space-4);
 }
 
 .dashboard-section-title {
   margin: 0;
   font-size: 1rem;
   font-weight: 700;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .activity-list {
@@ -201,17 +201,17 @@ onMounted(() => {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: $space-2;
+  gap: var(--wd-space-2);
 }
 
 .activity-item {
   display: flex;
   align-items: center;
-  gap: $space-2;
-  padding: $space-3 $space-4;
-  background: $color-surface;
-  border-radius: $radius-md;
-  box-shadow: $shadow-sm;
+  gap: var(--wd-space-2);
+  padding: var(--wd-space-3) var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  box-shadow: var(--wd-shadow-sm);
   font-size: 0.875rem;
   flex-wrap: wrap;
 
@@ -222,17 +222,17 @@ onMounted(() => {
 
 .activity-actor {
   font-weight: 600;
-  color: $color-accent;
+  color: var(--wd-red);
   flex-shrink: 0;
 }
 
 .activity-message {
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   flex-shrink: 0;
 }
 
 .activity-repo {
-  color: $color-text;
+  color: var(--wd-ink);
   font-weight: 500;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -243,7 +243,7 @@ onMounted(() => {
 
 .activity-time {
   font-size: 0.75rem;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   flex-shrink: 0;
   margin-left: auto;
 }

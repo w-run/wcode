@@ -1,0 +1,31 @@
+{
+  "name": "@w-run/wdesign-icons",
+  "version": "1.0.0",
+  "description": "WDesign 图标库 — 595 个 SVG（256×256 · currentColor），Soft Bento · Red 配套",
+  "type": "module",
+  "main": "./src/index.ts",
+  "module": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./data": "./icons.data.js",
+    "./icons/*": "./icons/*"
+  },
+  "files": [
+    "icons",
+    "icons.json",
+    "icons.data.js",
+    "src",
+    "MIGRATION.md"
+  ],
+  "peerDependencies": {
+    "vue": "^3.3.0"
+  },
+  "keywords": [
+    "wdesign",
+    "icons",
+    "svg-icons",
+    "vue3"
+  ],
+  "license": "MIT"
+}

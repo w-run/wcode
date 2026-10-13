@@ -1,0 +1,64 @@
+// =============================================================
+//  Soft Bento · Red — 全量样式入口
+//  用法（Vite）：
+//    import 'wdesign/src/styles/index.scss'
+//  或在宿主 scss 中：
+//    @import 'wdesign/src/styles/index';
+// =============================================================
+@import 'vars';
+@import 'fonts';
+@import 'base';
+@import 'animations';
+@import 'components/space';
+@import 'components/grid';
+@import 'components/container';
+@import 'components/dot';
+@import 'components/icon-btn';
+@import 'components/chevron';
+@import 'components/button';
+@import 'components/tag';
+@import 'components/card';
+@import 'components/input';
+@import 'components/switch';
+@import 'components/progress';
+@import 'components/avatar';
+@import 'components/list';
+@import 'components/checkbox';
+@import 'components/radio';
+@import 'components/select';
+@import 'components/tabs';
+@import 'components/alert';
+@import 'components/skeleton';
+@import 'components/empty';
+@import 'components/modal';
+@import 'components/badge';
+@import 'components/datepicker';
+@import 'components/toast';
+@import 'components/tooltip';
+@import 'components/dropdown';
+@import 'components/pagination';
+@import 'components/slider';
+@import 'components/steps';
+@import 'components/spinner';
+@import 'components/markdown';
+@import 'components/typography';
+@import 'components/timeline';
+@import 'components/post-item';
+@import 'components/table';
+@import 'components/breadcrumb';
+@import 'components/collapse';
+@import 'components/drawer';
+@import 'components/result';
+@import 'components/rate';
+@import 'components/segmented';
+@import 'components/upload';
+@import 'components/notification';
+@import 'components/carousel';
+@import 'components/sortable';
+@import 'components/otp';
+@import 'components/image-preview';
+@import 'components/file-list';
+@import 'components/explorer';
+@import 'components/ai-msg';
+@import 'dark';
+

@@ -209,8 +209,8 @@ onMounted(async () => {
 .repo-detail-page {
   display: flex;
   flex-direction: column;
-  gap: $space-6;
-  padding: $space-6;
+  gap: var(--wd-space-6);
+  padding: var(--wd-space-6);
   max-width: 1280px;
   margin: 0 auto;
 
@@ -218,26 +218,26 @@ onMounted(async () => {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__name {
     font-size: 1.25rem;
     font-weight: 700;
-    color: $color-text;
+    color: var(--wd-ink);
     word-break: break-all;
   }
 
   &__actions {
     display: flex;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     flex-wrap: wrap;
   }
 
   &__body {
     display: flex;
     flex-direction: column;
-    gap: $space-6;
+    gap: var(--wd-space-6);
 
     @media (min-width: $bp-desktop) {
       flex-direction: row;
@@ -253,70 +253,70 @@ onMounted(async () => {
   &__sidebar {
     display: flex;
     flex-direction: column;
-    gap: $space-4;
+    gap: var(--wd-space-4);
     width: 100%;
 
     @media (min-width: $bp-desktop) {
       width: 280px;
       flex-shrink: 0;
       position: sticky;
-      top: $space-6;
+      top: var(--wd-space-6);
     }
   }
 
   &__loading,
   &__error {
-    padding: $space-8;
+    padding: var(--wd-space-8);
     text-align: center;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &__readme-fallback {
-    padding: $space-8;
+    padding: var(--wd-space-8);
     text-align: center;
-    color: $color-text-muted;
-    background: $color-surface;
-    border-radius: $radius-lg;
+    color: var(--wd-ink-2);
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-lg);
   }
 
   &__skeleton {
-    background: $color-surface-2;
-    border-radius: $radius-md;
+    background: var(--wd-field);
+    border-radius: var(--wd-radius-md);
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
 
     &--title {
       height: 2rem;
       width: 60%;
-      margin-bottom: $space-4;
+      margin-bottom: var(--wd-space-4);
     }
 
     &--readme {
       height: 400px;
-      border-radius: $radius-lg;
+      border-radius: var(--wd-radius-lg);
     }
   }
 }
 
 // ---- README 内容样式 ----
 .readme-body {
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
   font-size: 0.875rem;
   line-height: 1.7;
-  color: $color-text;
+  color: var(--wd-ink);
   overflow-wrap: break-word;
 
   :deep(h1),
   :deep(h2),
   :deep(h3),
   :deep(h4) {
-    margin: $space-6 0 $space-3;
+    margin: var(--wd-space-6) 0 var(--wd-space-3);
     font-weight: 600;
-    color: $color-text;
-    border-bottom: 1px solid $color-surface-2;
-    padding-bottom: $space-2;
+    color: var(--wd-ink);
+    border-bottom: 1px solid var(--wd-field);
+    padding-bottom: var(--wd-space-2);
   }
 
   :deep(h1) {
@@ -330,11 +330,11 @@ onMounted(async () => {
   }
 
   :deep(p) {
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
   }
 
   :deep(a) {
-    color: $color-accent;
+    color: var(--wd-red);
     text-decoration: none;
 
     &:hover {
@@ -344,78 +344,78 @@ onMounted(async () => {
 
   :deep(ul),
   :deep(ol) {
-    margin: 0 0 $space-4;
-    padding-left: $space-6;
+    margin: 0 0 var(--wd-space-4);
+    padding-left: var(--wd-space-6);
   }
 
   :deep(li) {
-    margin-bottom: $space-1;
+    margin-bottom: var(--wd-space-1);
   }
 
   :deep(pre) {
-    padding: $space-4;
-    background: $color-surface-2;
-    border-radius: $radius-md;
+    padding: var(--wd-space-4);
+    background: var(--wd-field);
+    border-radius: var(--wd-radius-md);
     overflow-x: auto;
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
   }
 
   :deep(code.inline-code) {
     padding: 0.125rem 0.375rem;
-    background: $color-surface-2;
-    border-radius: $radius-sm;
-    font-family: $font-mono;
+    background: var(--wd-field);
+    border-radius: var(--wd-radius-sm);
+    font-family: var(--wd-font-mono);
     font-size: 0.8125rem;
-    color: $color-accent;
+    color: var(--wd-red);
   }
 
   :deep(blockquote) {
-    margin: 0 0 $space-4;
-    padding: $space-3 $space-4;
-    border-left: 3px solid $color-accent;
-    background: $color-accent-light;
-    border-radius: 0 $radius-md $radius-md 0;
-    color: $color-text-muted;
+    margin: 0 0 var(--wd-space-4);
+    padding: var(--wd-space-3) var(--wd-space-4);
+    border-left: 3px solid var(--wd-red);
+    background: var(--wd-tint-2);
+    border-radius: 0 var(--wd-radius-md) var(--wd-radius-md) 0;
+    color: var(--wd-ink-2);
   }
 
   :deep(table) {
     width: 100%;
     border-collapse: collapse;
-    margin: 0 0 $space-4;
+    margin: 0 0 var(--wd-space-4);
     font-size: 0.8125rem;
   }
 
   :deep(th),
   :deep(td) {
-    padding: $space-2 $space-3;
+    padding: var(--wd-space-2) var(--wd-space-3);
     text-align: left;
-    border-bottom: 1px solid $color-surface-2;
+    border-bottom: 1px solid var(--wd-field);
   }
 
   :deep(th) {
     font-weight: 600;
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 
   :deep(img) {
     max-width: 100%;
     height: auto;
-    border-radius: $radius-md;
+    border-radius: var(--wd-radius-md);
   }
 }
 
 // ---- 侧栏卡片 ----
 .sidebar-card {
-  padding: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 
   &__title {
-    margin: 0 0 $space-3;
+    margin: 0 0 var(--wd-space-3);
     font-size: 0.75rem;
     font-weight: 600;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     text-transform: uppercase;
     letter-spacing: 0.05em;
   }
@@ -425,53 +425,53 @@ onMounted(async () => {
 .stat-row {
   display: flex;
   align-items: center;
-  gap: $space-2;
-  padding: $space-2 0;
+  gap: var(--wd-space-2);
+  padding: var(--wd-space-2) 0;
   font-size: 0.875rem;
 
   &:not(:last-child) {
-    border-bottom: 1px solid $color-surface-2;
+    border-bottom: 1px solid var(--wd-field);
   }
 
   .icon {
     width: 0.875rem;
     height: 0.875rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 }
 
 .stat-dot {
   width: 0.625rem;
   height: 0.625rem;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   flex-shrink: 0;
 }
 
 .stat-label {
   flex: 1;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .stat-value {
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 // ---- 分支选择器 ----
 .branch-select {
   width: 100%;
-  padding: $space-2 $space-3;
+  padding: var(--wd-space-2) var(--wd-space-3);
   border: none;
-  border-radius: $radius-md;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-field);
   font-family: inherit;
   font-size: 0.875rem;
-  color: $color-text;
+  color: var(--wd-ink);
   cursor: pointer;
   outline: none;
 
   &:focus {
-    box-shadow: 0 0 0 2px $color-accent;
+    box-shadow: 0 0 0 2px var(--wd-red);
   }
 }
 
@@ -479,14 +479,14 @@ onMounted(async () => {
 .topic-list {
   display: flex;
   flex-wrap: wrap;
-  gap: $space-2;
+  gap: var(--wd-space-2);
 }
 
 .topic-tag {
   padding: 0.25rem 0.625rem;
-  border-radius: $radius-full;
-  background: $color-accent-light;
-  color: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
   font-size: 0.75rem;
   font-weight: 500;
 }
@@ -494,33 +494,33 @@ onMounted(async () => {
 // ---- 标签 ----
 .code-btn {
   padding: 0.3rem 0.9rem;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
   font-size: 0.75rem;
   font-weight: 500;
   text-decoration: none;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-accent-hover;
+    background: var(--wd-red-hover);
   }
 }
 
 .tag {
   padding: 0.25rem 0.625rem;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   font-size: 0.75rem;
   font-weight: 500;
 
   &--muted {
-    background: $color-surface-2;
-    color: $color-text-muted;
+    background: var(--wd-field);
+    color: var(--wd-ink-2);
   }
 
   &--info {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
   }
 }
 
@@ -533,23 +533,23 @@ onMounted(async () => {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: $space-2;
-  padding: $space-2 0;
+  gap: var(--wd-space-2);
+  padding: var(--wd-space-2) 0;
   font-size: 0.8125rem;
-  border-bottom: 1px solid $color-surface-2;
+  border-bottom: 1px solid var(--wd-field);
 
   &:last-child {
     border-bottom: none;
   }
 
   dt {
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   dd {
     margin: 0;
     font-weight: 500;
-    color: $color-text;
+    color: var(--wd-ink);
     text-align: right;
     word-break: break-all;
   }
@@ -558,8 +558,8 @@ onMounted(async () => {
 // ---- 骨架屏辅助 ----
 .skeleton-line {
   height: 1rem;
-  background: $color-surface-2;
-  border-radius: $radius-sm;
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-sm);
   animation: skeleton-shimmer 1.5s ease-in-out infinite;
 }
 

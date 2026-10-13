@@ -1,0 +1,28 @@
+// WDesign — Tooltip（深色气泡 · 无箭头）
+.wd-tooltip { position: relative; display: inline-flex; }
+
+.wd-tooltip__bubble {
+  position: absolute;
+  z-index: 60;
+  left: 50%;
+  transform: translateX(-50%) translateY(2px);
+  background: var(--wd-dark);
+  color: var(--wd-dark-text);
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: var(--wd-radius-sm);
+  white-space: nowrap;
+  box-shadow: var(--wd-shadow-pop);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease;
+}
+.wd-tooltip--top .wd-tooltip__bubble { bottom: calc(100% + 10px); }
+.wd-tooltip--bottom .wd-tooltip__bubble { top: calc(100% + 10px); }
+.wd-tooltip--open .wd-tooltip__bubble { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* ---- 微交互（精致版）---- */
+.wd-tooltip__bubble { transition: opacity var(--wd-dur-fast) var(--wd-ease-out), transform var(--wd-dur-fast) var(--wd-ease-out); }
+.wd-tooltip--open .wd-tooltip__bubble { animation: wd-settle var(--wd-dur) var(--wd-ease-out) both; }
+

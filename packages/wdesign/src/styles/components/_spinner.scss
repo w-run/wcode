@@ -1,0 +1,16 @@
+// WDesign — Spinner
+.wd-spinner {
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 50%;
+  border: 3px solid var(--wd-tint-2);
+  border-top-color: var(--wd-red);
+  animation: wd-spinner-rotate .8s linear infinite;
+}
+.wd-spinner--sm { width: 18px; height: 18px; border-width: 2.5px; }
+.wd-spinner--lg { width: 40px; height: 40px; border-width: 4px; }
+
+@keyframes wd-spinner-rotate {
+  to { transform: rotate(360deg); }
+}

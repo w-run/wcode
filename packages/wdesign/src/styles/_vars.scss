@@ -1,0 +1,112 @@
+// =============================================================
+//  WDesign — 运行期 CSS 自定义属性（var(--wd-*)）
+//  ⚠️ 全站只能引入一次！重复引入会产生多份 :root，
+//     并让后出现的 :root 覆盖 [data-theme="dark"] 深色层。
+//  编译期 SCSS 变量见 _tokens.scss。
+// =============================================================
+
+@use "./tokens" as *;
+
+:root {
+  --wd-red:        #{$wd-red};
+  --wd-red-hover:  #{$wd-red-hover};
+  --wd-red-active: #{$wd-red-active};
+  --wd-red-soft:   #{$wd-red-soft};
+
+  --wd-tint-1:     #{$wd-tint-1};
+  --wd-tint-2:     #{$wd-tint-2};
+  --wd-tint-3:     #{$wd-tint-3};
+  --wd-tint-4:     #{$wd-tint-4};
+
+  --wd-ink:        #{$wd-ink};
+  --wd-ink-2:      #{$wd-ink-2};
+  --wd-ink-3:      #{$wd-ink-3};
+  --wd-ink-4:      #{$wd-ink-4};
+  --wd-ink-5:      #{$wd-ink-5};
+  --wd-bg:         #{$wd-bg};
+  --wd-card:       #{$wd-card};
+  --wd-dark:       #{$wd-dark};
+  --wd-dark-2:     #{$wd-dark-2};
+  --wd-dark-text:  #{$wd-dark-text};
+
+  --wd-success:    #{$wd-success};
+  --wd-warning:    #{$wd-warning};
+  --wd-success-soft: #{$wd-success-soft};
+  --wd-warning-soft: #{$wd-warning-soft};
+  --wd-field:        #{$wd-field};
+  --wd-dur:      #{$wd-dur};
+  --wd-dur-slow: #{$wd-dur-slow};
+  --wd-dur-fast: #{$wd-dur-fast};
+  --wd-dur-theme: #{$wd-dur-theme};
+  --wd-dur-reveal: #{$wd-dur-reveal};
+  --wd-ease-smooth: #{$wd-ease-smooth};
+  --wd-ease-sharp:  #{$wd-ease-sharp};
+  --wd-ease-spring-soft: #{$wd-ease-spring-soft};
+  --wd-ease:     #{$wd-ease};
+  --wd-ease-spring: #{$wd-ease-spring};
+  --wd-ease-out:    #{$wd-ease-out};
+  --wd-mask:     #{$wd-mask};
+  --wd-toast-bg: #{$wd-toast-bg};
+  --wd-field-hover: #{$wd-field-hover};
+  --wd-dark-3:      #{$wd-dark-3};
+  --wd-ring-soft:   #{$wd-ring-soft};
+  --wd-underline:   #{$wd-underline};
+  --wd-shadow-sm:   #{$wd-shadow-sm};
+  --wd-shadow-pop:  #{$wd-shadow-pop};
+  --wd-shadow-lg:   #{$wd-shadow-lg};
+  --wd-shadow-knob: #{$wd-shadow-knob};
+  --wd-shadow-accent: #{$wd-shadow-accent};
+  --wd-on-dark:      #{$wd-on-dark};
+  --wd-on-dark-2:    #{$wd-on-dark-2};
+  --wd-on-dark-3:    #{$wd-on-dark-3};
+  --wd-on-dark-text: #{$wd-on-dark-text};
+  --wd-mark-bg:      #{$wd-mark-bg};
+  --wd-link-underline: #{$wd-link-underline};
+  --wd-danger:         #{$wd-danger};
+
+  --wd-focus-ring-faint: #{$wd-focus-ring-faint};
+  --wd-focus-ring:      #{$wd-focus-ring};
+  --wd-focus-ring-soft: #{$wd-focus-ring-soft};
+
+  --wd-radius-sm:   #{$wd-radius-sm};
+  --wd-radius-md:   #{$wd-radius-md};
+  --wd-radius-lg:   #{$wd-radius-lg};
+  --wd-radius-xl:   #{$wd-radius-xl};
+  --wd-radius-pill: #{$wd-radius-pill};
+
+  --wd-shadow:       #{$wd-shadow};
+  --wd-shadow-hover: #{$wd-shadow-hover};
+
+  --wd-font-family: #{$wd-font-family};
+  --wd-font-mono:   #{$wd-font-mono};
+
+  --wd-img-filter:        #{$wd-img-filter};
+  --wd-img-filter-invert: #{$wd-img-filter-invert};
+  --wd-logo-filter:       #{$wd-logo-filter};
+  --wd-logo-opacity:      #{$wd-logo-opacity};
+
+  --wd-fs-display: #{$wd-fs-display};
+  --wd-fs-h1:      #{$wd-fs-h1};
+  --wd-fs-h2:      #{$wd-fs-h2};
+  --wd-fs-h3:      #{$wd-fs-h3};
+  --wd-fs-body:    #{$wd-fs-body};
+  --wd-fs-caption: #{$wd-fs-caption};
+  --wd-size-sm: #{$wd-size-sm};
+  --wd-size-md: #{$wd-size-md};
+  --wd-size-lg: #{$wd-size-lg};
+  --wd-padding-sm: #{$wd-padding-sm};
+  --wd-padding-md: #{$wd-padding-md};
+  --wd-padding-lg: #{$wd-padding-lg};
+  --wd-font-size-sm: #{$wd-font-size-sm};
+  --wd-font-size-md: #{$wd-font-size-md};
+  --wd-font-size-lg: #{$wd-font-size-lg};
+
+  --wd-space-1:  #{$wd-space-1};
+  --wd-space-2:  #{$wd-space-2};
+  --wd-space-3:  #{$wd-space-3};
+  --wd-space-4:  #{$wd-space-4};
+  --wd-space-6:  #{$wd-space-6};
+  --wd-space-8:  #{$wd-space-8};
+  --wd-space-12: #{$wd-space-12};
+  --wd-space-16: #{$wd-space-16};
+}

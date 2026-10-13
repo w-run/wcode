@@ -1,0 +1,60 @@
+// WDesign — Radio
+.wd-radio-group { display: flex; flex-wrap: wrap; gap: 22px; }
+
+.wd-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  font-size: 14.5px;
+  color: var(--wd-ink);
+  user-select: none;
+}
+.wd-radio:focus-visible { outline: none; }
+.wd-radio:focus-visible .wd-radio__dot { box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+
+.wd-radio__dot {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--wd-field);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease;
+}
+.wd-radio:hover .wd-radio__dot { background: var(--wd-tint-1); }
+
+.wd-radio__inner {
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  background: #fff;
+  transform: scale(0);
+  transition: transform var(--wd-dur-fast) ease;
+}
+.wd-radio--checked .wd-radio__dot { background: var(--wd-red); }
+.wd-radio--checked:hover .wd-radio__dot { background: var(--wd-red-hover); }
+.wd-radio--checked .wd-radio__inner { transform: scale(1); }
+
+.wd-radio--disabled { cursor: default; color: var(--wd-ink-3); }
+.wd-radio--disabled:hover .wd-radio__dot { background: var(--wd-field); }
+.wd-radio--disabled .wd-radio__inner { background: var(--wd-ink-3); }
+/* ---- 微交互（精致版）---- */
+.wd-radio--checked .wd-radio__inner {
+  animation: wd-radio-dot var(--wd-dur-slow) var(--wd-ease-spring) both;
+}
+/* 选中瞬间：外圈轻震一下 */
+.wd-radio--checked .wd-radio__dot {
+  animation: wd-ring-out var(--wd-dur-slow) var(--wd-ease-out);
+}
+.wd-radio__dot {
+  transition: background var(--wd-dur-fast) ease, transform var(--wd-dur) var(--wd-ease-out);
+}
+.wd-radio:active .wd-radio__dot { transform: scale(.94); }
+

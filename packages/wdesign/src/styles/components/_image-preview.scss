@@ -1,0 +1,56 @@
+// WDesign — ImagePreview（图片预览 · 灯箱）
+.wd-image-preview { display: inline-flex; cursor: zoom-in; }
+.wd-image-preview__thumb { width: 100%; border-radius: var(--wd-radius-sm); display: block; }
+
+.wd-preview { position: fixed; inset: 0; z-index: 1300; }
+.wd-preview__mask { position: absolute; inset: 0; background: var(--wd-mask); }
+
+.wd-preview__stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px;
+}
+.wd-preview__img {
+  max-width: 100%;
+  max-height: 100%;
+  border-radius: var(--wd-radius-sm);
+  box-shadow: var(--wd-shadow-lg);
+  transition: transform var(--wd-dur) ease;
+  cursor: grab;
+}
+
+.wd-preview__toolbar {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  display: flex;
+  gap: 6px;
+  padding: 8px;
+  background: var(--wd-card);
+  border-radius: 999px;
+  box-shadow: var(--wd-shadow-pop);
+}
+.wd-preview__btn { font-size: 17px; }
+
+.wd-preview__count {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  z-index: 2;
+  padding: 6px 14px;
+  background: var(--wd-mask);
+  color: #fff;
+  border-radius: 999px;
+  font-size: 12.5px;
+  font-weight: 600;
+}
+
+.wd-preview-fade-enter-active,
+.wd-preview-fade-leave-active { transition: opacity var(--wd-dur) ease; }
+.wd-preview-fade-enter-from,
+.wd-preview-fade-leave-to { opacity: 0; }

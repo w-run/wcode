@@ -1,0 +1,25 @@
+// WDesign — Empty（空状态）
+.wd-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.wd-empty__icon {
+  width: 72px;
+  height: 72px;
+  margin-bottom: 10px;
+  border-radius: 50%;
+  background: var(--wd-field);
+  color: var(--wd-ink-3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wd-empty__title { font-size: 15px; font-weight: 700; color: var(--wd-ink); }
+.wd-empty__desc { font-size: 13px; color: var(--wd-ink-2); max-width: 320px; }
+.wd-empty__action { margin-top: 14px; }

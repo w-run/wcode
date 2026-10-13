@@ -1,0 +1,56 @@
+// =============================================================
+//  Soft Bento · Red — Base（可选引入）
+//  仅做最小重置 + 页面底色/字体设定；
+//  若宿主项目已有自己的 reset，可跳过本文件。
+// =============================================================
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* 移动端：去除系统点击高亮（改用组件自身的 :active 反馈） */
+  -webkit-tap-highlight-color: transparent;
+}
+a, button, [role="button"], label, input, select, textarea {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  margin: 0;
+  background: var(--wd-bg);
+  color: var(--wd-ink);
+  font-family: var(--wd-font-family);
+  font-size: 15.5px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// 尊重系统「减弱动态效果」设置
+// 选区高亮：主题红浅底（细节统一）
+::selection {
+  background: var(--wd-tint-3);
+  color: var(--wd-ink);
+}
+
+/* ── 统一极简滚动条（全库生效）── */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb {
+  background: var(--wd-ink-3);
+  border-radius: 999px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-thumb:hover { background: var(--wd-ink-2); background-clip: content-box; }
+::-webkit-scrollbar-corner { background: transparent; }
+* { scrollbar-width: thin; scrollbar-color: var(--wd-ink-3) transparent; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+  }
+}

@@ -11,6 +11,6 @@ defineProps<{
 
 <style lang="scss" scoped>
 .repo-issues-page {
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 </style>

@@ -1,0 +1,68 @@
+/* =============================================================
+ *  WDesign — 深色主题（data-theme="dark" 或 .dark-theme，两种机制均支持）
+ *  底色切换 + 文字翻转；主题红 #D62839 不变
+ *
+ *  自给自足：@use 自己的令牌层，可被宿主独立 @use（blog / wcode 无需 @import 全量）
+ * ============================================================= */
+@use './tokens' as t;
+
+[data-theme="dark"],
+.dark-theme,
+:root[data-theme="dark"],
+:root.dark-theme,
+html[data-theme="dark"],
+html.dark-theme {
+  --wd-bg:         #{t.$wd-bg-dark};   /* 深底 */
+  --wd-card:       #{t.$wd-card-dark};   /* 深卡 */
+  --wd-field:      #{t.$wd-field-dark};   /* 深控件底 */
+  --wd-dark:       #{t.$wd-dark-dark};   /* 深色锚点反转 */
+  --wd-dark-text:  #{t.$wd-card-dark};   /* 锚点反转后其上的文字用深色 */
+  --wd-dark-2:     #{t.$wd-field-hover-dark};
+  --wd-ink:        #{t.$wd-ink-dark};   /* 正文 → 亮 */
+  --wd-ink-2:      #{t.$wd-ink-2-dark};   /* 次级 → 暗灰（反向迭代：原 #8888A0 对比不足，~6.3:1） */
+  --wd-ink-3:      #{t.$wd-ink-3-dark};   /* 占位（原 #55556A 对比不足，~3.7:1） */
+  --wd-ink-4:      #{t.$wd-ink-4-dark};   /* 极弱：时间戳 */
+  --wd-ink-5:      #{t.$wd-ink-5-dark};   /* 最弱：分割/描边 */
+
+  /* 主题感知图片（深色：压暗 + Logo 降透明） */
+  --wd-img-filter:        brightness(.86);
+  --wd-img-filter-invert: invert(1) hue-rotate(180deg) brightness(.86);
+  --wd-logo-filter:       brightness(1.25);
+  --wd-logo-opacity:      .8;
+  --wd-tint-1:     #2A1A1E;   /* 浅红底（暗色版） */
+  --wd-tint-2:     #3A2025;
+  --wd-tint-3:     #4A2830;
+  --wd-tint-4:     #5A3540;
+  --wd-success:     #4CC79A;   /* 深色下提亮 */
+  --wd-warning:     #F0B459;
+  --wd-success-soft: #17352A;  /* 深色浅底 → 深绿调 */
+  --wd-warning-soft: #3A2E17;  /* 深色浅底 → 深橙调 */
+  --wd-mask:      rgba(0, 0, 0, .62);
+  --wd-toast-bg:  rgba(34, 34, 38, .74);
+  --wd-field-hover: #{t.$wd-field-hover-dark};
+  --wd-dark-3:      #4A4A52;
+  --wd-ring-soft:   rgba(255, 255, 255, .14);
+  --wd-underline:   rgba(255, 255, 255, .4);
+  --wd-shadow:        0 12px 30px rgba(0, 0, 0, .45);
+  --wd-shadow-hover:  0 16px 40px rgba(0, 0, 0, .55);
+  --wd-shadow-sm:     0 4px 12px rgba(0, 0, 0, .4);
+  --wd-shadow-pop:    0 12px 28px rgba(0, 0, 0, .5);
+  --wd-shadow-lg:     0 24px 60px rgba(0, 0, 0, .6);
+  --wd-shadow-knob:   0 2px 8px rgba(0, 0, 0, .5);
+  --wd-mark-bg:       rgba(214, 40, 57, .28);
+  --wd-link-underline: rgba(214, 40, 57, .5);
+
+  background: var(--wd-bg);
+  color: var(--wd-ink);
+}
+
+/* 深色下滚动条 */
+
+
+/* 文字选中 */
+[data-theme="dark"] ::selection,
+.dark-theme ::selection { background: rgba(214, 40, 57, .3); }
+
+/* 深色主题：锚点卡片反转为浅色，其上次级文字改中性灰 */
+[data-theme="dark"] .wd-card--dark,
+.dark-theme .wd-card--dark .wd-card__meta { color: var(--wd-ink-2); }

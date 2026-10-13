@@ -1,0 +1,31 @@
+// WDesign — Pagination
+.wd-pagination { display: inline-flex; align-items: center; gap: 6px; }
+
+.wd-pagination__btn {
+  min-width: 36px;
+  height: 36px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: var(--wd-radius-pill);
+  background: transparent;
+  color: var(--wd-ink-2);
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease;
+}
+.wd-pagination__btn:hover:not(:disabled) { background: var(--wd-field); color: var(--wd-ink); }
+.wd-pagination__btn:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+.wd-pagination__btn:disabled { color: var(--wd-ink-3); cursor: default; }
+
+.wd-pagination__btn--active { background: var(--wd-red); color: #fff; }
+.wd-pagination__btn--active:hover:not(:disabled) { background: var(--wd-red-hover); color: #fff; }
+
+.wd-pagination__dots { color: var(--wd-ink-3); font-size: 13px; padding: 0 2px; }
+/* ---- 微交互（精致版）---- */
+.wd-pagination__btn--active { animation: wd-bloom var(--wd-dur) var(--wd-ease-out) both; }
+

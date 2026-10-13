@@ -1,0 +1,68 @@
+// WDesign — FileList（文件列表 · 下拉展开）
+.wd-file-list { display: flex; flex-direction: column; gap: 2px; }
+
+.wd-file-list__row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-height: 38px;
+  padding: 8px 12px;
+  border-radius: var(--wd-radius-sm);
+  cursor: pointer;
+  transition: background var(--wd-dur-fast) ease;
+}
+.wd-file-list__row:hover { background: var(--wd-bg); }
+.wd-file-list__row--folder { font-weight: 600; }
+
+/* 展开箭头：所有行都占位（保证文件夹/文件图标对齐在同一列） */
+.wd-file-list__chevron {
+  width: 14px;
+  flex: none;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.wd-file-list__icon {
+  width: 26px;
+  height: 26px;
+  flex: none;
+  border-radius: 8px;
+  background: var(--wd-tint-1);
+  color: var(--wd-red-soft);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.wd-file-list__row--file .wd-file-list__icon { background: var(--wd-field); color: var(--wd-ink-3); }
+
+.wd-file-list__name {
+  flex: 1;
+  min-width: 0;
+  font-size: 13.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wd-file-list__size {
+  flex: none;
+  width: 66px;
+  text-align: right;
+  font-size: 12px;
+  color: var(--wd-ink-2);
+  font-family: var(--wd-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+/* 行进出场动画（展开 / 收起子级时生效） */
+.wd-row-move {
+  transition: transform var(--wd-dur-slow) var(--wd-ease);
+}
+.wd-row-enter-active,
+.wd-row-leave-active {
+  transition: opacity var(--wd-dur) ease, transform var(--wd-dur) ease;
+}
+.wd-row-enter-from,
+.wd-row-leave-to {
+  opacity: 0;
+  transform: translateX(-8px);
+}

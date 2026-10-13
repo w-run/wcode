@@ -52,35 +52,35 @@ defineProps<{
 .minimal {
   max-width: 760px;
   margin: 0 auto;
-  padding: $space-16 $space-6 $space-16;
+  padding: var(--wd-space-16) var(--wd-space-6) var(--wd-space-16);
 }
 
 .minimal__hero {
   text-align: center;
-  margin-bottom: $space-16;
+  margin-bottom: var(--wd-space-16);
 }
 
 .minimal__owner {
   font-size: 14px;
   letter-spacing: 0.05em;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   text-transform: uppercase;
-  margin-bottom: $space-2;
+  margin-bottom: var(--wd-space-2);
 }
 
 .minimal__name {
   font-size: 3rem;
   font-weight: 300;
   letter-spacing: -0.02em;
-  color: $color-text;
+  color: var(--wd-ink);
   line-height: 1.1;
 }
 
 .minimal__desc {
-  margin: $space-4 auto 0;
+  margin: var(--wd-space-4) auto 0;
   max-width: 480px;
   font-size: 16px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   line-height: 1.7;
 }
 
@@ -88,17 +88,17 @@ defineProps<{
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: $space-3;
-  margin-top: $space-6;
+  gap: var(--wd-space-3);
+  margin-top: var(--wd-space-6);
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .minimal__dot {
   width: 3px;
   height: 3px;
-  border-radius: $radius-full;
-  background: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-ink-2);
   opacity: 0.5;
 }
 
@@ -114,22 +114,22 @@ defineProps<{
 
 .minimal__empty {
   text-align: center;
-  padding: $space-12 0;
+  padding: var(--wd-space-12) 0;
 }
 
 .minimal__empty-title {
   font-size: 15px;
-  color: $color-text-muted;
-  margin-bottom: $space-3;
+  color: var(--wd-ink-2);
+  margin-bottom: var(--wd-space-3);
 }
 
 .minimal__empty-link {
   font-size: 14px;
-  color: $color-accent;
+  color: var(--wd-red);
   text-decoration: none;
 
   &:hover {
-    color: $color-accent-hover;
+    color: var(--wd-red-hover);
   }
 }
 </style>

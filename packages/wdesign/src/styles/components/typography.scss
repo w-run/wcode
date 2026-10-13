@@ -1,0 +1,84 @@
+// =============================================================
+//  WDesign — 排版增强（反向迭代 · 源：w-run/blog）
+//  wd-em           强调：红色虚线下划线
+//  wd-title-line   标题装饰线：红色小胶囊，hover 渐显
+//  wd-theme-aware  主题感知图片（<img> 应用 --wd-img-filter）
+// =============================================================
+@import '../tokens';
+
+.wd-em {
+  text-decoration: none;
+  border-bottom: 2px dashed $wd-red;
+  padding-bottom: 1px;
+}
+
+.wd-title-line {
+  position: relative;
+
+  &::after {
+    content: '';
+    display: block;
+    width: 2em;
+    height: 5px;
+    border-radius: $wd-radius-pill;
+    background: $wd-red;
+    opacity: 0.3;
+    margin-top: 0.5em;
+    transition: opacity $wd-dur-slow ease;
+  }
+
+  &:hover::after {
+    opacity: 1;
+  }
+}
+
+// 主题感知图片：深色下自动压暗（配合 portfolio 等富图场景）
+img.wd-theme-aware:not([src*='.svg']) {
+  filter: var(--wd-img-filter, none);
+}
+img.wd-theme-invert {
+  filter: var(--wd-img-filter-invert, none);
+}
+
+// 主题过渡（html/body 层）
+.wd-theme-transition,
+.wd-theme-transition * {
+  transition:
+    background-color $wd-dur-theme ease,
+    color $wd-dur-theme ease,
+    border-color $wd-dur-theme ease,
+    box-shadow $wd-dur-theme ease,
+    filter $wd-dur-theme ease;
+}
+
+// =============================================================
+//  滚动揭示（反向迭代 · 源：w-run/blog）
+//  -------------------------------------------------------------
+//  配合 IntersectionObserver：元素进入视口时加 .is-revealed。
+//  用法（原生）：
+//    <div class="wd-reveal" data-reveal>…</div>   容器
+//    <div class="wd-reveal">…</div>                子项（错峰用 --wd-reveal-delay）
+//  或直接在 SCSS 里 @include wd-reveal;
+// =============================================================
+.wd-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--wd-dur-reveal, 0.45s) var(--wd-ease-out, cubic-bezier(0.16, 1, 0.3, 1)),
+    transform var(--wd-dur-reveal, 0.45s) var(--wd-ease-out, cubic-bezier(0.16, 1, 0.3, 1));
+  transition-delay: var(--wd-reveal-delay, 0s);
+  will-change: transform, opacity;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .wd-reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+}

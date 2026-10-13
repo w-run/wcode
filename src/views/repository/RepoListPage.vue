@@ -90,33 +90,33 @@ onMounted(() => {
 .repo-list-page {
   display: flex;
   flex-direction: column;
-  gap: $space-6;
-  padding: $space-6;
+  gap: var(--wd-space-6);
+  padding: var(--wd-space-6);
   max-width: 1280px;
   margin: 0 auto;
 
   &__toolbar {
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__search {
     flex: 1;
     display: flex;
     align-items: center;
-    gap: $space-3;
+    gap: var(--wd-space-3);
     height: 2.75rem;
-    padding: 0 $space-4;
-    background: $color-surface;
-    border-radius: $radius-full;
-    box-shadow: $shadow-sm;
+    padding: 0 var(--wd-space-4);
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-pill);
+    box-shadow: var(--wd-shadow-sm);
 
     .icon-search {
       flex-shrink: 0;
       width: 1.125rem;
       height: 1.125rem;
-      color: $color-text-muted;
+      color: var(--wd-ink-2);
     }
   }
 
@@ -127,10 +127,10 @@ onMounted(() => {
     background: transparent;
     font-family: inherit;
     font-size: 0.875rem;
-    color: $color-text;
+    color: var(--wd-ink);
 
     &::placeholder {
-      color: $color-text-muted;
+      color: var(--wd-ink-2);
     }
 
     &::-webkit-search-cancel-button {
@@ -141,16 +141,16 @@ onMounted(() => {
   &__badge {
     flex-shrink: 0;
     padding: 0.25rem 0.75rem;
-    border-radius: $radius-full;
-    background: $color-warning-light;
-    color: $color-warning;
+    border-radius: var(--wd-radius-pill);
+    background: var(--wd-warning-soft);
+    color: var(--wd-warning);
     font-size: 0.75rem;
     font-weight: 500;
   }
 
   &__grid {
     display: grid;
-    gap: $space-4;
+    gap: var(--wd-space-4);
     grid-template-columns: 1fr;
 
     @media (min-width: $bp-tablet) {
@@ -168,8 +168,8 @@ onMounted(() => {
 
   &__skeleton {
     height: 140px;
-    border-radius: $radius-lg;
-    background: $color-surface-2;
+    border-radius: var(--wd-radius-lg);
+    background: var(--wd-field);
     animation: skeleton-shimmer 1.5s ease-in-out infinite;
   }
 
@@ -177,12 +177,12 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $space-4;
-    padding: $space-12;
+    gap: var(--wd-space-4);
+    padding: var(--wd-space-12);
     text-align: center;
 
     p {
-      color: $color-danger;
+      color: var(--wd-danger);
       font-size: 0.875rem;
     }
   }
@@ -191,9 +191,9 @@ onMounted(() => {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: $space-4;
-    padding: $space-12;
-    color: $color-text-muted;
+    gap: var(--wd-space-4);
+    padding: var(--wd-space-12);
+    color: var(--wd-ink-2);
     text-align: center;
 
     .icon-empty {
@@ -210,20 +210,20 @@ onMounted(() => {
 .btn-retry {
   padding: 0.5rem 1.5rem;
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface;
-  color: $color-text;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  color: var(--wd-ink);
   font-size: 0.875rem;
   font-weight: 600;
   cursor: pointer;
-  box-shadow: $shadow-sm;
+  box-shadow: var(--wd-shadow-sm);
   transition:
     background-color 0.2s ease,
     box-shadow 0.2s ease;
 
   &:hover {
-    background: $color-surface-2;
-    box-shadow: $shadow-md;
+    background: var(--wd-field);
+    box-shadow: var(--wd-shadow);
   }
 }
 

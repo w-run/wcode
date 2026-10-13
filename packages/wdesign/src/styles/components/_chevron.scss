@@ -1,0 +1,12 @@
+// WDesign — Chevron（折叠箭头 · 原子基础件）
+// 被 Select / Collapse / FileList / AiMessage 复用
+.wd-chevron {
+  display: inline-flex;
+  flex: none;
+  color: var(--wd-ink-3);
+  transition: transform var(--wd-dur) ease, color var(--wd-dur) ease;
+}
+.wd-chevron--open { transform: rotate(180deg); color: var(--wd-red); }
+
+/* 右向箭头（如文件列表）：展开转 90°（优先级高于默认 180°） */
+.wd-chevron--right.wd-chevron--open { transform: rotate(90deg); color: var(--wd-red); }

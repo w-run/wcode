@@ -154,27 +154,27 @@ onMounted(loadBranches)
 }
 
 .browse__head {
-  margin-bottom: $space-4;
+  margin-bottom: var(--wd-space-4);
 }
 
 .browse__title {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: var(--wd-space-3);
 }
 
 .browse__repo {
   font-size: 1.25rem;
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .browse__branch {
-  padding: $space-1 $space-3;
+  padding: var(--wd-space-1) var(--wd-space-3);
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface;
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  color: var(--wd-ink-2);
   font-size: 13px;
   cursor: pointer;
 }
@@ -184,12 +184,12 @@ onMounted(loadBranches)
   align-items: center;
   flex-wrap: wrap;
   gap: 4px;
-  margin-top: $space-2;
+  margin-top: var(--wd-space-2);
   font-size: 13px;
 }
 
 .browse__crumb {
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   text-decoration: none;
 
   &::before {
@@ -199,11 +199,11 @@ onMounted(loadBranches)
   }
 
   &:hover {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 
   &--active {
-    color: $color-text;
+    color: var(--wd-ink);
     font-weight: 500;
     pointer-events: none;
   }
@@ -212,7 +212,7 @@ onMounted(loadBranches)
 .browse__body {
   display: grid;
   grid-template-columns: 220px 1fr;
-  gap: $space-4;
+  gap: var(--wd-space-4);
   align-items: start;
 
   @include media-down(calc($bp-desktop - 1px)) {
@@ -233,10 +233,10 @@ onMounted(loadBranches)
 }
 
 .browse__files {
-  background: $color-surface;
-  border-radius: $radius-lg;
-  padding: $space-2;
-  box-shadow: $shadow-md;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  padding: var(--wd-space-2);
+  box-shadow: var(--wd-shadow);
   min-height: 200px;
 }
 
@@ -249,16 +249,16 @@ onMounted(loadBranches)
 .entry {
   display: flex;
   align-items: center;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   height: 36px;
-  padding: 0 $space-3;
-  border-radius: $radius-md;
-  color: $color-text;
+  padding: 0 var(--wd-space-3);
+  border-radius: var(--wd-radius-md);
+  color: var(--wd-ink);
   text-decoration: none;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 }
 
@@ -266,10 +266,10 @@ onMounted(loadBranches)
   flex-shrink: 0;
   width: 16px;
   height: 16px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 
   &--dir {
-    color: $color-warning;
+    color: var(--wd-warning);
   }
 }
 
@@ -282,8 +282,8 @@ onMounted(loadBranches)
 
 .browse__error,
 .browse__empty {
-  padding: $space-8 $space-4;
-  color: $color-text-muted;
+  padding: var(--wd-space-8) var(--wd-space-4);
+  color: var(--wd-ink-2);
   font-size: 13px;
   text-align: center;
 }

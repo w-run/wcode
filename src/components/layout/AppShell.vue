@@ -11,6 +11,6 @@
 <style lang="scss" scoped>
 .app-shell {
   min-height: 100vh;
-  background: $color-bg;
+  background: var(--wd-bg);
 }
 </style>

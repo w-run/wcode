@@ -61,44 +61,44 @@ const sections = splitMarkdownSections(props.markdown)
 .cards {
   max-width: 1024px;
   margin: 0 auto;
-  padding: $space-16 $space-6 $space-16;
+  padding: var(--wd-space-16) var(--wd-space-6) var(--wd-space-16);
 }
 
 .cards__hero {
   text-align: center;
-  margin-bottom: $space-12;
+  margin-bottom: var(--wd-space-12);
 }
 
 .cards__owner {
   font-size: 13px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .cards__name {
-  margin-top: $space-2;
+  margin-top: var(--wd-space-2);
   font-size: 2.75rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .cards__desc {
   max-width: 520px;
-  margin: $space-3 auto 0;
-  color: $color-text-muted;
+  margin: var(--wd-space-3) auto 0;
+  color: var(--wd-ink-2);
   font-size: 15px;
 }
 
 .cards__stats {
-  margin-top: $space-6;
+  margin-top: var(--wd-space-6);
   font-size: 13px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 
   span + span::before {
     content: '·';
-    margin: 0 $space-3;
+    margin: 0 var(--wd-space-3);
     opacity: 0.5;
   }
 }
@@ -106,21 +106,21 @@ const sections = splitMarkdownSections(props.markdown)
 .cards__grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: $space-4;
+  gap: var(--wd-space-4);
 }
 
 .card {
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-xl;
-  box-shadow: $shadow-md;
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-xl);
+  box-shadow: var(--wd-shadow);
   transition:
-    transform $transition-fast,
-    box-shadow $transition-fast;
+    transform var(--wd-dur-fast) var(--wd-ease),
+    box-shadow var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
     transform: translateY(-2px);
-    box-shadow: $shadow-lg;
+    box-shadow: var(--wd-shadow-pop);
   }
 
   &--full {
@@ -131,27 +131,27 @@ const sections = splitMarkdownSections(props.markdown)
 .card__title {
   display: flex;
   align-items: baseline;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   font-size: 1.05rem;
   font-weight: 600;
-  color: $color-text;
-  margin-bottom: $space-3;
+  color: var(--wd-ink);
+  margin-bottom: var(--wd-space-3);
 }
 
 .card__num {
   font-size: 12px;
   font-weight: 600;
-  color: $color-accent;
+  color: var(--wd-red);
 }
 
 .cards__empty {
   text-align: center;
-  padding: $space-12 0;
-  color: $color-text-muted;
+  padding: var(--wd-space-12) 0;
+  color: var(--wd-ink-2);
 }
 
 .cards__empty-link {
-  color: $color-accent;
+  color: var(--wd-red);
   text-decoration: none;
 }
 </style>

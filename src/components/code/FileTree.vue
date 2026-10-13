@@ -95,9 +95,9 @@ watch(
 
 <style lang="scss" scoped>
 .file-tree {
-  background: $color-surface;
-  border-radius: $radius-lg;
-  padding: $space-2;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  padding: var(--wd-space-2);
   overflow-y: auto;
 }
 
@@ -111,14 +111,14 @@ watch(
   display: flex;
   flex-direction: column;
   gap: 8px;
-  padding: $space-2;
+  padding: var(--wd-space-2);
 }
 
 .file-tree__line {
   display: block;
   height: 10px;
-  border-radius: $radius-full;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
   animation: tree-shimmer 1.5s ease-in-out infinite;
 }
 
@@ -132,19 +132,19 @@ watch(
 
 .file-tree__error,
 .file-tree__empty {
-  padding: $space-4;
-  color: $color-text-muted;
+  padding: var(--wd-space-4);
+  color: var(--wd-ink-2);
   font-size: 13px;
   text-align: center;
 }
 
 .file-tree__retry {
-  margin-left: $space-2;
-  color: $color-accent;
+  margin-left: var(--wd-space-2);
+  color: var(--wd-red);
   font-size: 13px;
 
   &:hover {
-    color: $color-accent-hover;
+    color: var(--wd-red-hover);
   }
 }
 

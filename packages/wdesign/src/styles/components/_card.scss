@@ -1,0 +1,36 @@
+// Soft Bento · Red — Card
+// 便当盒卡片：白底 + 大圆角 + 单层浅阴影（无边框）
+.wd-card {
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  padding: 22px;
+  box-shadow: var(--wd-shadow);
+}
+.wd-card--tint { background: var(--wd-tint-2); }
+.wd-card--dark { background: var(--wd-dark); color: var(--wd-dark-text); }
+
+.wd-card--pad-sm { padding: 16px; border-radius: var(--wd-radius-md); }
+.wd-card--pad-lg { padding: 32px; border-radius: var(--wd-radius-xl); }
+
+.wd-card--hoverable {
+  cursor: pointer;
+  transition: box-shadow var(--wd-dur) ease, transform var(--wd-dur) ease;
+}
+.wd-card--hoverable:hover {
+  box-shadow: var(--wd-shadow-hover);
+  transform: translateY(-2px);
+}
+
+.wd-card__title { font-size: 16px; font-weight: 700; }
+.wd-card__meta { font-size: 13px; color: var(--wd-ink-2); margin-top: 4px; }
+.wd-card--dark .wd-card__meta { color: var(--wd-on-dark); }
+
+.wd-card__stat {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -.02em;
+  line-height: 1.15;
+  color: var(--wd-red);
+  margin-top: 12px;
+}
+.wd-card--dark .wd-card__stat { color: var(--wd-red-soft); }

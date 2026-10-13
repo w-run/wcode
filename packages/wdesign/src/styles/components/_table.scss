@@ -1,0 +1,44 @@
+// WDesign — Table（无边框表格：斑马纹 + 色块表头）
+.wd-table-wrap {
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  overflow-x: auto;
+  overflow-y: hidden;
+  box-shadow: var(--wd-shadow);
+}
+.wd-table-wrap::-webkit-scrollbar { height: 4px; }
+.wd-table-wrap::-webkit-scrollbar-thumb { background: var(--wd-ink-3); border-radius: 999px; }
+
+.wd-table {
+  min-width: 100%;
+  width: max-content;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: 14px;
+}
+.wd-table th {
+  padding: 13px 16px;
+  text-align: left;
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--wd-ink-2);
+  background: var(--wd-bg);
+  white-space: nowrap;
+}
+.wd-table td { padding: 14px 16px; color: var(--wd-ink); }
+
+.wd-table tbody tr { transition: background var(--wd-dur-fast) ease; }
+.wd-table--striped tbody tr:nth-child(even) { background: var(--wd-bg); }
+.wd-table tbody tr:hover { background: var(--wd-tint-1); }
+
+.wd-table__th { cursor: default; }
+.wd-table__th--sort { cursor: pointer; user-select: none; }
+.wd-table__th--sort:hover { color: var(--wd-red); }
+.wd-table__sort { display: inline-flex; margin-left: 5px; vertical-align: middle; }
+
+.wd-table__empty {
+  padding: 42px 20px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--wd-ink-2);
+}

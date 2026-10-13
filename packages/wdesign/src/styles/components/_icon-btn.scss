@@ -1,0 +1,33 @@
+// WDesign — IconBtn（圆形图标按钮 · 原子基础件）
+// 被 Modal / Drawer / Notification / Carousel / ImagePreview / DatePicker 复用
+.wd-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border: 0;
+  border-radius: 50%;
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+  cursor: pointer;
+  transition: background var(--wd-dur-fast) ease, color var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease;
+}
+.wd-icon-btn:hover { background: var(--wd-tint-2); color: var(--wd-red-active); }
+.wd-icon-btn:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+
+.wd-icon-btn--ghost { background: transparent; }
+.wd-icon-btn--ghost:hover { background: var(--wd-tint-2); color: var(--wd-red); }
+
+.wd-icon-btn--sm { width: 30px; height: 30px; }
+.wd-icon-btn--lg { width: 40px; height: 40px; }
+/* ---- 微交互（精致版）---- */
+.wd-icon-btn {
+  transition: background var(--wd-dur-fast) var(--wd-ease-out),
+              color var(--wd-dur-fast) var(--wd-ease-out),
+              box-shadow var(--wd-dur) var(--wd-ease-out);
+}
+.wd-icon-btn:hover { box-shadow: 0 0 0 6px var(--wd-tint-1); }
+.wd-icon-btn:active { box-shadow: 0 0 0 3px var(--wd-tint-2); }
+

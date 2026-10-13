@@ -88,25 +88,25 @@ const detailTo = computed(() => ({
 .pull-card {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
+  gap: var(--wd-space-3);
   height: 100%;
-  padding: $space-4;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-4);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
   transition:
     box-shadow 0.2s ease,
     transform 0.2s ease;
 
   &:hover {
-    box-shadow: $shadow-lg;
+    box-shadow: var(--wd-shadow-pop);
     transform: translateY(-2px);
   }
 
   &__main {
     display: flex;
     flex-direction: column;
-    gap: $space-3;
+    gap: var(--wd-space-3);
     flex: 1;
     min-width: 0;
     text-decoration: none;
@@ -116,7 +116,7 @@ const detailTo = computed(() => ({
   &__head {
     display: flex;
     align-items: flex-start;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     min-width: 0;
   }
 
@@ -127,36 +127,36 @@ const detailTo = computed(() => ({
     font-size: 0.9375rem;
     font-weight: 600;
     line-height: 1.4;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__number {
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     font-weight: 500;
-    margin-right: $space-1;
+    margin-right: var(--wd-space-1);
   }
 
   &__branches {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     font-size: 0.75rem;
   }
 
   &__foot {
     display: flex;
     align-items: center;
-    gap: $space-2;
-    padding-top: $space-2;
-    border-top: 1px solid $color-surface-2;
+    gap: var(--wd-space-2);
+    padding-top: var(--wd-space-2);
+    border-top: 1px solid var(--wd-field);
     font-size: 0.75rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &__author {
     font-weight: 500;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__time {
@@ -167,10 +167,10 @@ const detailTo = computed(() => ({
 
 .branch-chip {
   padding: 0.125rem 0.625rem;
-  border-radius: $radius-full;
-  background: $color-surface-2;
-  color: $color-text-muted;
-  font-family: $font-mono;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+  font-family: var(--wd-font-mono);
   font-size: 0.6875rem;
   max-width: 12rem;
   overflow: hidden;
@@ -178,8 +178,8 @@ const detailTo = computed(() => ({
   white-space: nowrap;
 
   &--base {
-    background: $color-accent-light;
-    color: $color-accent;
+    background: var(--wd-tint-2);
+    color: var(--wd-red);
   }
 }
 
@@ -187,6 +187,6 @@ const detailTo = computed(() => ({
   flex-shrink: 0;
   width: 0.75rem;
   height: 0.75rem;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 </style>

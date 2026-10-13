@@ -207,9 +207,9 @@ onMounted(loadBranches)
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: $space-3;
-  padding: $space-2 $space-4;
-  margin-bottom: $space-2;
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-2) var(--wd-space-4);
+  margin-bottom: var(--wd-space-2);
 }
 
 .vs__crumbs {
@@ -222,7 +222,7 @@ onMounted(loadBranches)
 }
 
 .vs__crumb {
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   text-decoration: none;
   white-space: nowrap;
 
@@ -233,11 +233,11 @@ onMounted(loadBranches)
   }
 
   &:hover {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 
   &--active {
-    color: $color-text;
+    color: var(--wd-ink);
     font-weight: 500;
   }
 }
@@ -246,9 +246,9 @@ onMounted(loadBranches)
   flex-shrink: 0;
   padding: 4px 12px;
   border: none;
-  border-radius: $radius-full;
-  background: $color-surface;
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  color: var(--wd-ink-2);
   font-size: 12px;
   cursor: pointer;
 }
@@ -257,7 +257,7 @@ onMounted(loadBranches)
   flex: 1;
   display: grid;
   grid-template-columns: 240px 1fr;
-  gap: $space-3;
+  gap: var(--wd-space-3);
   min-height: 0;
 
   @include media-down(calc($bp-desktop - 1px)) {
@@ -271,10 +271,10 @@ onMounted(loadBranches)
   flex-direction: column;
   min-height: 0;
   overflow-y: auto;
-  padding: $space-2;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-2);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
 
   @include media-down(calc($bp-desktop - 1px)) {
     max-height: 220px;
@@ -282,12 +282,12 @@ onMounted(loadBranches)
 }
 
 .explorer__title {
-  padding: $space-1 $space-2 $space-2;
+  padding: var(--wd-space-1) var(--wd-space-2) var(--wd-space-2);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 /* ---------- 右侧编辑器 ---------- */
@@ -295,9 +295,9 @@ onMounted(loadBranches)
   display: flex;
   flex-direction: column;
   min-height: 0;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-md;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow);
   overflow: hidden;
 }
 
@@ -305,26 +305,26 @@ onMounted(loadBranches)
   display: flex;
   align-items: center;
   gap: 2px;
-  padding: $space-1 $space-2;
-  background: $color-surface-2;
+  padding: var(--wd-space-1) var(--wd-space-2);
+  background: var(--wd-field);
 }
 
 .edit__tab {
   padding: 5px 14px;
-  border-radius: $radius-md;
+  border-radius: var(--wd-radius-md);
   font-size: 12.5px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 
   &--active {
-    background: $color-surface;
-    color: $color-text;
+    background: var(--wd-card);
+    color: var(--wd-ink);
     font-weight: 500;
-    box-shadow: $shadow-sm;
+    box-shadow: var(--wd-shadow-sm);
   }
 }
 
 .edit__list {
-  padding: $space-2;
+  padding: var(--wd-space-2);
   margin: 0;
   list-style: none;
   overflow-y: auto;
@@ -333,21 +333,21 @@ onMounted(loadBranches)
 .row {
   display: flex;
   align-items: center;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   width: 100%;
   height: 34px;
-  padding: 0 $space-3;
+  padding: 0 var(--wd-space-3);
   border: none;
-  border-radius: $radius-md;
+  border-radius: var(--wd-radius-md);
   background: transparent;
-  color: $color-text;
+  color: var(--wd-ink);
   font-size: 13px;
   text-align: left;
   cursor: pointer;
-  transition: background $transition-fast;
+  transition: background var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
+    background: var(--wd-field);
   }
 }
 
@@ -355,7 +355,7 @@ onMounted(loadBranches)
   flex-shrink: 0;
   width: 15px;
   height: 15px;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
 }
 
 .row__name {
@@ -368,15 +368,15 @@ onMounted(loadBranches)
   display: flex;
   flex-direction: column;
   gap: 6px;
-  padding: $space-3;
+  padding: var(--wd-space-3);
   overflow-y: auto;
 }
 
 .edit__line {
   display: block;
   height: 12px;
-  border-radius: $radius-sm;
-  background: $color-surface-2;
+  border-radius: var(--wd-radius-sm);
+  background: var(--wd-field);
   animation: vs-shimmer 1.5s ease-in-out infinite;
 
   &:nth-child(odd) {
@@ -385,8 +385,8 @@ onMounted(loadBranches)
 }
 
 .edit__empty {
-  padding: $space-8;
-  color: $color-text-muted;
+  padding: var(--wd-space-8);
+  color: var(--wd-ink-2);
   text-align: center;
   font-size: 13px;
 }

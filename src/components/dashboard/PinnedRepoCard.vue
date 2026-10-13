@@ -16,7 +16,7 @@ function navigate() {
   router.push(`/repos/${owner}/${repoName}`)
 }
 
-/** 语言色点 class：_tokens.scss 中的 $color-lang-* 语义色（未知语言回退默认灰） */
+/** 语言色点 class：_tokens.scss 中的 $lang-* 语义色（未知语言回退默认灰） */
 const langClass = computed(() => {
   const lang = (props.repo.language ?? '').toLowerCase()
   const known = ['js', 'ts', 'python', 'rust', 'go', 'cpp']
@@ -78,30 +78,30 @@ const updatedText = computed(() => {
 .pinned-repo {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
-  padding: $space-6;
-  background: $color-surface;
-  box-shadow: $shadow-sm;
-  border-radius: $radius-lg;
-  transition: box-shadow $transition-fast;
+  gap: var(--wd-space-3);
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow-sm);
+  border-radius: var(--wd-radius-lg);
+  transition: box-shadow var(--wd-dur-fast) var(--wd-ease);
   cursor: pointer;
 
   &:hover {
-    box-shadow: $shadow-lg;
+    box-shadow: var(--wd-shadow-pop);
   }
 
   &__head {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: $space-3;
+    gap: var(--wd-space-3);
   }
 
   &__name {
     margin: 0;
     font-size: 1.0625rem;
     font-weight: 700;
-    color: $color-text;
+    color: var(--wd-ink);
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -110,11 +110,11 @@ const updatedText = computed(() => {
   &__stars {
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
+    gap: var(--wd-space-1);
     flex-shrink: 0;
     font-size: 0.8125rem;
     font-weight: 600;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     font-variant-numeric: tabular-nums;
   }
 
@@ -122,7 +122,7 @@ const updatedText = computed(() => {
     margin: 0;
     font-size: 0.875rem;
     line-height: 1.6;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
@@ -133,56 +133,56 @@ const updatedText = computed(() => {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: $space-3;
+    gap: var(--wd-space-3);
     margin-top: auto;
   }
 
   &__lang {
     display: inline-flex;
     align-items: center;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     font-size: 0.8125rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 
   &__updated {
     font-size: 0.75rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
   }
 }
 
 .lang-dot {
   width: 10px;
   height: 10px;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   flex-shrink: 0;
 
   &--default {
-    background: $color-text-muted;
+    background: var(--wd-ink-2);
   }
 
   &--js {
-    background: $color-lang-js;
+    background: $lang-js;
   }
 
   &--ts {
-    background: $color-lang-ts;
+    background: $lang-ts;
   }
 
   &--python {
-    background: $color-lang-python;
+    background: $lang-python;
   }
 
   &--rust {
-    background: $color-lang-rust;
+    background: $lang-rust;
   }
 
   &--go {
-    background: $color-lang-go;
+    background: $lang-go;
   }
 
   &--cpp {
-    background: $color-lang-cpp;
+    background: $lang-cpp;
   }
 }
 </style>

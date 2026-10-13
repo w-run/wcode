@@ -1,0 +1,21 @@
+// WDesign — Skeleton（骨架屏 · 色块脉冲）
+.wd-skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.wd-skeleton__item {
+  display: block;
+  background: var(--wd-field);
+  border-radius: 10px;
+  animation: wd-skeleton-pulse 1.4s ease-in-out infinite;
+}
+.wd-skeleton__item--text { height: 14px; border-radius: 7px; }
+.wd-skeleton--circle .wd-skeleton__item { border-radius: 50%; }
+
+@keyframes wd-skeleton-pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .55; }
+}

@@ -1,0 +1,25 @@
+// WDesign — Breadcrumb
+.wd-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 2px;
+  font-size: 13.5px;
+}
+
+.wd-breadcrumb__item {
+  border: 0;
+  background: transparent;
+  padding: 4px 9px;
+  border-radius: var(--wd-radius-pill);
+  font: inherit;
+  color: var(--wd-ink-2);
+  cursor: pointer;
+  transition: color var(--wd-dur-fast) ease, background var(--wd-dur-fast) ease;
+}
+.wd-breadcrumb__item:hover { color: var(--wd-red); background: var(--wd-tint-1); }
+
+.wd-breadcrumb__item--current { color: var(--wd-ink); font-weight: 700; cursor: default; }
+.wd-breadcrumb__item--current:hover { color: var(--wd-ink); background: transparent; }
+
+.wd-breadcrumb__sep { color: var(--wd-ink-3); font-size: 12px; user-select: none; }

@@ -1,0 +1,21 @@
+// Soft Bento · Red — Progress
+.wd-progress {
+  height: 10px;
+  width: 100%;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-tint-2);
+  overflow: hidden;
+}
+.wd-progress--thin { height: 6px; }
+
+.wd-progress__bar {
+  display: block;
+  height: 100%;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
+  transition: width .3s ease;
+}
+
+// 深色卡内使用
+.wd-progress--on-dark { background: var(--wd-on-dark-3); }
+.wd-progress--on-dark .wd-progress__bar { background: var(--wd-red-soft); }

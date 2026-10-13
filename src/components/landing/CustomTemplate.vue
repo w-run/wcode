@@ -29,12 +29,12 @@ const html = computed(() => {
 <style lang="scss" scoped>
 .custom {
   min-height: 100vh;
-  background: $color-bg;
+  background: var(--wd-bg);
 }
 
 .custom__inner {
   max-width: 800px;
   margin: 0 auto;
-  padding: $space-12 $space-6 $space-16;
+  padding: var(--wd-space-12) var(--wd-space-6) var(--wd-space-16);
 }
 </style>

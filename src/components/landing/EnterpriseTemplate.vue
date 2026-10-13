@@ -126,7 +126,7 @@ function scrollTo(index: number) {
 <style lang="scss" scoped>
 .ent {
   min-height: 100vh;
-  background: $color-surface;
+  background: var(--wd-card);
 }
 
 .ent__bar {
@@ -135,16 +135,16 @@ function scrollTo(index: number) {
   z-index: $z-sticky;
   display: flex;
   align-items: center;
-  gap: $space-6;
-  padding: $space-3 $space-8;
-  background: $color-surface;
-  box-shadow: $shadow-sm;
+  gap: var(--wd-space-6);
+  padding: var(--wd-space-3) var(--wd-space-8);
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow-sm);
 }
 
 .ent__brand {
   display: flex;
   align-items: center;
-  gap: $space-3;
+  gap: var(--wd-space-3);
 }
 
 .ent__logo {
@@ -153,8 +153,8 @@ function scrollTo(index: number) {
   justify-content: center;
   width: 30px;
   height: 30px;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
   font-size: 14px;
   font-weight: 700;
@@ -162,13 +162,13 @@ function scrollTo(index: number) {
 
 .ent__name {
   font-weight: 600;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .ent__nav {
   display: flex;
   align-items: center;
-  gap: $space-2;
+  gap: var(--wd-space-2);
   flex: 1;
   overflow-x: auto;
 }
@@ -176,39 +176,39 @@ function scrollTo(index: number) {
 .ent__nav-link {
   padding: 6px 12px;
   border: none;
-  border-radius: $radius-full;
+  border-radius: var(--wd-radius-pill);
   background: transparent;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   font-size: 12.5px;
   white-space: nowrap;
   cursor: pointer;
   transition:
-    background $transition-fast,
-    color $transition-fast;
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
-    color: $color-accent;
+    background: var(--wd-field);
+    color: var(--wd-red);
   }
 }
 
 .ent__cta {
   padding: 6px 16px;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
   color: #fff;
   font-size: 13px;
   text-decoration: none;
 
   &:hover {
-    background: $color-accent-hover;
+    background: var(--wd-red-hover);
   }
 }
 
 .ent__hero {
   max-width: 860px;
   margin: 0 auto;
-  padding: $space-16 $space-6 $space-12;
+  padding: var(--wd-space-16) var(--wd-space-6) var(--wd-space-12);
   text-align: center;
 }
 
@@ -216,13 +216,13 @@ function scrollTo(index: number) {
   font-size: 2.5rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  color: $color-text;
+  color: var(--wd-ink);
 }
 
 .ent__sub {
   max-width: 560px;
-  margin: $space-3 auto 0;
-  color: $color-text-muted;
+  margin: var(--wd-space-3) auto 0;
+  color: var(--wd-ink-2);
   font-size: 15px;
 }
 
@@ -230,8 +230,8 @@ function scrollTo(index: number) {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: $space-2;
-  margin-top: $space-6;
+  gap: var(--wd-space-2);
+  margin-top: var(--wd-space-6);
 }
 
 .ent__badge {
@@ -239,13 +239,13 @@ function scrollTo(index: number) {
   align-items: center;
   gap: 6px;
   padding: 6px 14px;
-  border-radius: $radius-full;
-  background: $color-surface-2;
-  color: $color-text-muted;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
   font-size: 12.5px;
 
   strong {
-    color: $color-text;
+    color: var(--wd-ink);
     font-weight: 600;
   }
 }
@@ -253,17 +253,17 @@ function scrollTo(index: number) {
 .ent__lang-dot {
   width: 8px;
   height: 8px;
-  border-radius: $radius-full;
-  background: $color-accent;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-red);
 }
 
 .ent__layout {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 0 $space-6 $space-16;
+  padding: 0 var(--wd-space-6) var(--wd-space-16);
   display: grid;
   grid-template-columns: 200px 1fr;
-  gap: $space-8;
+  gap: var(--wd-space-8);
   align-items: start;
 
   @include media-down($bp-desktop) {
@@ -277,9 +277,9 @@ function scrollTo(index: number) {
   display: flex;
   flex-direction: column;
   gap: 2px;
-  padding: $space-4;
-  border-radius: $radius-lg;
-  background: $color-bg;
+  padding: var(--wd-space-4);
+  border-radius: var(--wd-radius-lg);
+  background: var(--wd-bg);
 
   @include media-down($bp-desktop) {
     display: none;
@@ -290,31 +290,31 @@ function scrollTo(index: number) {
   font-size: 11px;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: $color-text-muted;
-  margin-bottom: $space-2;
+  color: var(--wd-ink-2);
+  margin-bottom: var(--wd-space-2);
 }
 
 .ent__toc-link {
   text-align: left;
   padding: 6px 10px;
   border: none;
-  border-radius: $radius-md;
+  border-radius: var(--wd-radius-md);
   background: transparent;
-  color: $color-text-muted;
+  color: var(--wd-ink-2);
   font-size: 13px;
   cursor: pointer;
   transition:
-    background $transition-fast,
-    color $transition-fast;
+    background var(--wd-dur-fast) var(--wd-ease),
+    color var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    background: $color-surface-2;
-    color: $color-accent;
+    background: var(--wd-field);
+    color: var(--wd-red);
   }
 }
 
 .ent__section {
-  margin-bottom: $space-8;
+  margin-bottom: var(--wd-space-8);
 
   &:last-child {
     margin-bottom: 0;
@@ -324,25 +324,25 @@ function scrollTo(index: number) {
 .ent__section-title {
   font-size: 1.15rem;
   font-weight: 600;
-  color: $color-text;
-  margin-bottom: $space-3;
-  padding-bottom: $space-2;
-  border-bottom: 2px solid $color-accent-light;
+  color: var(--wd-ink);
+  margin-bottom: var(--wd-space-3);
+  padding-bottom: var(--wd-space-2);
+  border-bottom: 2px solid var(--wd-tint-2);
 }
 
 .ent__full {
-  background: $color-bg;
+  background: var(--wd-bg);
   padding: 0;
 }
 
 .ent__empty {
   text-align: center;
-  padding: $space-12 0;
-  color: $color-text-muted;
+  padding: var(--wd-space-12) 0;
+  color: var(--wd-ink-2);
 }
 
 .ent__empty-link {
-  color: $color-accent;
+  color: var(--wd-red);
   text-decoration: none;
 }
 </style>

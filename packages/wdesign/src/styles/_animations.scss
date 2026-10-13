@@ -1,0 +1,142 @@
+// Soft Bento · Red — Animations
+// 基于 duration token（dur-fast / dur / dur-slow）+ ease 的动画封装
+
+// ── 通用动效 ──
+@mixin wd-transition($dur: var(--wd-dur), $easing: var(--wd-ease)) {
+  transition: $dur $easing;
+}
+
+// Fade（淡入淡出）
+@mixin wd-fade-in($dur: var(--wd-dur-fast)) {
+  animation: wd-fade-in $dur ease forwards;
+  @keyframes wd-fade-in { from { opacity: 0 } to { opacity: 1 } }
+}
+@mixin wd-fade-out($dur: var(--wd-dur-fast)) {
+  animation: wd-fade-out $dur ease forwards;
+  @keyframes wd-fade-out { from { opacity: 1 } to { opacity: 0 } }
+}
+
+// Slide（滑入）
+@mixin wd-slide-up($dist: 8px, $dur: var(--wd-dur-fast)) {
+  animation: wd-slide-up $dur ease forwards;
+  @keyframes wd-slide-up { from { opacity: 0; transform: translateY($dist) } to { opacity: 1; transform: translateY(0) } }
+}
+@mixin wd-slide-down($dist: 8px, $dur: var(--wd-dur-fast)) {
+  animation: wd-slide-down $dur ease forwards;
+  @keyframes wd-slide-down { from { opacity: 0; transform: translateY(-$dist) } to { opacity: 1; transform: translateY(0) } }
+}
+
+// Scale（缩放）
+@mixin wd-scale-in($scale: .92, $dur: var(--wd-dur-fast)) {
+  animation: wd-scale-in $dur ease forwards;
+  @keyframes wd-scale-in { from { opacity: 0; transform: scale($scale) } to { opacity: 1; transform: scale(1) } }
+}
+
+// ── 通用 class（给非 Vue 组件使用） ──
+
+// Press：按压反馈（配 :active）
+.wd-animated--press {
+  transition: transform var(--wd-dur-fast) ease;
+  &:active { transform: scale(.96); }
+}
+
+// Enter/Leave：菜单 / 折叠 / 提示 的入场离场
+.wd-collapse-enter-active { transition: opacity var(--wd-dur-fast) ease, transform var(--wd-dur-fast) ease; }
+.wd-collapse-enter-from,
+.wd-collapse-leave-to    { opacity: 0; transform: translateY(-4px); }
+
+// SlidePanel：抽屉 / 侧滑面板（配套 --right 反向）
+.wd-slide-panel--enter-active { transition: transform var(--wd-dur-slow) var(--wd-ease); }
+.wd-slide-panel--enter-from   { transform: translateX(-100%); }
+.wd-slide-panel--enter-to     { transform: translateX(0); }
+.wd-slide-panel--right .wd-slide-panel--enter-from { transform: translateX(100%); }
+
+// Skeleton 闪烁
+.wd-animated--skeleton {
+  background: linear-gradient(90deg, var(--wd-field) 25%, var(--wd-field-hover) 50%, var(--wd-field) 75%);
+  background-size: 200% 100%;
+  animation: wd-shimmer 1.4s ease-in-out infinite;
+}
+@keyframes wd-shimmer { 0% { background-position: 200% 0 } 100% { background-position: -200% 0 } }
+
+// Progress 进度条（宽度变化用 dur 档）
+.wd-animated--progress { transition: width var(--wd-dur) var(--wd-ease); }
+
+// ── 尺寸档位已迁移至 _tokens.scss（控件尺寸属令牌层）──
+
+// ── 精致微动效关键帧 ──
+// 光影掠过（填充面：让"光"滑过，而非位移/缩放）
+@keyframes wd-sheen {
+  from { transform: translateX(-130%) skewX(-18deg); opacity: 0; }
+  25%  { opacity: 1; }
+  to   { transform: translateX(330%) skewX(-18deg); opacity: 0; }
+}
+// 柔光呼吸（当前步骤 / 进行中状态：缓慢、克制）
+@keyframes wd-breathe {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(214, 40, 57, .16); }
+  50%      { box-shadow: 0 0 0 7px rgba(214, 40, 57, 0); }
+}
+// 绽开（徽标 / 内点：从中心柔和展开，无回弹）
+@keyframes wd-bloom {
+  from { opacity: 0; transform: scale(.88); }
+  to   { opacity: 1; transform: scale(1); }
+}
+// 轻盈沉降（浮层入场：位移 + 极轻缩放，收尾慢）
+@keyframes wd-settle {
+  from { opacity: 0; transform: translateY(-5px) scale(.985); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* 微动效核心集 */
+/* wd-ring-in — 输入框聚焦时内扩充 */
+@keyframes wd-ring-in {
+  from { box-shadow: 0 0 0 0 var(--wd-focus-ring-soft) }
+  to   { box-shadow: 0 0 0 4px var(--wd-focus-ring-soft) }
+}
+/* wd-ring-out — 切换外环闪现，脱色 */
+@keyframes wd-ring-out {
+  from { box-shadow: 0 0 0 8px rgba(214, 40, 57, .18) }
+  to   { box-shadow: 0 0 0 0 rgba(214, 40, 57, 0) }
+}
+/* wd-switch-ring-on — 开状态触发红色外环 */
+@keyframes wd-switch-ring-on {
+  from { box-shadow: 0 0 0 0 rgba(214, 40, 57, .28) }
+  to   { box-shadow: 0 0 0 8px rgba(214, 40, 57, 0) }
+}
+/* wd-switch-ring-off — 关状态触发灰色外环 */
+@keyframes wd-switch-ring-off {
+  from { box-shadow: 0 0 0 0 rgba(138, 144, 153, .20) }
+  to   { box-shadow: 0 0 0 10px rgba(138, 144, 153, 0) }
+}
+/* wd-check-pop — 勾选框选中时微弹 */
+@keyframes wd-check-pop {
+  0%   { transform: scale(.92) }
+  55%  { transform: scale(1.08) }
+  100% { transform: scale(1) }
+}
+/* wd-radio-dot — 单选圆点进场（细腻版） */
+@keyframes wd-radio-dot {
+  0%   { transform: scale(.4) }
+  50%  { transform: scale(1.12) }
+  100% { transform: scale(1) }
+}
+
+// ── 滚动揭示（反向迭代 · 源：w-run/blog）──────────────
+// 元素初始隐藏，进入视口时加 .is-revealed → 沿 expo 曲线从下方 12px 浮现。
+// 耗时用 --wd-dur-reveal（比普通快，留沉降空间）；可配合 JS 观察器错峰
+// （给每个元素设 --wd-reveal-delay）。
+@mixin wd-reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity var(--wd-dur-reveal, .45s) var(--wd-ease-out, cubic-bezier(.16, 1, .3, 1)),
+    transform var(--wd-dur-reveal, .45s) var(--wd-ease-out, cubic-bezier(.16, 1, .3, 1));
+  transition-delay: var(--wd-reveal-delay, 0s);
+  will-change: transform, opacity;
+
+  &.is-revealed {
+    opacity: 1;
+    transform: none;
+  }
+}
+

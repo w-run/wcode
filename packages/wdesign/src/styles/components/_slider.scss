@@ -1,0 +1,52 @@
+// WDesign — Slider
+.wd-slider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 340px;
+}
+
+.wd-slider input[type='range'] {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  height: 8px;
+  margin: 0;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-tint-2);
+  outline: none;
+}
+
+.wd-slider input[type='range']::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(25,27,31,.10);
+  cursor: grab;
+  transition: transform var(--wd-dur-fast) ease;
+}
+.wd-slider input[type='range']::-webkit-slider-thumb:active {
+  cursor: grabbing;
+  transform: scale(1.08);
+}
+.wd-slider input[type='range']:focus-visible {
+  box-shadow: 0 0 0 4px var(--wd-focus-ring-soft);
+}
+
+.wd-slider__value {
+  min-width: 36px;
+  text-align: right;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--wd-ink);
+}
+/* ---- 微交互（精致版）---- */
+.wd-slider input[type='range']::-webkit-slider-thumb {
+  transition: box-shadow var(--wd-dur) var(--wd-ease-out), transform var(--wd-dur-fast) var(--wd-ease-out);
+}
+.wd-slider input[type='range']:hover::-webkit-slider-thumb { box-shadow: 0 0 0 7px var(--wd-tint-2); }
+

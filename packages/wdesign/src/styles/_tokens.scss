@@ -1,0 +1,161 @@
+// =============================================================
+//  Soft Bento · Red — Design Tokens
+//  主题色 #D62839 · 无边框 · 色块分层 · 全圆角
+//
+//  双轨制：
+//   · SCSS 变量  —— 编译期使用（mixin / 扩展样式）
+//   · CSS 自定义属性 —— 运行期使用（组件样式全部引用 var()，
+//     覆盖 :root 上的变量即可整体换肤）
+// =============================================================
+
+// --- Brand · 主题红及其状态（浅色 / 深色模式下恒为 #D62839） --
+$wd-red:        #D62839 !default; // 主题红 · 主按钮 / 关键数据
+$wd-red-hover:  #BC2332 !default; // 悬停
+$wd-red-active: #A21E2B !default; // 按下
+$wd-red-soft:   #E05B68 !default; // 深色底上的红
+
+// --- Tint · 红的浅色延伸（L2 浅色块层） ---------------------
+$wd-tint-1:     #FDF2F3 !default; // 最浅 · 高亮底
+$wd-tint-2:     #FBEAEB !default; // 块底 / 次级按钮
+$wd-tint-3:     #F8DDDF !default; // 轨道 / 选中
+$wd-tint-4:     #F3BEC4 !default; // 强调块
+
+// --- Neutral · 灰白承担 90% 画面 ---------------------------
+$wd-ink:        #191B1F !default; // 正文
+$wd-ink-2:      #8A9099 !default; // 说明
+$wd-ink-3:      #B8BEC7 !default; // 占位
+// 反向迭代（源：w-run/blog）：更完整的弱文本梯度，供时间戳/分割/禁用使用
+$wd-ink-4:      #CDD2D7 !default; // 极弱（时间戳 / 次要标注）
+$wd-ink-5:      #E3E6EA !default; // 最弱（分割 / 描边 / 禁用）
+$wd-bg:         #F7F8FA !default; // 页面底 L0
+$wd-card:       #FFFFFF !default; // 卡片 L1
+$wd-dark:       #1C1C1C !default; // 深色一级 · 锚点 L4
+$wd-dark-2:     #2F2F2F !default; // 深色二级 · 浮层 / 悬停
+$wd-dark-text:  #FFFFFF !default; // 深色锚点上的文字（深色主题翻转为深字）
+
+// --- Semantic · 仅小面积（状态点 / 小字提示） --------------
+$wd-success:    #2FA57C !default;
+$wd-warning:    #E8A33D !default;
+$wd-success-soft: #E8F6F0 !default; // 成功 · 浅底
+$wd-warning-soft: #FCF4E8 !default; // 警告 · 浅底
+$wd-field:        #E9EDF1 !default; // 控件底色 · 白卡 / 灰底均可辨识
+
+// --- Motion（动效）
+$wd-dur:      .18s !default;
+$wd-dur-slow: .24s !default; // 大位移 / 尺寸变化（分段滑块、抽屉、折叠）
+$wd-dur-fast: .12s !default;
+$wd-ease:     cubic-bezier(.25, .8, .35, 1) !default;
+$wd-ease-spring: cubic-bezier(.34, 1.56, .64, 1) !default; // 微型弹簧
+$wd-ease-out:    cubic-bezier(.16, 1, .3, 1) !default;    // 轻盈沉降
+// 反向迭代（源：w-run/blog）—— 更细腻的动效曲线族
+$wd-ease-spring-soft: cubic-bezier(.34, 1.3, .64, 1) !default; // 克制弹性（UI 微交互首选）
+$wd-ease-smooth:      cubic-bezier(.4, 0, .2, 1) !default;     // 平滑无感（颜色 / 背景 / 面板）
+$wd-ease-sharp:       cubic-bezier(.6, 0, .8, .2) !default;    // 干脆收场（退出 / 按下）
+$wd-dur-reveal: .45s !default; // 揭示 / 入场（比 dur-slow 更长，给沉降留空间）
+// --- 深色主题值（SCSS 形式，供编译期引用；_dark.scss 以此发射 CSS 变量）---
+// 反向迭代（源：w-run/blog）：深色值此前只有 CSS 变量、缺 SCSS 变量，
+// 导致消费方在编译期需要深色值时只能硬编码颜色。
+$wd-bg-dark:      #121214 !default;
+$wd-card-dark:    #1C1C1E !default;
+$wd-field-dark:   #2A2A2E !default;
+$wd-field-hover-dark: #3A3A40 !default;
+$wd-ink-dark:     #E8E8EC !default;
+$wd-ink-2-dark:   #9A9AB2 !default;
+$wd-ink-3-dark:   #74748C !default;
+$wd-ink-4-dark:   #58586E !default;
+$wd-ink-5-dark:   #45455A !default;
+$wd-dark-dark:    #F0F0F0 !default;
+$wd-dark-text-dark: #1C1C1E !default;
+$wd-dark-2-dark:  #3A3A40 !default;
+
+$wd-mask:     rgba(28, 28, 28, .42) !default; // 遮罩（深色主题会覆盖）
+// 反向迭代（源：w-run/blog）：主题切换时的全局过渡时长
+$wd-dur-theme: .3s !default;
+
+// --- 主题感知图片（反向迭代 · 源：w-run/blog）
+// 深色下图片易过亮，用滤镜统一压暗；<img> 与背景图都可套用
+$wd-img-filter:        none !default;              // 图片滤镜（浅色：不处理）
+$wd-img-filter-invert: invert(1) hue-rotate(180deg) !default; // 图标反向（浅色用深色图）
+$wd-logo-filter:       none !default;              // Logo 滤镜
+$wd-logo-opacity:      1 !default;                 // Logo 透明度
+$wd-toast-bg: rgba(255, 255, 255, .78) !default; // Toast 半透明底（深色主题会覆盖）
+$wd-field-hover: #E3E7EC !default; // 控件悬停底
+$wd-dark-3:      #3A3A3A !default; // 深色按钮按下
+$wd-ring-soft:   rgba(25, 27, 31, .12) !default; // 细环 / 微投影
+$wd-underline:   rgba(25, 27, 31, .4) !default; // 下划线修饰
+$wd-shadow-sm:   0 4px 12px rgba(25, 27, 31, .06) !default; // 小元件浮起
+$wd-shadow-pop:  0 12px 28px rgba(25, 27, 31, .14) !default; // 浮层（菜单/提示）
+$wd-shadow-lg:   0 24px 60px rgba(25, 27, 31, .2) !default; // 模态 / 抽屉 / 灯箱
+$wd-shadow-knob: 0 2px 8px rgba(25, 27, 31, .22) !default; // 滑块拇指 / 开关旋钮
+$wd-shadow-accent: 0 8px 20px rgba(214, 40, 57, .28) !default; // 主题红辉光（强调按钮 / 选中卡）· 反哺自 wcode
+$wd-on-dark:      rgba(255, 255, 255, .62) !default; // 深色面上的次级文字
+$wd-on-dark-2:    rgba(255, 255, 255, .8) !default; // 深色面上的强次级
+$wd-on-dark-3:    rgba(255, 255, 255, .14) !default; // 深色面上的轨道
+$wd-on-dark-text: #EDEFF2 !default; // 深色面上的正文（如代码块）
+$wd-mark-bg:      rgba(214, 40, 57, .14) !default; // 文本高亮
+$wd-link-underline: rgba(214, 40, 57, .35) !default; // 链接下划线
+
+$wd-danger:     $wd-red !default;
+
+// --- Focus Ring --------------------------------------------
+$wd-focus-ring-faint: rgba(214, 40, 57, .08) !default; // 轻淡（输入框等大面积控件）
+$wd-focus-ring:      rgba(214, 40, 57, .22) !default;
+$wd-focus-ring-soft: rgba(214, 40, 57, .14) !default;
+
+// --- Radius · 圆润是风格核心 --------------------------------
+$wd-radius-sm:   12px !default;
+$wd-radius-md:   16px !default;
+$wd-radius-lg:   24px !default;
+$wd-radius-xl:   32px !default;
+$wd-radius-pill: 999px !default;
+
+// --- Shadow · 只允许一层 ------------------------------------
+$wd-shadow:       0 12px 30px rgba(25, 27, 31, .06) !default;
+$wd-shadow-hover: 0 16px 40px rgba(25, 27, 31, .09) !default;
+
+// --- Spacing · 4pt 基准 -------------------------------------
+$wd-space-1:  4px  !default;
+$wd-space-2:  8px  !default;
+$wd-space-3:  12px !default;
+$wd-space-4:  16px !default;
+$wd-space-6:  24px !default;
+$wd-space-8:  32px !default;
+$wd-space-12: 48px !default;
+$wd-space-16: 64px !default;
+
+// --- Typography ---------------------------------------------
+// 字体：拉丁 Mona Sans + 中文 思源黑体（Source Han Sans SC）—— 均为 VF 可变字体
+// 字体栈：WDesignSans 优先（WIP，可先用），Mona Sans / 系统中文字体兜底
+$wd-font-family: "WDesignSans Latin", "WDesignSans CJK Symbol", "WDesignSans GB2312", "WDesignSans GB2312 Extra", "WDesignSans BIG5", "WDesignSans BIG5 Extra", "WDesignSans JIS", "Mona Sans", "Source Han Sans SC", "PingFang SC", -apple-system, BlinkMacSystemFont, "Inter", sans-serif !default;
+$wd-font-mono:   "Mona Sans Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace !default;
+$wd-fs-display:  56px !default; // 800
+$wd-fs-h1:       32px !default; // 800
+$wd-fs-h2:       24px !default; // 700
+$wd-fs-h3:       18px !default; // 600
+$wd-fs-body:     15.5px !default; // 400
+$wd-fs-caption:  13px !default; // 400 · $wd-ink-2
+
+// --- 控件尺寸档位（sm / md / lg）· 供 button / input / select / tag 复用
+$wd-size-sm: 34px !default;
+$wd-size-md: 44px !default;
+$wd-size-lg: 56px !default;
+
+$wd-padding-sm: 10px 20px !default;
+$wd-padding-md: 13px 24px !default;
+$wd-padding-lg: 16px 32px !default;
+
+$wd-font-size-sm: 13px !default;
+$wd-font-size-md: 14.5px !default;
+$wd-font-size-lg: 16px !default;
+
+// =============================================================
+//  CSS 自定义属性（运行期主题化）
+//  换肤示例：在任意作用域覆盖这些变量
+//  .theme-warm { --wd-red: #E5484D; --wd-tint-2: #FDECEC; }
+// =============================================================
+
+// =============================================================
+//  ⚠️ 本文件【只含 SCSS 编译期变量】，不发射任何 CSS。
+//     可安全地被任意多个 SFC / 入口 @use（幂等，零重复输出）。
+//     运行期 CSS 自定义属性（:root { --wd-* }）见 _vars.scss —— 全站只引入一次。
+// =============================================================

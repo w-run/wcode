@@ -1,0 +1,29 @@
+/* ============================================================
+ * WDesign — 字体（静态托管版）
+ * 部署到 https://box.w-run.net/npm/fonts/ 后：
+ *   普通 CSS 项目：  <link rel="stylesheet" href="https://box.w-run.net/npm/fonts/wdesign-fonts.css">
+ *   SCSS 项目：      @import 'wdesign/src/styles/fonts'  （内部走下面的绝对 URL）
+ * 两个字体均为 SIL OFL 1.1，可免费商用。
+ *
+ * 中文思源黑体已转 WOFF2（16.9MB → 7.4MB，压缩 56%），
+ * 现代浏览器加载 woff2，老浏览器回退 ttf。
+ * ============================================================ */
+
+/* 拉丁 · Mona Sans VF（wght 200–900） */
+@font-face {
+  font-family: 'Mona Sans';
+  src: url('https://box.w-run.net/npm/fonts/mona-sans-vf.woff2') format('woff2-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* 中文 · 思源黑体 SC VF（wght 200–900） */
+@font-face {
+  font-family: 'Source Han Sans SC';
+  src: url('https://box.w-run.net/npm/fonts/noto-sans-sc-vf.woff2') format('woff2-variations'),
+       url('https://box.w-run.net/npm/fonts/noto-sans-sc-vf.ttf') format('truetype-variations');
+  font-weight: 200 900;
+  font-style: normal;
+  font-display: swap;
+}

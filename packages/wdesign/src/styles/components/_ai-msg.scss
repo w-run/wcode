@@ -1,0 +1,118 @@
+// WDesign — AiMessage（AI 消息框 · 流式 / 思考 / 操作）
+.wd-ai-msg { display: flex; gap: 12px; align-items: flex-start; }
+.wd-ai-msg--self { flex-direction: row-reverse; }
+
+.wd-ai-msg__avatar {
+  width: 34px;
+  height: 34px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--wd-tint-2);
+  color: var(--wd-red);
+  font-size: 12px;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.wd-ai-msg--self .wd-ai-msg__avatar { background: var(--wd-dark); color: var(--wd-dark-text); }
+
+.wd-ai-msg__bubble {
+  max-width: 78%;
+  padding: 13px 16px;
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  border-top-left-radius: 6px;
+  box-shadow: var(--wd-shadow);
+}
+.wd-ai-msg--self .wd-ai-msg__bubble {
+  background: var(--wd-tint-2);
+  border-top-left-radius: 18px;
+  border-top-right-radius: 6px;
+  color: var(--wd-red-active);
+}
+
+.wd-ai-msg__thinking {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 8px;
+  font-size: 12.5px;
+  color: var(--wd-ink-2);
+}
+.wd-ai-msg__thinking i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--wd-red-soft);
+  animation: wd-ai-think 1s ease-in-out infinite;
+}
+.wd-ai-msg__thinking i:nth-child(2) { animation-delay: var(--wd-dur-fast); }
+.wd-ai-msg__thinking i:nth-child(3) { animation-delay: .32s; }
+@keyframes wd-ai-think {
+  0%, 100% { opacity: .35; transform: translateY(0); }
+  50% { opacity: 1; transform: translateY(-2px); }
+}
+
+.wd-ai-msg__text {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.wd-ai-msg__cursor { display: inline-block; color: var(--wd-red); animation: wd-ai-blink 1s step-end infinite; }
+@keyframes wd-ai-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.wd-ai-msg__actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+
+// ---- 深度思考（reasoning_content）独立区域
+.wd-ai-msg__reasoning {
+  margin-bottom: 10px;
+  background: var(--wd-bg);
+  border-radius: var(--wd-radius-sm);
+  overflow: hidden;
+}
+.wd-ai-msg--self .wd-ai-msg__reasoning { background: var(--wd-card); }
+
+.wd-ai-msg__reasoning-head {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 10px 14px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  text-align: left;
+  color: var(--wd-ink-2);
+  transition: color var(--wd-dur-fast) ease;
+}
+.wd-ai-msg__reasoning-head:hover { color: var(--wd-ink); }
+.wd-ai-msg__reasoning-spark { color: var(--wd-red-soft); flex: none; }
+.wd-ai-msg__reasoning-title { color: var(--wd-ink); }
+.wd-ai-msg__reasoning-state { margin-left: auto; font-size: 11.5px; font-weight: 600; color: var(--wd-ink-3); }
+
+.wd-ai-msg__reasoning-body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--wd-dur-slow) ease;
+}
+.wd-ai-msg__reasoning--open .wd-ai-msg__reasoning-body { grid-template-rows: 1fr; }
+.wd-ai-msg__reasoning-inner { overflow: hidden; }
+.wd-ai-msg__reasoning-text {
+  margin: 0;
+  padding: 0 14px 12px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--wd-ink-2);
+  white-space: pre-wrap;
+  word-break: break-word;
+}

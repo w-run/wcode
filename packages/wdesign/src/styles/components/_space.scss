@@ -1,0 +1,10 @@
+// WDesign — Space（间距容器 · 布局）
+.wd-space {
+  display: flex;
+  gap: var(--wd-space-3);
+}
+.wd-space--col { flex-direction: column; }
+.wd-space--wrap { flex-wrap: wrap; }
+.wd-space--between { justify-content: space-between; }
+.wd-space--center { justify-content: center; align-items: center; }
+.wd-space--grow > * { flex: 1; }

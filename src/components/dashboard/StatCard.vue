@@ -27,26 +27,26 @@ withDefaults(
 .stat-card {
   display: flex;
   align-items: center;
-  gap: $space-4;
-  padding: $space-6;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
-  transition: box-shadow $transition-fast;
+  gap: var(--wd-space-4);
+  padding: var(--wd-space-6);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
+  transition: box-shadow var(--wd-dur-fast) var(--wd-ease);
 
   &:hover {
-    box-shadow: $shadow-md;
+    box-shadow: var(--wd-shadow);
   }
 
   &--accent {
-    background: $color-accent-light;
+    background: var(--wd-tint-2);
   }
 
   &--success {
-    background: $color-success-light;
+    background: var(--wd-success-soft);
   }
 
   &--warning {
-    background: $color-warning-light;
+    background: var(--wd-warning-soft);
   }
 
   &__icon {
@@ -56,8 +56,8 @@ withDefaults(
     flex-shrink: 0;
     width: 44px;
     height: 44px;
-    border-radius: $radius-full;
-    background: $color-surface;
+    border-radius: var(--wd-radius-pill);
+    background: var(--wd-card);
 
     :deep(svg) {
       width: 22px;
@@ -66,21 +66,21 @@ withDefaults(
   }
 
   &--accent &__icon {
-    color: $color-accent;
+    color: var(--wd-red);
   }
 
   &--success &__icon {
-    color: $color-success;
+    color: var(--wd-success);
   }
 
   &--warning &__icon {
-    color: $color-warning;
+    color: var(--wd-warning);
   }
 
   &__content {
     display: flex;
     flex-direction: column;
-    gap: $space-1;
+    gap: var(--wd-space-1);
     min-width: 0;
   }
 
@@ -88,13 +88,13 @@ withDefaults(
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
-    color: $color-text;
+    color: var(--wd-ink);
     font-variant-numeric: tabular-nums;
   }
 
   &__label {
     font-size: 0.8125rem;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     line-height: 1;
   }
 }

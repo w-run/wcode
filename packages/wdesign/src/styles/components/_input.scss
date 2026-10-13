@@ -1,0 +1,43 @@
+// Soft Bento · Red — Input
+.wd-input {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 220px;
+  height: 44px;
+  padding: 0 22px;
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-pill);
+  color: var(--wd-ink);
+  font-size: var(--wd-font-size-md);
+  transition: box-shadow var(--wd-dur-fast) ease;
+}
+.wd-input--rounded { border-radius: var(--wd-radius-md); }
+.wd-input--lg { height: 54px; padding: 0 28px; font-size: var(--wd-font-size-lg); }
+.wd-input--sm { height: 34px; padding: 0 14px; font-size: var(--wd-font-size-sm); }
+.wd-input:focus-within {
+  box-shadow: 0 0 0 4px var(--wd-focus-ring-faint);
+  animation: wd-ring-in var(--wd-dur) var(--wd-ease-out);
+  caret-color: var(--wd-red);
+}
+
+.wd-input__icon { display: inline-flex; flex: none; color: var(--wd-ink-3); }
+
+.wd-input input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  font: inherit;
+  color: inherit;
+}
+.wd-input input::placeholder { color: var(--wd-ink-3); }
+.wd-input input:disabled { color: var(--wd-ink-3); background: transparent; pointer-events: none; }
+/* ---- 微交互（精致版）---- */
+.wd-input { transition: box-shadow var(--wd-dur) var(--wd-ease-out), background var(--wd-dur-fast) var(--wd-ease-out); }
+.wd-input__icon { transition: color var(--wd-dur-fast) var(--wd-ease-out); }
+.wd-input input::placeholder { opacity: 1; transition: opacity var(--wd-dur) ease; }
+.wd-input:focus-within input::placeholder { opacity: .45; }
+.wd-input:focus-within .wd-input__icon { color: var(--wd-red); }
+

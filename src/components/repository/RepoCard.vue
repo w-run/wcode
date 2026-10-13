@@ -102,26 +102,26 @@ function navigate() {
 .repo-card {
   display: flex;
   flex-direction: column;
-  gap: $space-3;
+  gap: var(--wd-space-3);
   height: 100%;
-  padding: $space-6;
-  background: $color-surface;
-  border-radius: $radius-lg;
-  box-shadow: $shadow-sm;
+  padding: var(--wd-space-6);
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-lg);
+  box-shadow: var(--wd-shadow-sm);
   transition:
     box-shadow 0.2s ease,
     transform 0.2s ease;
   cursor: pointer;
 
   &:hover {
-    box-shadow: $shadow-lg;
+    box-shadow: var(--wd-shadow-pop);
     transform: translateY(-2px);
   }
 
   &__head {
     display: flex;
     align-items: center;
-    gap: $space-2;
+    gap: var(--wd-space-2);
     min-width: 0;
   }
 
@@ -129,7 +129,7 @@ function navigate() {
     flex-shrink: 0;
     width: 0.625rem;
     height: 0.625rem;
-    border-radius: $radius-full;
+    border-radius: var(--wd-radius-pill);
   }
 
   &__name {
@@ -140,15 +140,15 @@ function navigate() {
     white-space: nowrap;
     font-size: 1rem;
     font-weight: 600;
-    color: $color-text;
+    color: var(--wd-ink);
   }
 
   &__badge {
     flex-shrink: 0;
     padding: 0.125rem 0.5rem;
-    border-radius: $radius-full;
-    background: $color-surface-2;
-    color: $color-text-muted;
+    border-radius: var(--wd-radius-pill);
+    background: var(--wd-field);
+    color: var(--wd-ink-2);
     font-size: 0.6875rem;
     font-weight: 500;
   }
@@ -157,7 +157,7 @@ function navigate() {
     flex: 1;
     min-height: 2.5em;
     margin: 0;
-    color: $color-text-muted;
+    color: var(--wd-ink-2);
     font-size: 0.8125rem;
     line-height: 1.5;
     display: -webkit-box;
@@ -170,8 +170,8 @@ function navigate() {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: $space-2;
-    color: $color-text-muted;
+    gap: var(--wd-space-2);
+    color: var(--wd-ink-2);
     font-size: 0.75rem;
   }
 
@@ -185,18 +185,18 @@ function navigate() {
 
   &__foot {
     display: flex;
-    gap: $space-4;
-    padding: $space-2 $space-3;
-    border-radius: $radius-full;
-    background: $color-surface-2;
-    color: $color-text-muted;
+    gap: var(--wd-space-4);
+    padding: var(--wd-space-2) var(--wd-space-3);
+    border-radius: var(--wd-radius-pill);
+    background: var(--wd-field);
+    color: var(--wd-ink-2);
     font-size: 0.75rem;
   }
 
   &__stat {
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
+    gap: var(--wd-space-1);
 
     .icon {
       width: 0.875rem;

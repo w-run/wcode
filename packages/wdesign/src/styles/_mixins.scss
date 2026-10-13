@@ -1,0 +1,74 @@
+// =============================================================
+//  Soft Bento · Red — Mixins
+//  供业务样式复用的风格化 mixin（编译期）
+// =============================================================
+@import 'tokens';
+
+// 便当盒卡片：白底 + 大圆角 + 单层浅阴影（无边框）
+@mixin wd-card($radius: $wd-radius-lg) {
+  background: $wd-card;
+  border-radius: $radius;
+  box-shadow: $wd-shadow;
+}
+
+// 胶囊
+@mixin wd-pill {
+  border-radius: $wd-radius-pill;
+}
+
+// 键盘焦点环（红色柔光）
+@mixin wd-focus-ring {
+  outline: none;
+  box-shadow: 0 0 0 4px $wd-focus-ring;
+}
+
+// 单行截断
+@mixin wd-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// 次级文字
+@mixin wd-ink-2 {
+  color: $wd-ink-2;
+}
+
+// 主题切换过渡（浅/深之间颜色平滑过渡）
+// 用法：body { @include wd-theme-transition; }
+@mixin wd-theme-transition {
+  transition:
+    background-color $wd-dur-theme ease,
+    color $wd-dur-theme ease,
+    border-color $wd-dur-theme ease,
+    box-shadow $wd-dur-theme ease,
+    filter $wd-dur-theme ease;
+}
+
+// 强调文本：红色虚线下划线（反向迭代 · 源：w-run/blog 的 u 元素）
+@mixin wd-em {
+  text-decoration: none;
+  border-bottom: 2px dashed $wd-red;
+  padding-bottom: 1px;
+  color: inherit;
+}
+
+// 标题装饰线：标题下方红色小胶囊，hover 渐显（反向迭代 · 源：w-run/blog title-line）
+// 用法：h2 { @include wd-title-line(2em, 5px); }
+@mixin wd-title-line($w: 2em, $h: 5px) {
+  position: relative;
+  &::after {
+    content: '';
+    display: block;
+    width: $w;
+    height: $h;
+    border-radius: $wd-radius-pill;
+    background: $wd-red;
+    opacity: .3;
+    margin-top: .5em;
+    transition: opacity $wd-dur-slow ease;
+  }
+  &:hover::after {
+    opacity: 1;
+  }
+}

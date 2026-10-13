@@ -1,0 +1,21 @@
+// WDesign — OTP（验证码输入框）
+.wd-otp { display: flex; gap: 10px; }
+
+.wd-otp__box {
+  width: 52px;
+  height: 56px;
+  border: 0;
+  border-radius: var(--wd-radius-sm);
+  background: var(--wd-field);
+  color: var(--wd-ink);
+  font: inherit;
+  font-family: var(--wd-font-mono);
+  font-size: 22px;
+  font-weight: 700;
+  text-align: center;
+  outline: none;
+  transition: background var(--wd-dur-fast) ease, box-shadow var(--wd-dur-fast) ease;
+}
+.wd-otp__box:focus { background: var(--wd-card); box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+.wd-otp__box::placeholder { color: var(--wd-ink-3); }
+.wd-otp__box:disabled { opacity: .5; }

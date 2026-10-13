@@ -1,0 +1,227 @@
+// WDesign — Segmented（分段控制 · 选中滑块平滑平移）
+.wd-segmented {
+  position: relative;
+  display: inline-flex;
+  gap: 4px;
+  padding: 5px;
+  background: var(--wd-field);
+  border-radius: var(--wd-radius-pill);
+}
+.wd-segmented--block { display: flex; width: 100%; }
+.wd-segmented--block .wd-segmented__item { flex: 1; }
+
+.wd-segmented__slider {
+  position: absolute;
+  top: 5px;
+  bottom: 5px;
+  left: 0;
+  z-index: 0;
+  border-radius: var(--wd-radius-pill);
+  background: var(--wd-card);
+  box-shadow: var(--wd-shadow-sm);
+  transition: transform var(--wd-dur-slow) cubic-bezier(.25, .8, .35, 1), width var(--wd-dur-slow) cubic-bezier(.25, .8, .35, 1), height var(--wd-dur-slow) cubic-bezier(.25, .8, .35, 1);
+}
+.wd-segmented--dark { background: var(--wd-dark-2); }
+.wd-segmented--dark .wd-segmented__item { color: var(--wd-on-dark); }
+.wd-segmented--dark .wd-segmented__item:hover { color: #fff; }
+.wd-segmented--dark .wd-segmented__slider { background: var(--wd-dark); box-shadow: none; }
+
+.wd-segmented__item {
+  position: relative;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 9px 18px;
+  border: 0;
+  border-radius: var(--wd-radius-pill);
+  background: transparent;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--wd-ink-2);
+  cursor: pointer;
+  transition: color var(--wd-dur-fast) ease;
+  white-space: nowrap;
+}
+.wd-segmented__item:hover { color: var(--wd-ink); }
+.wd-segmented__item:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--wd-focus-ring-soft); }
+.wd-segmented__item--active { color: var(--wd-ink); }
+.wd-segmented--dark .wd-segmented__item--active { color: var(--wd-dark-text); }
+.wd-segmented--dark .wd-segmented__item--active:hover { color: var(--wd-dark-text); }
+
+/* =============================================================
+ *  溢出模式：单行横向滚动（选项多时）
+ *  · 隐藏滚动条
+ *  · 两端渐隐提示（仅在对应方向还有内容时出现）
+ *  · 选中项自动滚入视野（JS 负责）
+ * ============================================================= */
+.wd-segmented-wrap {
+  display: inline-block;
+  max-width: 100%;
+}
+/* auto 模式：wrap 撑满容器宽度（块级），track 不超出 —— 供 JS 量取真实可用宽度 */
+.wd-segmented-wrap--auto {
+  display: block;
+}
+.wd-segmented-wrap--auto .wd-segmented {
+  max-width: 100%;
+}
+
+.wd-segmented-wrap--scroll {
+  display: block;
+  overflow: hidden; /* 裁掉滚动区的溢出，渐隐才贴合边缘 */
+  border-radius: var(--wd-radius-pill);
+}
+
+.wd-segmented-wrap--scroll .wd-segmented {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none; /* Firefox */
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+.wd-segmented-wrap--scroll .wd-segmented::-webkit-scrollbar {
+  display: none; /* WebKit */
+}
+
+/* 两端渐隐：用 mask 让内容淡出，而非盖一层色块（不挑背景色） */
+.wd-segmented-wrap--scroll.wd-segmented-wrap--fade-l .wd-segmented {
+  mask-image: linear-gradient(to right, transparent 0, #000 28px);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px);
+}
+.wd-segmented-wrap--scroll.wd-segmented-wrap--fade-r .wd-segmented {
+  mask-image: linear-gradient(to left, transparent 0, #000 28px);
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 28px);
+}
+.wd-segmented-wrap--scroll.wd-segmented-wrap--fade-l.wd-segmented-wrap--fade-r .wd-segmented {
+  mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 28px, #000 calc(100% - 28px), transparent 100%);
+}
+
+/* 滚动模式下不换行 */
+.wd-segmented-wrap--scroll .wd-segmented__item {
+  flex: none;
+}
+
+/* =============================================================
+ *  下拉降级（auto 模式，选项过多）
+ * ============================================================= */
+
+/* 测量态：track 移出视觉流但仍参与布局，供 JS 量取真实宽度 */
+.wd-segmented-wrap--measuring .wd-segmented {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 0;
+  overflow: hidden;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.wd-segmented-picker {
+  position: relative;
+  display: inline-block;
+  min-width: 168px;
+  max-width: 100%;
+}
+
+.wd-segmented-picker__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  padding: 0.65rem 0.9rem 0.65rem 1rem;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--wd-ink, #191b1f);
+  background: var(--wd-field, #e9edf1);
+  border: none;
+  border-radius: var(--wd-radius-pill, 999px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--wd-dur-fast, .18s) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));
+}
+.wd-segmented-picker__trigger:hover {
+  background: var(--wd-field-hover, #dfe4ea);
+}
+.wd-segmented-picker__trigger:focus-visible {
+  outline: 2px solid var(--wd-red, #d62839);
+  outline-offset: 2px;
+}
+
+.wd-segmented-picker__label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.wd-segmented-picker__meta {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--wd-ink-3, #6e7480);
+  font-variant-numeric: tabular-nums;
+}
+.wd-segmented-picker__caret {
+  margin-left: auto;
+  color: var(--wd-ink-3, #6e7480);
+  transition: transform var(--wd-dur-fast, .18s) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));
+  flex: none;
+}
+.wd-segmented-picker__caret.is-open {
+  transform: rotate(180deg);
+}
+
+/* 面板（跟 WdDropdown 视觉同源） */
+.wd-segmented-picker__panel {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  min-width: 100%;
+  max-width: min(320px, 88vw);
+  max-height: min(320px, 60vh);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 8px;
+  background: var(--wd-card, #fff);
+  border-radius: var(--wd-radius-md, 14px);
+  box-shadow: var(--wd-shadow-hover, 0 12px 32px rgba(14, 15, 19, .14));
+  z-index: 60;
+  scrollbar-width: thin;
+}
+
+.wd-segmented-picker__option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.5rem 0.7rem;
+  font: inherit;
+  font-size: 13.5px;
+  font-weight: 500;
+  text-align: left;
+  color: var(--wd-ink, #191b1f);
+  background: none;
+  border: none;
+  border-radius: var(--wd-radius-sm, 8px);
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color var(--wd-dur-fast, .18s) var(--wd-ease-smooth, cubic-bezier(.4, 0, .2, 1));
+}
+.wd-segmented-picker__option:hover {
+  background: var(--wd-field, #e9edf1);
+}
+.wd-segmented-picker__option--active {
+  color: var(--wd-red, #d62839);
+  font-weight: 700;
+}
+.wd-segmented-picker__option--active svg {
+  color: var(--wd-red, #d62839);
+  flex: none;
+}

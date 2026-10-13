@@ -1,0 +1,81 @@
+// =============================================================
+//  WDesign — Timeline（时间线）
+//  反向迭代（源：w-run/blog 的 About 经历区块）
+//  纵向列表，左侧时间标签 + 右侧内容的双栏结构（大留白风格）
+// =============================================================
+.wd-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wd-space-6, 24px);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.wd-timeline__item {
+  display: flex;
+  gap: 1.5rem;
+  align-items: flex-start;
+}
+
+.wd-timeline__period {
+  flex: 0 0 4.5em;
+  padding-top: 0.15rem;
+  font-size: 13px;
+  font-weight: 800;
+  color: var(--wd-red);
+}
+
+.wd-timeline__body {
+  flex: 1;
+  min-width: 0;
+}
+
+.wd-timeline__title {
+  margin: 0 0 0.4rem;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--wd-ink);
+}
+
+.wd-timeline__desc {
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.75;
+  color: var(--wd-ink-2);
+}
+
+/* 竖线变体：左侧带贯穿线 */
+.wd-timeline--line .wd-timeline__item {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.wd-timeline--line .wd-timeline__item::before {
+  content: '';
+  position: absolute;
+  left: 4px;
+  top: 6px;
+  bottom: -1.5rem;
+  width: 1px;
+  background: var(--wd-ring-soft);
+}
+.wd-timeline--line .wd-timeline__item:last-child::before {
+  display: none;
+}
+.wd-timeline--line .wd-timeline__item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--wd-red);
+}
+
+@media (max-width: 768px) {
+  .wd-timeline__item {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+}

@@ -1,0 +1,49 @@
+// WDesign — Collapse（手风琴 · grid-rows 平滑展开）
+.wd-collapse { display: flex; flex-direction: column; gap: 10px; }
+
+.wd-collapse__item {
+  background: var(--wd-card);
+  border-radius: var(--wd-radius-md);
+  box-shadow: var(--wd-shadow);
+  overflow: hidden;
+}
+
+.wd-collapse__head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  font-size: 14.5px;
+  font-weight: 600;
+  color: var(--wd-ink);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--wd-dur-fast) ease;
+}
+.wd-collapse__head:hover { background: var(--wd-bg); }
+
+
+.wd-collapse__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--wd-dur-slow) ease;
+}
+.wd-collapse__item--open .wd-collapse__body { grid-template-rows: 1fr; }
+.wd-collapse__inner { overflow: hidden; }
+.wd-collapse__content {
+  padding: 0 20px 18px;
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--wd-ink-2);
+  opacity: 1;
+  transition: opacity var(--wd-dur) ease;
+}
+.wd-collapse__item:not(.wd-collapse__item--open) .wd-collapse__content {
+  opacity: 0;
+  pointer-events: none;
+}

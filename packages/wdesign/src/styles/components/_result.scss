@@ -1,0 +1,27 @@
+// WDesign — Result（结果页）
+.wd-result {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 48px 24px;
+}
+
+.wd-result__icon {
+  width: 76px;
+  height: 76px;
+  margin-bottom: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+}
+.wd-result--success .wd-result__icon { background: var(--wd-success-soft); color: var(--wd-success); }
+.wd-result--warning .wd-result__icon { background: var(--wd-warning-soft); color: var(--wd-warning); }
+.wd-result--error .wd-result__icon { background: var(--wd-tint-2); color: var(--wd-red); }
+
+.wd-result__title { font-size: 19px; font-weight: 800; letter-spacing: -.01em; }
+.wd-result__desc { margin-top: 8px; font-size: 14px; color: var(--wd-ink-2); max-width: 440px; }
+.wd-result__extra { margin-top: 22px; display: flex; gap: 10px; justify-content: center; }

@@ -1,0 +1,194 @@
+// =============================================================
+//  WDesign — Markdown 样式（.wd-markdown）
+//  用法：<article class="wd-markdown"> …渲染后的 HTML… </article>
+//
+//  · 全 token 化（var(--wd-*)），颜色交给主题，天然支持深浅模式
+//  · 引用块修复：移除 hover 高亮（嵌套时会被子元素触发、连带点亮父级）
+//    改为静态层级：L1 浅红 / L2 白卡 / L3 浅红加深
+//  · 内置 hljs 深色代码配色（与 pre 的深色块配套）
+// =============================================================
+
+.wd-markdown {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: var(--wd-ink);
+  word-wrap: break-word;
+  -webkit-text-size-adjust: 100%;
+
+  ::selection { background: var(--wd-tint-3); color: var(--wd-ink); }
+  > :first-child { margin-top: 0; }
+
+  // ---- 标题
+  h1, h2, h3, h4, h5, h6 {
+    margin: 1.6em 0 .6em;
+    font-weight: 800;
+    letter-spacing: -.01em;
+    line-height: 1.3;
+  }
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.55rem; }
+  h3 { font-size: 1.22rem; }
+  h4 { font-size: 1.05rem; }
+  h5 { font-size: .95rem; }
+  h6 { font-size: .88rem; color: var(--wd-ink-2); }
+
+  p { margin: 0 0 1.15em; }
+
+  // ---- 链接 / 强调
+  a {
+    color: var(--wd-red);
+    text-decoration: underline;
+    text-decoration-color: var(--wd-link-underline);
+    text-decoration-thickness: 1.5px;
+    text-underline-offset: 3px;
+    transition: color var(--wd-dur-fast) ease, text-decoration-color var(--wd-dur-fast) ease;
+  }
+  a:hover { color: var(--wd-red-hover); text-decoration-color: var(--wd-red-hover); }
+  strong, b { font-weight: 700; }
+  em { font-style: italic; }
+  mark { padding: .05em .35em; border-radius: 6px; background: var(--wd-mark-bg); color: inherit; }
+  small { font-size: .88em; color: var(--wd-ink-2); }
+  sub, sup { font-size: .72em; line-height: 0; position: relative; vertical-align: baseline; }
+  sub { bottom: -.25em; }
+  sup { top: -.5em; }
+  abbr[title] { text-decoration: underline dotted var(--wd-underline); text-underline-offset: 3px; }
+
+  // ---- 代码
+  code, kbd, pre, samp { font-family: var(--wd-font-mono); }
+  code {
+    padding: .16em .45em;
+    font-size: .87em;
+    border-radius: 7px;
+    background: var(--wd-field);
+    color: var(--wd-ink);
+    white-space: break-spaces;
+  }
+  pre {
+    margin: 0 0 1.25em;
+    padding: 18px 20px;
+    background: #101013; /* 固定深色块，不随主题翻转 */
+    color: var(--wd-on-dark-text);
+    border-radius: var(--wd-radius-md);
+    overflow: auto;
+    font-size: 13.5px;
+    line-height: 1.7;
+    code { padding: 0; background: transparent; border-radius: 0; color: inherit; font-size: inherit; white-space: pre; }
+  }
+  kbd {
+    padding: .12em .45em;
+    font-size: .85em;
+    border-radius: 7px;
+    background: var(--wd-field);
+    color: var(--wd-ink);
+    box-shadow: 0 2px 0 var(--wd-ring-soft);
+  }
+
+  // ---- 引用块（嵌套层级 = 静态分层，父级不会被连带高亮）
+  blockquote {
+    position: relative;
+    margin: 0 0 1.25em;
+    padding: 15px 18px 15px 27px;
+    background: var(--wd-tint-1);
+    border-radius: var(--wd-radius-md);
+    color: var(--wd-ink-2);
+
+    &::before {
+      content: '';
+      position: absolute;
+      left: 11px;
+      top: 15px;
+      bottom: 15px;
+      width: 4px;
+      border-radius: 999px;
+      background: var(--wd-red-soft);
+    }
+    > :last-child { margin-bottom: 0; }
+
+    // 二级：白卡浮出
+    blockquote {
+      margin: 12px 0 2px;
+      background: var(--wd-card);
+      box-shadow: var(--wd-shadow-sm);
+      &::before { background: var(--wd-tint-4); }
+
+      // 三级：浅红加深
+      blockquote {
+        margin-bottom: 0;
+        background: var(--wd-tint-2);
+        box-shadow: none;
+        &::before { background: var(--wd-red); }
+      }
+    }
+  }
+
+  // ---- 列表
+  ul, ol { margin: 0 0 1.15em; padding-left: 1.5em; }
+  ul ul, ul ol, ol ol, ol ul { margin: .35em 0 0; }
+  li { margin: .3em 0; }
+  li::marker { color: var(--wd-red-soft); }
+  ol li::marker { color: var(--wd-ink-3); font-weight: 600; }
+  li > p { margin: .4em 0; }
+  .task-list-item { list-style: none; }
+  .task-list-item input[type='checkbox'],
+  input.task-list-item-checkbox {
+    accent-color: var(--wd-red);
+    width: 15px;
+    height: 15px;
+    margin: 0 .5em 0 0;
+    vertical-align: -2px;
+  }
+
+  // ---- 表格（无边框：斑马纹 + 色块表头）
+  table {
+    width: 100%;
+    margin: 0 0 1.25em;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 14.5px;
+    background: var(--wd-card);
+    border-radius: var(--wd-radius-sm);
+    overflow: hidden;
+    box-shadow: var(--wd-shadow);
+    th, td { padding: 11px 16px; text-align: left; }
+    thead th { background: var(--wd-field); font-size: 13px; font-weight: 700; color: var(--wd-ink); }
+    tbody tr:nth-child(even) { background: var(--wd-bg); }
+    tbody tr:hover { background: var(--wd-tint-1); }
+  }
+
+  // ---- 分隔线（色块短棒，不用线）
+  hr {
+    border: 0;
+    height: 3px;
+    width: 64px;
+    margin: 34px auto;
+    border-radius: 999px;
+    background: var(--wd-field);
+  }
+
+  // ---- 图片 / 图注
+  img { max-width: 100%; height: auto; border-radius: var(--wd-radius-md); background: var(--wd-bg); }
+  figure { margin: 0 0 1.25em; }
+  figcaption { margin-top: 8px; font-size: 12.5px; color: var(--wd-ink-2); text-align: center; }
+
+  // ---- 定义列表
+  dl { margin: 0 0 1.25em; }
+  dt { font-weight: 700; margin-top: .8em; }
+  dd { margin: .2em 0 0; padding-left: 1.2em; color: var(--wd-ink-2); }
+
+  // ---- hljs 深色代码配色（配套 pre 的深色块）
+  // 注意：以下为固定语法色板（VS Code Dark），不受主题影响，刻意保留的硬编码
+  .hljs-comment, .hljs-quote, .hljs-meta { color: #6A9955; }
+  .hljs-name, .hljs-keyword, .hljs-selector-tag, .hljs-literal,
+  .hljs-link, .hljs-modifier, .hljs-template-tag { color: #569CD6; }
+  .hljs-string { color: #CE9178; }
+  .hljs-variable, .hljs-template-variable, .hljs-attr, .hljs-attribute,
+  .hljs-params, .hljs-property, .hljs-pseudo { color: #9CDCFE; }
+  .hljs-title, .hljs-function .hljs-title, .hljs-function_ .hljs-title { color: #DCDCAA; }
+  .hljs-number, .hljs-value { color: #B5CEA8; }
+  .hljs-operator, .hljs-ellipsis { color: #D4D4D4; }
+  .hljs-tag { color: #808080; }
+  .hljs-built_in, .hljs-builtin-name, .hljs-constructor, .hljs-class .hljs-title,
+  .hljs-enum .hljs-title, .hljs-interface .hljs-title { color: #4EC9B0; }
+  .hljs-exception, .hljs-regexp { color: #D16969; }
+  .hljs-decorator { color: #6394BF; }
+}
