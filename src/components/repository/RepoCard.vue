@@ -58,43 +58,13 @@ function navigate() {
       <span v-if="repo.private" class="repo-card__badge">私有</span>
     </div>
 
-    <p v-if="repo.description" class="repo-card__desc">
-      {{ repo.description }}
-    </p>
+    <p class="repo-card__desc">{{ repo.description }}</p>
 
     <div class="repo-card__meta">
       <span v-if="langColor" class="repo-card__lang">{{ repo.language }}</span>
       <span class="repo-card__time">更新于 {{ updatedText }}</span>
     </div>
 
-    <div class="repo-card__foot">
-      <span class="repo-card__stat">
-        <svg
-          class="icon"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.75.75 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Z"
-          />
-        </svg>
-        {{ formatCount(repo.stars_count) }}
-      </span>
-      <span class="repo-card__stat">
-        <svg
-          class="icon"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          aria-hidden="true"
-        >
-          <path
-            d="M5 5.372v.878c0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75v-.878a.25.25 0 0 1 .43-.147l2.223 2.535a.25.25 0 0 1 0 .342l-2.223 2.535a.25.25 0 0 1-.43-.147v-.878a.75.75 0 0 0-.75-.75h-4.5a.75.75 0 0 0-.75.75v.878a.25.25 0 0 1-.43.147L2.347 8.028a.25.25 0 0 1 0-.342l2.223-2.535a.25.25 0 0 1 .43.147Z"
-          />
-        </svg>
-        {{ formatCount(repo.forks_count) }}
-      </span>
-    </div>
   </article>
 </template>
 
@@ -153,24 +123,27 @@ function navigate() {
     font-weight: 500;
   }
 
+  /* 描述固定预留 2 行：行数不等时卡片高度仍一致，元信息位置对齐 */
   &__desc {
-    flex: 1;
-    min-height: 2.5em;
-    margin: 0;
-    color: var(--wd-ink-2);
-    font-size: 0.8125rem;
-    line-height: 1.5;
     display: -webkit-box;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    margin: 0;
+    min-height: calc(1.5em * 2);
+    color: var(--wd-ink-2);
+    font-size: 0.8125rem;
+    line-height: 1.5;
   }
 
   &__meta {
+    /* 贴底：不同描述行数下，底部信息始终对齐 */
+    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: var(--wd-space-2);
+    padding-top: var(--wd-space-1);
     color: var(--wd-ink-2);
     font-size: 0.75rem;
   }
@@ -183,25 +156,5 @@ function navigate() {
     white-space: nowrap;
   }
 
-  &__foot {
-    display: flex;
-    gap: var(--wd-space-4);
-    padding: var(--wd-space-2) var(--wd-space-3);
-    border-radius: var(--wd-radius-pill);
-    background: var(--wd-field);
-    color: var(--wd-ink-2);
-    font-size: 0.75rem;
-  }
-
-  &__stat {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--wd-space-1);
-
-    .icon {
-      width: 0.875rem;
-      height: 0.875rem;
-    }
-  }
 }
 </style>

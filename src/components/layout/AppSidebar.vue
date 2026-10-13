@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useDashboardStore } from '@/stores/dashboard'
+import { useTheme } from '@/composables/useTheme'
 
 interface NavItem {
   to: string
@@ -29,11 +30,14 @@ const navItems: NavItem[] = [
   { to: '/settings', label: '我的', icon: 'settings' },
 ]
 
+const { theme, toggleTheme } = useTheme()
 const store = useDashboardStore()
-const isApi = computed(() => store.source === 'api' && store.repos.length > 0)
-const backend = computed(() =>
-  store.source === 'mock' ? '示例数据' : store.repos.length > 0 ? '在线' : '未连接',
-)
+
+/** 头像内容：有登录名取首字母，否则退化为图标 */
+const initial = computed(() => {
+  const login = store.repos[0]?.owner?.login ?? ''
+  return login ? login.replace(/[^a-zA-Z0-9]/g, '').charAt(0).toUpperCase() : ''
+})
 
 function onNavigate() {
   emit('update:modelValue', false)
@@ -41,12 +45,8 @@ function onNavigate() {
 </script>
 
 <template>
-  <!-- 桌面端：窄图标栏（图标居中，无标签 —— 参考 Mr.File 侧栏） -->
+  <!-- 桌面端：窄图标栏（无 logo，图标居中，用户与主题置左下） -->
   <aside class="app-rail" aria-label="主导航">
-    <router-link to="/" class="rail-brand" aria-label="wcode 首页">
-      <span class="rail-brand__dot" aria-hidden="true" />
-    </router-link>
-
     <nav class="rail-nav">
       <router-link
         v-for="item in navItems"
@@ -62,15 +62,21 @@ function onNavigate() {
       </router-link>
     </nav>
 
+    <!-- 左下角：亮暗色 + 头像 -->
     <div class="rail-foot">
-      <span
-        class="rail-status"
-        :class="{ 'rail-status--off': !isApi }"
-        :title="`后端：${backend}`"
-        :aria-label="`后端：${backend}`"
-      />
-      <button class="rail-avatar" type="button" aria-label="用户菜单">
-        <span class="rail-avatar__inner" />
+      <button
+        class="rail-btn"
+        type="button"
+        :aria-label="theme === 'dark' ? '切换到亮色' : '切换到暗色'"
+        :title="theme === 'dark' ? '亮色模式' : '暗色模式'"
+        @click="toggleTheme"
+      >
+        <WdIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="19" />
+      </button>
+
+      <button class="rail-avatar" type="button" aria-label="用户菜单" title="账户">
+        <span v-if="initial" class="rail-avatar__text">{{ initial }}</span>
+        <WdIcon v-else name="user" :size="18" />
       </button>
     </div>
   </aside>
@@ -97,6 +103,13 @@ function onNavigate() {
         <span>{{ item.label }}</span>
       </router-link>
     </nav>
+
+    <div class="drawer-foot">
+      <button class="drawer-theme" type="button" @click="toggleTheme">
+        <WdIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="18" />
+        <span>{{ theme === 'dark' ? '亮色模式' : '暗色模式' }}</span>
+      </button>
+    </div>
   </WdDrawer>
 </template>
 
@@ -114,25 +127,10 @@ function onNavigate() {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: var(--wd-space-6);
-    width: 72px;
-    padding: var(--wd-space-4) 0;
+    width: 84px;
+    padding: var(--wd-space-5) 0 var(--wd-space-4);
     background: var(--wd-bg);
   }
-}
-
-.rail-brand {
-  display: grid;
-  place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
-}
-.rail-brand__dot {
-  width: 14px;
-  height: 14px;
-  border-radius: 5px;
-  background: var(--wd-red);
 }
 
 .rail-nav {
@@ -140,18 +138,18 @@ function onNavigate() {
   flex-direction: column;
   align-items: center;
   gap: var(--wd-space-2);
-  /* 图标组垂直居中（参考图：品牌置顶、图标居中、用户置底） */
+  /* 图标组垂直居中 */
   margin: auto 0;
 }
 
-/* 图标项：图标在 44×44 方块内居中，hover/选中给底色 */
+/* 图标项：图标在 46×46 方块内居中，hover/选中给底色 */
 .rail-item {
   position: relative;
   display: grid;
   place-items: center;
-  width: 44px;
-  height: 44px;
-  border-radius: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 15px;
   color: var(--wd-ink-3);
   text-decoration: none;
   transition:
@@ -200,21 +198,32 @@ function onNavigate() {
   transform: translate(0, -50%);
 }
 
+/* ── 左下角：主题 + 头像 ── */
 .rail-foot {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--wd-space-3);
+  gap: var(--wd-space-2);
 }
 
-.rail-status {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--wd-success);
+.rail-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: none;
+  border-radius: 13px;
+  background: transparent;
+  color: var(--wd-ink-3);
+  cursor: pointer;
+  transition:
+    background $wd-dur-slow $wd-ease-smooth,
+    color $wd-dur-slow $wd-ease-smooth;
 
-  &--off {
-    background: var(--wd-warning);
+  &:hover {
+    background: var(--wd-field);
+    color: var(--wd-ink);
   }
 }
 
@@ -226,14 +235,19 @@ function onNavigate() {
   padding: 0;
   border: none;
   border-radius: 50%;
-  background: transparent;
-  cursor: pointer;
-}
-.rail-avatar__inner {
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
   background: var(--wd-tint-2);
+  color: var(--wd-red);
+  cursor: pointer;
+  transition: box-shadow $wd-dur-slow $wd-ease-smooth;
+
+  &:hover {
+    box-shadow: 0 0 0 3px var(--wd-focus-ring-soft);
+  }
+}
+.rail-avatar__text {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1;
 }
 
 /* ══════ 移动端抽屉导航 ══════ */
@@ -272,5 +286,26 @@ function onNavigate() {
 .drawer-item--active .drawer-item__icon {
   background: var(--wd-red);
   color: #fff;
+}
+
+.drawer-foot {
+  margin-top: var(--wd-space-6);
+  padding-top: var(--wd-space-4);
+}
+
+.drawer-theme {
+  display: flex;
+  align-items: center;
+  gap: var(--wd-space-2);
+  width: 100%;
+  padding: 10px var(--wd-space-3);
+  border: none;
+  border-radius: var(--wd-radius-md);
+  background: var(--wd-field);
+  color: var(--wd-ink-2);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
 }
 </style>

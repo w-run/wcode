@@ -36,9 +36,9 @@ const sidebarOpen = ref(false)
     padding-bottom: calc(56px + env(safe-area-inset-bottom));
   }
 
-  // 桌面端图标栏让位（72px）
+  // 桌面端图标栏让位（84px）
   @include media-up($bp-desktop) {
-    margin-left: 72px;
+    margin-left: 84px;
   }
 }
 </style>

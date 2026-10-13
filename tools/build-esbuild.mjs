@@ -127,10 +127,13 @@ function compileSFC(source, filename) {
 
   const id = hashId(filename)
   const isTs = (descriptor.script?.lang || descriptor.scriptSetup?.lang || 'js') === 'ts'
+  // 有 <style scoped> 时，运行期需据此给元素打上 data-v-<id>，与 compileStyle 的选择器对齐
+  const scopeId = descriptor.styles.some((s) => s.scoped) ? `data-v-${id}` : ''
   let code = 'export default {}'
 
   if (descriptor.scriptSetup) {
     code = sfc.compileScript(descriptor, { id, inlineTemplate: !!descriptor.template, genDefaultAs: '__wc_sfc__' }).content
+    if (scopeId) code += `\n__wc_sfc__.__scopeId = ${JSON.stringify(scopeId)}`
     code += '\nexport default __wc_sfc__'
   } else if (descriptor.template) {
     const t = sfc.compileTemplate({
@@ -141,13 +144,29 @@ function compileSFC(source, filename) {
       compilerOptions: { bindingMetadata: descriptor.script ? undefined : undefined },
     })
     code = descriptor.script
-      ? descriptor.script.content.replace(/export\s+default/, 'const __wc_sfc__ =') + `\n${t.code}\n__wc_sfc__.render = render\nexport default __wc_sfc__`
-      : `${t.code}\nexport default { render }`
+      ? descriptor.script.content.replace(/export\s+default/, 'const __wc_sfc__ =') + `\n${t.code}\n__wc_sfc__.render = render${scopeId ? `\n__wc_sfc__.__scopeId = ${JSON.stringify(scopeId)}` : ''}\nexport default __wc_sfc__`
+      : `${t.code}\nexport default { render${scopeId ? `, __scopeId: ${JSON.stringify(scopeId)}` : ''} }`
   }
 
   for (const st of descriptor.styles) {
     if (!st.content.trim()) continue
-    collectedCSS.push(compileSCSS(INJECT + st.content, filename))
+    const css = compileSCSS(INJECT + st.content, filename)
+    // 关键：<style scoped> 必须做作用域转换（加 [data-v-<id>]），
+    // 否则所有 scoped 样式都会变成全局样式，class 撞名即互相污染
+    if (st.scoped) {
+      const out = sfc.compileStyle({
+        source: css,
+        filename,
+        id,
+        scoped: true,
+      })
+      if (out.errors?.length) {
+        throw new Error(`${filename}\n${out.errors[0]}`)
+      }
+      collectedCSS.push(out.code)
+    } else {
+      collectedCSS.push(css)
+    }
   }
   return { code, loader: isTs ? 'ts' : 'js' }
 }

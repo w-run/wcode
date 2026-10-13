@@ -20,7 +20,7 @@ function onSearch() {
 
 <template>
   <header class="app-header">
-    <!-- 桌面端：品牌 + 搜索 + 动作 -->
+    <!-- 桌面端：仅搜索（品牌已移除；主题与头像在左侧图标栏） -->
     <div class="header-desktop">
       <form class="header-search" role="search" @submit.prevent="onSearch">
         <WdIcon name="search" :size="17" class="header-search__icon" />
@@ -33,33 +33,21 @@ function onSearch() {
         />
         <kbd class="header-search__hint">/</kbd>
       </form>
-
-      <div class="header-actions">
-        <slot name="actions" />
-        <button
-          class="icon-btn"
-          type="button"
-          :aria-label="theme === 'dark' ? '切换到亮色' : '切换到暗色'"
-          @click="toggleTheme"
-        >
-          <WdIcon :name="theme === 'dark' ? 'sun' : 'moon'" :size="18" />
-        </button>
-        <button class="avatar-btn" type="button" aria-label="用户菜单">
-          <span class="avatar-placeholder" />
-        </button>
-      </div>
     </div>
 
-    <!-- 移动端：品牌 + 动作 + 汉堡 -->
+    <!-- 移动端：搜索 + 亮暗色 + 菜单 -->
     <div class="header-mobile">
-      <router-link to="/" class="logo">
-        <span class="logo-dot" aria-hidden="true" />
-        <span class="logo-text">wcode</span>
-      </router-link>
+      <form class="header-search" role="search" @submit.prevent="onSearch">
+        <WdIcon name="search" :size="17" class="header-search__icon" />
+        <input
+          v-model="keyword"
+          class="header-search__input"
+          type="search"
+          placeholder="搜索…"
+          aria-label="搜索"
+        />
+      </form>
       <div class="header-actions">
-        <button class="icon-btn" type="button" aria-label="搜索" @click="onSearch">
-          <WdIcon name="search" :size="18" />
-        </button>
         <button
           class="icon-btn"
           type="button"
@@ -88,26 +76,24 @@ function onSearch() {
   z-index: $z-sticky;
   height: 56px;
   background: var(--wd-bg);
-  /* 无硬分割线：靠留白与滚动阴影区分 */
+  /* 无硬分割线：靠留白与底色分层 */
 
   .header-desktop {
     display: none;
     align-items: center;
-    gap: var(--wd-space-6);
     height: 100%;
-    padding: 0 var(--wd-space-6);
+    /* 让位左侧 84px 图标栏 */
+    padding: 0 var(--wd-space-6) 0 calc(84px + var(--wd-space-6));
 
     @include media-up($bp-desktop) {
       display: flex;
-      /* 让位左侧 72px 图标栏 */
-      padding-left: calc(72px + var(--wd-space-6));
     }
   }
 
   .header-mobile {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    gap: var(--wd-space-2);
     height: 100%;
     padding: 0 var(--wd-space-4);
 
@@ -115,28 +101,6 @@ function onSearch() {
       display: none;
     }
   }
-}
-
-/* ── 品牌 ── */
-.logo {
-  display: inline-flex;
-  align-items: center;
-  gap: var(--wd-space-2);
-  flex-shrink: 0;
-  text-decoration: none;
-  transition: color $wd-dur-slow $wd-ease-smooth;
-}
-.logo-dot {
-  width: 9px;
-  height: 9px;
-  border-radius: 50%;
-  background: var(--wd-red);
-}
-.logo-text {
-  font-size: 18px;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  color: var(--wd-ink);
 }
 
 /* ── 搜索：胶囊 + 无边框，聚焦时叠主题红环 ── */
@@ -151,7 +115,8 @@ function onSearch() {
   padding: 0 var(--wd-space-3);
   border-radius: var(--wd-radius-pill);
   background: var(--wd-field);
-  transition: background $wd-dur-slow $wd-ease-smooth,
+  transition:
+    background $wd-dur-slow $wd-ease-smooth,
     box-shadow $wd-dur-slow $wd-ease-smooth;
 
   &:focus-within {
@@ -181,7 +146,6 @@ function onSearch() {
   &::placeholder {
     color: var(--wd-ink-3);
   }
-  /* 去掉 Safari 的原生清除按钮，保持胶囊干净 */
   &::-webkit-search-cancel-button {
     -webkit-appearance: none;
   }
@@ -207,11 +171,10 @@ function onSearch() {
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--wd-space-2);
-  margin-left: auto;
+  gap: var(--wd-space-1);
+  flex-shrink: 0;
 }
 
-/* ── 图标按钮 / 头像 ── */
 .icon-btn {
   display: flex;
   align-items: center;
@@ -234,33 +197,12 @@ function onSearch() {
   }
 }
 
-.avatar-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  padding: 0;
-  background: transparent;
-  border: none;
-  border-radius: var(--wd-radius-pill);
-  cursor: pointer;
-}
-
-.avatar-placeholder {
-  display: block;
-  width: 32px;
-  height: 32px;
-  border-radius: var(--wd-radius-pill);
-  background: var(--wd-tint-2);
-}
-
 .menu-btn {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 44px;
-  height: 44px;
+  width: 40px;
+  height: 40px;
   padding: 0;
   background: transparent;
   border: none;
@@ -274,9 +216,9 @@ function onSearch() {
   }
 }
 
-/* 窄屏隐藏桌面搜索胶囊 */
+/* 移动端搜索框自适应 */
 @include media-down($bp-desktop) {
-  .header-search {
+  .header-search__hint {
     display: none;
   }
 }

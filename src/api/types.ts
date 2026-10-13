@@ -6,6 +6,18 @@
  */
 
 /** 用户 / 组织 */
+export interface Organization {
+  id: number
+  name: string
+  full_name?: string
+  description?: string
+  avatar_url?: string
+  website?: string
+  location?: string
+  visibility?: string
+  repo_admin_change_team_access?: boolean
+}
+
 export interface User {
   id: number
   login: string

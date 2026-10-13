@@ -1,6 +1,8 @@
 import { defineStore } from 'pinia'
 import { listRepos, searchRepos } from '@/api/repos'
-import type { Repository } from '@/api/types'
+import { listIssues } from '@/api/issues'
+import { listMyOrgs } from '@/api/user'
+import type { Organization, Repository } from '@/api/types'
 
 /** 数据来源：api=真实后端，mock=后端不可达时的降级示例数据 */
 export type DashboardSource = 'api' | 'mock'
@@ -12,6 +14,15 @@ export interface ActivityItem {
   message: string
   actor: string
   at: string
+}
+
+/** 跨仓库聚合的开放 Issue（首页 Issues 栏） */
+export interface IssueRow {
+  id: string
+  number: number
+  title: string
+  repo: string
+  updatedAt: string
 }
 
 /** 后端不可达 / 未登录时使用的降级示例数据 */
@@ -97,6 +108,10 @@ export const useDashboardStore = defineStore('dashboard', {
     source: 'api' as DashboardSource,
     /** 后端不可达时的错误信息（用于首页顶部温和提示，不阻断渲染） */
     error: '' as string,
+    /** 我的组织 */
+    orgs: [] as Organization[],
+    /** 跨仓库的开放 Issue（按更新时间倒序） */
+    openIssues: [] as IssueRow[],
   }),
 
   getters: {
@@ -168,6 +183,46 @@ export const useDashboardStore = defineStore('dashboard', {
       } finally {
         this.loading = false
       }
+      // 组织 / Issue 旁路加载，失败不影响主流程
+      void this.fetchExtras()
+    },
+
+    /**
+     * 加载「我的组织」与跨仓库开放 Issue。
+     * 两者均为可选数据：任一失败只清空对应列表，不弹错。
+     */
+    async fetchExtras() {
+      try {
+        this.orgs = await listMyOrgs()
+      } catch {
+        this.orgs = []
+      }
+
+      const targets = this.repos.slice(0, 6)
+      const settled = await Promise.allSettled(
+        targets.map((r) => {
+          const [owner, name] = (r.full_name || r.name).split('/')
+          return listIssues(owner, name, { state: 'open', limit: 5 })
+        }),
+      )
+      const rows: IssueRow[] = []
+      settled.forEach((res, i) => {
+        if (res.status !== 'fulfilled') return
+        const repo = targets[i]
+        for (const it of res.value) {
+          rows.push({
+            id: `${repo.id}-${it.id}`,
+            number: it.number,
+            title: it.title,
+            repo: repo.full_name || repo.name,
+            updatedAt: it.updated_at || it.created_at || '',
+          })
+        }
+      })
+      rows.sort(
+        (a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime(),
+      )
+      this.openIssues = rows.slice(0, 6)
     },
   },
 })
